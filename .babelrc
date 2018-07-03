@@ -4,5 +4,8 @@
   ],
   "ignore": [
     "dist/**/*.js"
+  ],
+  "plugins": [
+    "transform-object-rest-spread"
   ]
 }

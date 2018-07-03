@@ -10,9 +10,9 @@ export default class UplCookie {
   /**
    * Create a UPL cookie
    */
-  constructor(trackingId = uuidv4(), timestamp = moment().format(UNIX_DATE_FORMAT)) {
-    this.tracking_id = trackingId;
-    this.timestamp = timestamp;
+  constructor() {
+    this.trackingId = uuidv4();
+    this.timestamp = moment().format(UNIX_DATE_FORMAT);
 
     return this;
   }
@@ -21,15 +21,16 @@ export default class UplCookie {
     return UPL_COOKIE_NAME;
   }
 
-  get touchId() {
-    return `${this.tracking_id}_${this.timestamp}`;
+  getTouchId() {
+    return `${this.trackingId}_${this.timestamp}`;
   }
 
   /**
    * Get the UplCookie location
+   *
    * @return
    */
-  get location() {
+  getLocation() {
     return {
       origin: this.origin,
       destination: this.destination,
@@ -56,13 +57,21 @@ export default class UplCookie {
     return this;
   }
 
+  /**
+   * Save this cookie as a browser cookie
+   * @return {UplCookie} this cookie
+   */
   save() {
     Cookies.set(UPL_COOKIE_NAME, this.toJSON());
 
     return this;
   }
 
+  /**
+   * Get this class' instance as JSON
+   * @return {Object}
+   */
   toJSON() {
-    return JSON.stringify(this);
+    return { ...this, touchId: this.getTouchId() };
   }
 }

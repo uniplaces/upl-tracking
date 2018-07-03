@@ -3,55 +3,58 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.setTouch = setTouch;
 exports.getUrlParameters = getUrlParameters;
-
-var _v = require('uuid/v4');
-
-var _v2 = _interopRequireDefault(_v);
+exports.isGoogleReferrer = isGoogleReferrer;
+exports.getReferrer = getReferrer;
 
 var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
+var _uplCookie = require('./upl-cookie');
+
+var _uplCookie2 = _interopRequireDefault(_uplCookie);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* global window, ga */
-const UPL_COOKIE_NAME = 'upl-cookie';
-const URL_PARAMETERS = [{ name: 'source', defaultValue: '' }, { name: 'medium', defaultValue: '' }, { name: 'campaign', defaultValue: '' }, { name: 'term', defaultValue: '' }, { name: 'content', defaultValue: '' }, { name: 'gclid', defaultValue: '' }, { name: 'msclkid', defaultValue: '' }, { name: 'origin', defaultValue: '' }, { name: 'destination', defaultValue: '' }, { name: 'language', defaultValue: '' }];
-
-class UplCookie {
-  constructor() {}
-}
+/* global ga */
+const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: 'organic' }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }, { name: 'origin', defaultValue: null }, { name: 'destination', defaultValue: null }, { name: 'language', defaultValue: null }];
 
 /**
  * Creates a new UplCookie
  * @param {string} url If
  * @returns {Object} the UPL cookie
  */
-function init(url, location = { origin: null, destination: null, language: null }) {
-  // Check if user has cookie already
-  // If not, Creates -- sets new cookie
-  // If yes, continues
-
-  // Check referer
-  // It's Uniplaces?
-  // Return same cookie
-  // It's other
-  // Set new cookie
-
+function setTouch(url, location = { origin: null, destination: null, language: null }) {
+  // Get URL parameters
   const params = getUrlParameters(url);
 
-  return new UplCookie();
-}
+  // Check if user has cookie already
+  let uplCookie = getCookie(url, location);
 
-function getTrackingId() {
-  return (0, _v2.default)();
-}
+  // If not, create and set new uplCookie
+  if (!uplCookie) {
+    uplCookie = new _uplCookie2.default();
+  }
 
-function setCookie(uplCookie) {}
+  // If yes, check document's referrer
+  // It's Uniplaces?
+  if (!isUniplacesReferrer()) {
+    // Return same uplCookie
+    return null;
+  }
+
+  // It's other
+  // Set new uplCookie
+  return uplCookie.setParameters(params).setLocation(location).save();
+}
 
 function getCookie() {
-  const cookie = _jsCookie2.default.get(UPL_COOKIE_NAME);
+  const cookieName = _uplCookie2.default.getCookieName();
+  const cookie = _jsCookie2.default.get(cookieName);
+
+  return cookie;
 }
 
 function getUrlParameters(url) {
@@ -84,4 +87,24 @@ function getUrlParameters(url) {
 
 function hasGoogleAnalytics() {
   return window.ga && ga.loaded;
+}
+
+function isUniplacesReferrer() {
+  return isCustomReferrer('uniplaces');
+}
+
+function isGoogleReferrer() {
+  return isCustomReferrer('google');
+}
+
+/**
+ *
+ *
+ */
+function getReferrer() {
+  return document.referrer ? new URL(document.referrer) : null;
+}
+
+function isCustomReferrer(substring) {
+  return document.referrer && document.referrer.includes(substring);
 }

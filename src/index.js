@@ -6,21 +6,22 @@ const URL_PARAMETERS = [
   { name: 'source', defaultValue: 'direct' },
   { name: 'medium', defaultValue: 'organic' },
   { name: 'campaign', defaultValue: null },
-  { name: 'term', defaultValue: '' },
-  { name: 'content', defaultValue: '' },
-  { name: 'gclid', defaultValue: '' },
-  { name: 'msclkid', defaultValue: '' },
-  { name: 'origin', defaultValue: '' },
-  { name: 'destination', defaultValue: '' },
-  { name: 'language', defaultValue: '' }
+  { name: 'term', defaultValue: null },
+  { name: 'content', defaultValue: null },
+  { name: 'gclid', defaultValue: null },
+  { name: 'msclkid', defaultValue: null },
+  { name: 'origin', defaultValue: null },
+  { name: 'destination', defaultValue: null },
+  { name: 'language', defaultValue: null }
 ];
 
 /**
  * Creates a new UplCookie
- * @param {string} url If
- * @returns {Object} the UPL cookie
+ * @param {string} url
+ * @param {Object} location
+ * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-export function init(url, location = { origin: null, destination: null, language: null }) {
+export function setTouch(url, location = { origin: null, destination: null, language: null }) {
   // Get URL parameters
   const params = getUrlParameters(url);
 
@@ -29,14 +30,14 @@ export function init(url, location = { origin: null, destination: null, language
 
   // If not, create and set new uplCookie
   if (!uplCookie) {
-    uplCookie = createCookie();
+    uplCookie = new UplCookie();
   }
 
   // If yes, check document's referrer
   // It's Uniplaces?
-  if (isUniplacesReferrer()) {
+  if (!isUniplacesReferrer()) {
     // Return same uplCookie
-    return uplCookie;
+    return null;
   }
 
   // It's other
@@ -45,10 +46,6 @@ export function init(url, location = { origin: null, destination: null, language
     .setParameters(params)
     .setLocation(location)
     .save();
-}
-
-function createCookie() {
-  return new UplCookie();
 }
 
 function getCookie() {
@@ -86,6 +83,14 @@ export function getUrlParameters(url) {
   return params;
 }
 
+/**
+ * Get the document's referrer as URL
+ * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
+ */
+export function getReferrer() {
+  return document.referrer ? new URL(document.referrer) : null;
+}
+
 function hasGoogleAnalytics() {
   return window.ga && ga.loaded;
 }
@@ -96,14 +101,6 @@ function isUniplacesReferrer() {
 
 export function isGoogleReferrer() {
   return isCustomReferrer('google');
-}
-
-/**
- *
- *
- */
-export function getReferrer() {
-  return document.referrer ? new URL(document.referrer) : null;
 }
 
 function isCustomReferrer(substring) {
