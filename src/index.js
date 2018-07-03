@@ -2,11 +2,10 @@
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
 
-const UPL_COOKIE_NAME = 'upl-cookie';
 const URL_PARAMETERS = [
-  { name: 'source', defaultValue: '' },
+  { name: 'source', defaultValue: 'direct' },
   { name: 'medium', defaultValue: 'organic' },
-  { name: 'campaign', defaultValue: '' },
+  { name: 'campaign', defaultValue: null },
   { name: 'term', defaultValue: '' },
   { name: 'content', defaultValue: '' },
   { name: 'gclid', defaultValue: '' },
@@ -31,10 +30,6 @@ export function init(url, location = { origin: null, destination: null, language
   // If not, create and set new uplCookie
   if (!uplCookie) {
     uplCookie = createCookie();
-    uplCookie.setParameters(params);
-    uplCookie.setLocation(location);
-
-    return setCookie(uplCookie);
   }
 
   // If yes, check document's referrer
@@ -46,30 +41,19 @@ export function init(url, location = { origin: null, destination: null, language
 
   // It's other
   // Set new uplCookie
-  const params = getUrlParameters(url);
-  uplCookie.setParameters(params);
-
-  return setCookie(uplCookie);
+  return uplCookie
+    .setParameters(params)
+    .setLocation(location)
+    .save();
 }
 
-function createCookie(url, location) {
-  const params = getUrlParameters(url);
-
+function createCookie() {
   return new UplCookie();
 }
 
-/**
- *
- *
- */
-function setCookie(uplCookie) {
-  Cookies.set(UPL_COOKIE_NAME, uplCookie);
-
-  return uplCookie;
-}
-
 function getCookie() {
-  const cookie = Cookies.get(UPL_COOKIE_NAME);
+  const cookieName = UplCookie.getCookieName();
+  const cookie = Cookies.get(cookieName);
 
   return cookie;
 }
@@ -110,10 +94,14 @@ function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
-function isGoogleReferrer() {
+export function isGoogleReferrer() {
   return isCustomReferrer('google');
 }
 
+/**
+ *
+ *
+ */
 export function getReferrer() {
   return document.referrer ? new URL(document.referrer) : null;
 }
