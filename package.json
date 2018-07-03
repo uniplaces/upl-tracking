@@ -1,0 +1,40 @@
+{
+  "name": "upl-tracking",
+  "version": "0.0.1",
+  "author": "Uniplaces",
+  "private": true,
+  "description": "UPL Tracking for Uniplaces platforms",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "build": "babel src -d dist --ignore **/*.test.js,**/__mocks__",
+    "test": "jest --forceExit --detectOpenHandles",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon src/index.js --exec babel-node"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "keywords": [
+    "tracking",
+    "upl",
+    "upl-tracking",
+    "uniplaces"
+  ],
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.3",
+    "babel-eslint": "8.2.5",
+    "babel-jest": "23.2.0",
+    "babel-preset-env": "1.7.0",
+    "eslint": "5.0.1",
+    "jest": "23.2.0",
+    "nodemon": "1.17.5",
+    "regenerator-runtime": "0.12.0"
+  },
+  "dependencies": {
+    "js-cookie": "2.2.0",
+    "moment": "2.22.2",
+    "uuid": "3.3.2"
+  }
+}
