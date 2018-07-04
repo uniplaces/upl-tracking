@@ -1,6 +1,7 @@
 /* global ga */
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
+import { capitalize } from './utils';
 import EventsType from './enums/events-type';
 
 const URL_PARAMETERS = [
@@ -67,7 +68,7 @@ function getUrlParameters(url) {
 
     // Use Google Analytics to try to find something
     if (param === null && hasGoogleAnalytics()) {
-      param = null;
+      param = `getInferred${capitalize(urlParameter.name)}`();
     }
 
     // Set the touch as direct -- use default values

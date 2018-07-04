@@ -13,12 +13,15 @@ var _uplCookie = require('./upl-cookie');
 
 var _uplCookie2 = _interopRequireDefault(_uplCookie);
 
+var _utils = require('./utils');
+
 var _eventsType = require('./enums/events-type');
 
 var _eventsType2 = _interopRequireDefault(_eventsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* global ga */
 const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: 'organic' }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }];
 
 /**
@@ -27,7 +30,6 @@ const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'med
  * @param {Object} location
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-/* global ga */
 function setTouch(url, location = { origin: null, destination: null, language: null }) {
   // Get URL parameters
   const params = getUrlParameters(url);
@@ -73,7 +75,7 @@ function getUrlParameters(url) {
 
     // Use Google Analytics to try to find something
     if (param === null && hasGoogleAnalytics()) {
-      param = null;
+      param = `getInferred${(0, _utils.capitalize)(urlParameter.name)}`();
     }
 
     // Set the touch as direct -- use default values
