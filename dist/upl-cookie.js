@@ -29,10 +29,12 @@ const DEFAULT_DOMAIN = '.uniplaces.com';
 class UplCookie {
   /**
    * Create a UPL cookie
+   * @param {string} trackingId - the trackingId
+   * @param {number} timestamp - the timestamp
    */
-  constructor() {
-    this.trackingId = (0, _v2.default)();
-    this.timestamp = (0, _moment2.default)().format(UNIX_DATE_FORMAT);
+  constructor(trackingId, timestamp) {
+    this.trackingId = trackingId || (0, _v2.default)();
+    this.timestamp = timestamp || (0, _moment2.default)().format(UNIX_DATE_FORMAT);
   }
 
   /**
@@ -67,7 +69,15 @@ class UplCookie {
    * Set the parameters of the cookie
    * @return {UplCookie}
    */
-  setParameters() {
+  setParameters({ source, medium, campaign, term, content, gclid, msclkid }) {
+    this.source = source;
+    this.medium = medium;
+    this.campaign = campaign;
+    this.term = term;
+    this.content = content;
+    this.gclid = gclid;
+    this.msclkid = msclkid;
+
     return this;
   }
 
