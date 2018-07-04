@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 
 const UNIX_DATE_FORMAT = 'x';
 const UPL_COOKIE_NAME = 'upl-cookie';
+const DEFAULT_EXPIRE_IN_DAYS = 180;
+const DEFAULT_DOMAIN = '.uniplaces.com';
 
 /** Class representing a UPL cookie */
 export default class UplCookie {
@@ -13,21 +15,27 @@ export default class UplCookie {
   constructor() {
     this.trackingId = uuidv4();
     this.timestamp = moment().format(UNIX_DATE_FORMAT);
-
-    return this;
   }
 
+  /**
+   * Get the cookie name
+   * @return {string}
+   */
   static getCookieName() {
     return UPL_COOKIE_NAME;
   }
 
+  /**
+   * Get the touch ID
+   * @return {string}
+   */
   getTouchId() {
     return `${this.trackingId}_${this.timestamp}`;
   }
 
   /**
    * Get the UplCookie location
-   * @return
+   * @return {Object}
    */
   getLocation() {
     return {
@@ -39,6 +47,7 @@ export default class UplCookie {
 
   /**
    * Set the parameters of the cookie
+   * @return {UplCookie}
    */
   setParameters() {
     return this;
@@ -47,6 +56,7 @@ export default class UplCookie {
   /**
    * Set the parameters of the cookie
    * @param {Object} location
+   * @return {UplCookie}
    */
   setLocation(location = { origin: null, destination: null, language: null }) {
     this.origin = location.origin;
@@ -58,10 +68,11 @@ export default class UplCookie {
 
   /**
    * Save this cookie as a browser cookie
-   * @return {UplCookie} this cookie
+   * @param {string} domain - the domain of the cookie
+   * @return {UplCookie}
    */
-  save() {
-    Cookies.set(UPL_COOKIE_NAME, this.toJSON());
+  save(domain = DEFAULT_DOMAIN) {
+    Cookies.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
 
     return this;
   }
@@ -71,6 +82,23 @@ export default class UplCookie {
    * @return {Object}
    */
   toJSON() {
-    return { ...this, touchId: this.getTouchId() };
+    return { ...this };
+  }
+
+  /**
+   * Get a new UplCookie from a JSON
+   * @param {Object} json - the json containing the information about the cookie
+   * @return {UplCookie}
+   */
+  static fromJSON(json) {
+    let cookie = new UplCookie();
+
+    for (let property in json) {
+      if (json.hasOwnProperty(property)) {
+        cookie[property] = json[property];
+      }
+    }
+
+    return cookie;
   }
 }

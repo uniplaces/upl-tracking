@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getReferrer = exports.getUrlParameters = exports.setTouch = exports.EventsType = undefined;
+exports.getInferedMedium = exports.getInferedSource = exports.getReferrer = exports.getUrlParameters = exports.setTouch = exports.EventsType = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -22,15 +22,16 @@ var _eventsType2 = _interopRequireDefault(_eventsType);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global ga */
-const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: 'organic' }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }];
+const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: null }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }];
 
 /**
  * Creates a new UplCookie
- * @param {string} url
- * @param {Object} location
+ * @param {string} url - the complete url
+ * @param {Object} location - the location's object
+ * @param {string} cookieDomain - the cookie domain to be used
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-function setTouch(url, location = { origin: null, destination: null, language: null }) {
+function setTouch(url, location, cookieDomain) {
   // Get URL parameters
   const params = getUrlParameters(url);
 
@@ -49,18 +50,27 @@ function setTouch(url, location = { origin: null, destination: null, language: n
     return null;
   }
 
-  // It's other
-  // Set new uplCookie
-  return uplCookie.setParameters(params).setLocation(location).save();
+  // Id it's other, set new parameters and save
+  return uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
 }
 
+/**
+ * Get the Upl Cookie
+ * @return {UplCookie} the Upl Cookie JSON
+ */
 function getCookie() {
   const cookieName = _uplCookie2.default.getCookieName();
-  const cookie = _jsCookie2.default.get(cookieName);
+  const cookie = _jsCookie2.default.getJSON(cookieName);
+
+  // @TODO: convert JSON in UplCookie instance
 
   return cookie;
 }
 
+/**
+ * Get the URL parameters
+ * @return {Object}
+ */
 function getUrlParameters(url) {
   const parsedUrl = new URL(url);
   const params = {};
@@ -75,7 +85,7 @@ function getUrlParameters(url) {
 
     // Use Google Analytics to try to find something
     if (param === null && hasGoogleAnalytics()) {
-      param = `getInferred${(0, _utils.capitalize)(urlParameter.name)}`();
+      param = `getInfered${(0, _utils.capitalize)(urlParameter.name)}`() || null;
     }
 
     // Set the touch as direct -- use default values
@@ -87,6 +97,24 @@ function getUrlParameters(url) {
   });
 
   return params;
+}
+
+/**
+ * Get the source, inferring it from the document.referrer
+ * @return {string} the source infered from the referrer
+ */
+function getInferedSource() {
+  let referrer = getReferrer();
+
+  return referrer ? referrer.host.split('.')[1] : null;
+}
+
+/**
+ * Get the medium, inferring it from the document.referrer
+ * @return {string} the medium infered from the referrer
+ */
+function getInferedMedium() {
+  return !getReferrer() ? null : 'organic';
 }
 
 /**
@@ -113,3 +141,5 @@ exports.EventsType = _eventsType2.default;
 exports.setTouch = setTouch;
 exports.getUrlParameters = getUrlParameters;
 exports.getReferrer = getReferrer;
+exports.getInferedSource = getInferedSource;
+exports.getInferedMedium = getInferedMedium;
