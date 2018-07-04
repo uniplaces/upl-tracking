@@ -1,4 +1,16 @@
-import { getUrlParameters, getReferrer, EventsType } from './index';
+import { getUrlParameters, getReferrer, getInferedSource, EventsType } from './index';
+
+function _setReferrer(referrer) {
+  Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
+}
+
+function _clearReferrer() {
+  Object.defineProperty(document, 'referrer', { writable: true, value: null });
+}
+
+afterEach(() => {
+  _clearReferrer();
+});
 
 test('it parses upl parameters correctly', () => {
   const url = 'https://www.uniplaces.com/accommodation/lisbon?upl_source=google&upl_campaign=campaign_1&upl_medium=this-is-a-medium';
@@ -35,14 +47,13 @@ test('it parses utm parameters correctly when there are no upl params', () => {
 test('it returns the referrer as URL', () => {
   const referrer = 'http://www.uniplaces.com/';
 
-  Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
+  _setReferrer(referrer);
 
+  const expected = 'www.uniplaces.com';
   const result = getReferrer();
 
-  Object.defineProperty(document, 'referrer', { writable: false, value: null });
-
   expect(result.href).toBe(referrer);
-  expect(result.host).toBe('www.uniplaces.com');
+  expect(result.host).toBe(expected);
 });
 
 test('it returns null when there is no referrer', () => {
@@ -54,6 +65,15 @@ test('it returns null when there is no referrer', () => {
 test('it exports the events type enumerable', () => {
   const expected = 'sign-up';
   const result = EventsType.SIGN_UP;
+
+  expect(result).toBe(expected);
+});
+
+test('it infers the source', () => {
+  _setReferrer('https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1');
+
+  const expected = 'baidu';
+  const result = getInferedSource();
 
   expect(result).toBe(expected);
 });

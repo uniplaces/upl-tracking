@@ -68,7 +68,7 @@ function getUrlParameters(url) {
 
     // Use Google Analytics to try to find something
     if (param === null && hasGoogleAnalytics()) {
-      param = `getInferred${capitalize(urlParameter.name)}`();
+      param = `getInfered${capitalize(urlParameter.name)}`() || null;
     }
 
     // Set the touch as direct -- use default values
@@ -80,6 +80,12 @@ function getUrlParameters(url) {
   });
 
   return params;
+}
+
+function getInferedSource() {
+  let referrer = getReferrer();
+
+  return referrer.host.split('.')[1];
 }
 
 /**
@@ -102,4 +108,4 @@ function isCustomReferrer(substring) {
   return document.referrer && document.referrer.includes(substring);
 }
 
-export { EventsType, setTouch, getUrlParameters, getReferrer };
+export { EventsType, setTouch, getUrlParameters, getReferrer, getInferedSource };
