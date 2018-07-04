@@ -5,11 +5,11 @@
 ## Usage
 
 ```js
-const UplTracking = require('upl-tracking');
+import * as UplTracking from 'upl-tracking';
 // or
-import UplTracking from 'upl-tracking';
+import { setTouch, EventsType } from 'upl-tracking';
 
-let cookie = UplTracking.setTouch();
+let cookie = setTouch();
 if (cookie) {
   this.sendToApiGateway('new-touch', cookie.toJSON());
 }
@@ -17,7 +17,7 @@ if (cookie) {
 if (cookie) {
   // When a user signs up, send the event to API Gateway
   this.sendToApiGateway('event', {
-    name: UplTracking.EventsType.SIGN_UP, // 'sign-up'
+    name: EventsType.SIGN_UP, // 'sign-up'
     touchId: cookie.getTouchId(),
     timestamp: moment().format('x')
   });

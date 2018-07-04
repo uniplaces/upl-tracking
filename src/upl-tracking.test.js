@@ -1,4 +1,9 @@
-import { getUrlParameters, getReferrer, getInferedSource, EventsType } from './index';
+import {
+  getUrlParameters,
+  getReferrer,
+  getInferedSource,
+  EventsType
+} from './upl-tracking';
 
 function _setReferrer(referrer) {
   Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
