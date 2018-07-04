@@ -74,14 +74,22 @@ class UplCookie {
     return this;
   }
 
+  /**
+   * Save this cookie as a browser cookie
+   * @return {UplCookie} this cookie
+   */
   save() {
-    _jsCookie2.default.set(UPL_COOKIE_NAME, '');
+    _jsCookie2.default.set(UPL_COOKIE_NAME, this.toJSON());
 
     return this;
   }
 
+  /**
+   * Get this class' instance as JSON
+   * @return {Object}
+   */
   toJSON() {
-    return JSON.stringify(_extends({}, this, { touchId: this.getTouchId() }));
+    return _extends({}, this, { touchId: this.getTouchId() });
   }
 }
 exports.default = UplCookie;

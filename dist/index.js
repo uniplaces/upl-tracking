@@ -3,10 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setTouch = setTouch;
-exports.getUrlParameters = getUrlParameters;
-exports.isGoogleReferrer = isGoogleReferrer;
-exports.getReferrer = getReferrer;
+exports.getReferrer = exports.getUrlParameters = exports.setTouch = exports.EventsType = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -16,16 +13,21 @@ var _uplCookie = require('./upl-cookie');
 
 var _uplCookie2 = _interopRequireDefault(_uplCookie);
 
+var _eventsType = require('./enums/events-type');
+
+var _eventsType2 = _interopRequireDefault(_eventsType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* global ga */
-const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: 'organic' }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }, { name: 'origin', defaultValue: null }, { name: 'destination', defaultValue: null }, { name: 'language', defaultValue: null }];
+const URL_PARAMETERS = [{ name: 'source', defaultValue: 'direct' }, { name: 'medium', defaultValue: 'organic' }, { name: 'campaign', defaultValue: null }, { name: 'term', defaultValue: null }, { name: 'content', defaultValue: null }, { name: 'gclid', defaultValue: null }, { name: 'msclkid', defaultValue: null }];
 
 /**
  * Creates a new UplCookie
- * @param {string} url If
- * @returns {Object} the UPL cookie
+ * @param {string} url
+ * @param {Object} location
+ * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
+/* global ga */
 function setTouch(url, location = { origin: null, destination: null, language: null }) {
   // Get URL parameters
   const params = getUrlParameters(url);
@@ -85,6 +87,14 @@ function getUrlParameters(url) {
   return params;
 }
 
+/**
+ * Get the document's referrer as URL
+ * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
+ */
+function getReferrer() {
+  return document.referrer ? new URL(document.referrer) : null;
+}
+
 function hasGoogleAnalytics() {
   return window.ga && ga.loaded;
 }
@@ -93,18 +103,11 @@ function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
-function isGoogleReferrer() {
-  return isCustomReferrer('google');
-}
-
-/**
- *
- *
- */
-function getReferrer() {
-  return document.referrer ? new URL(document.referrer) : null;
-}
-
 function isCustomReferrer(substring) {
   return document.referrer && document.referrer.includes(substring);
 }
+
+exports.EventsType = _eventsType2.default;
+exports.setTouch = setTouch;
+exports.getUrlParameters = getUrlParameters;
+exports.getReferrer = getReferrer;

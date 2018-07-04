@@ -1,4 +1,4 @@
-import { getUrlParameters, getReferrer } from './index';
+import { getUrlParameters, getReferrer, EventsType } from './index';
 
 test('it parses upl parameters correctly', () => {
   const url = 'https://www.uniplaces.com/accommodation/lisbon?upl_source=google&upl_campaign=campaign_1&upl_medium=this-is-a-medium';
@@ -49,4 +49,11 @@ test('it returns null when there is no referrer', () => {
   const result = getReferrer();
 
   expect(result).toBe(null);
+});
+
+test('it exports the events type enumerable', () => {
+  const expected = 'sign-up';
+  const result = EventsType.SIGN_UP;
+
+  expect(result).toBe(expected);
 });

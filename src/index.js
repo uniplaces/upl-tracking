@@ -1,6 +1,7 @@
 /* global ga */
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
+import EventsType from './enums/events-type';
 
 const URL_PARAMETERS = [
   { name: 'source', defaultValue: 'direct' },
@@ -18,7 +19,7 @@ const URL_PARAMETERS = [
  * @param {Object} location
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-export function setTouch(url, location = { origin: null, destination: null, language: null }) {
+function setTouch(url, location = { origin: null, destination: null, language: null }) {
   // Get URL parameters
   const params = getUrlParameters(url);
 
@@ -52,7 +53,7 @@ function getCookie() {
   return cookie;
 }
 
-export function getUrlParameters(url) {
+function getUrlParameters(url) {
   const parsedUrl = new URL(url);
   const params = {};
 
@@ -84,7 +85,7 @@ export function getUrlParameters(url) {
  * Get the document's referrer as URL
  * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
  */
-export function getReferrer() {
+function getReferrer() {
   return document.referrer ? new URL(document.referrer) : null;
 }
 
@@ -96,10 +97,8 @@ function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
-export function isGoogleReferrer() {
-  return isCustomReferrer('google');
-}
-
 function isCustomReferrer(substring) {
   return document.referrer && document.referrer.includes(substring);
 }
+
+export { EventsType, setTouch, getUrlParameters, getReferrer };
