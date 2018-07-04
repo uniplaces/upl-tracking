@@ -27,7 +27,6 @@ export default class UplCookie {
 
   /**
    * Get the UplCookie location
-   *
    * @return
    */
   getLocation() {

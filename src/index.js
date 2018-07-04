@@ -9,10 +9,7 @@ const URL_PARAMETERS = [
   { name: 'term', defaultValue: null },
   { name: 'content', defaultValue: null },
   { name: 'gclid', defaultValue: null },
-  { name: 'msclkid', defaultValue: null },
-  { name: 'origin', defaultValue: null },
-  { name: 'destination', defaultValue: null },
-  { name: 'language', defaultValue: null }
+  { name: 'msclkid', defaultValue: null }
 ];
 
 /**

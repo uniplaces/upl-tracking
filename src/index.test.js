@@ -7,11 +7,8 @@ test('it parses upl parameters correctly', () => {
     campaign: 'campaign_1',
     medium: 'this-is-a-medium',
     content: null,
-    destination: null,
     gclid: null,
-    language: null,
     msclkid: null,
-    origin: null,
     term: null
   };
   const result = getUrlParameters(url);
@@ -26,11 +23,8 @@ test('it parses utm parameters correctly when there are no upl params', () => {
     campaign: 'campaign_1',
     medium: 'this-is-a-medium',
     content: null,
-    destination: null,
     gclid: null,
-    language: null,
     msclkid: null,
-    origin: null,
     term: null
   };
   const result = getUrlParameters(url);
