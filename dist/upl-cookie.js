@@ -20,6 +20,10 @@ var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
+var _languageType = require('./enums/language-type');
+
+var _languageType2 = _interopRequireDefault(_languageType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -115,9 +119,11 @@ var UplCookie = function () {
     value: function setLocation() {
       var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null };
 
+      var formattedLanguage = _languageType2.default[location.language.replace('-', '_').toUpperCase()];
+
       this.origin = location.origin;
       this.destination = location.destination;
-      this.language = location.language;
+      this.language = formattedLanguage;
 
       return this;
     }

@@ -20,7 +20,7 @@ test('it constructs a upl cookie with custom tracking id and timestamp', () => {
 });
 
 test('it returns the cookie name', () => {
-  const expected = 'upl-cookie';
+  const expected = 'upl_cookie';
   const result = UplCookie.getCookieName();
 
   expect(result).toBe(expected);
@@ -80,12 +80,12 @@ test('it sets the new location', () => {
     timestamp: 1000000,
     origin: 'portugal',
     destination: 'barcelona',
-    language: 'pt'
+    language: 'portuguese'
   };
   const result = cookie.setLocation({
     origin: 'portugal',
     destination: 'barcelona',
-    language: 'pt'
+    language: 'pt-pt'
   });
 
   expect(result).toEqual(expected);
@@ -95,7 +95,7 @@ test('it saves the cookie in Cookies', () => {
   const cookie = new UplCookie('123-456', 150000);
   const result = cookie.save();
 
-  const expectedCookieName = 'upl-cookie';
+  const expectedCookieName = 'upl_cookie';
   const expectedCookieJson = { trackingId: '123-456', timestamp: 150000 };
   const expectedOptions = { expires: 180, domain: '.uniplaces.com' };
 

@@ -81,6 +81,8 @@ function getUrlParameters(url) {
 
     // Set the touch as direct -- use default values
     if (param === null) {
+      console.log(`Does not exist infered value for ${urlParameter.name}`);
+
       param = urlParameter.defaultValue;
     }
 
@@ -95,9 +97,11 @@ function getUrlParameters(url) {
  * @return {string} the source infered from the referrer
  */
 function getInferedSource() {
-  let referrer = getReferrer();
+  if (isUniplacesReferrer()) {
+    return null;
+  }
 
-  console.log('Getting infered source...', referrer.host);
+  let referrer = getReferrer();
 
   return referrer ? referrer.host.split('.')[1] : null;
 }
@@ -107,7 +111,11 @@ function getInferedSource() {
  * @return {string} the medium infered from the referrer
  */
 function getInferedMedium() {
-  return !getReferrer() ? null : 'organic';
+  if (isUniplacesReferrer() || !getReferrer()) {
+    return null;
+  }
+
+  return 'organic';
 }
 
 /**

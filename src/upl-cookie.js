@@ -1,6 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import Cookies from 'js-cookie';
+import LanguageType from './enums/language-type';
 
 const UNIX_DATE_FORMAT = 'x';
 const UPL_COOKIE_NAME = 'upl_cookie';
@@ -69,9 +70,11 @@ export default class UplCookie {
    * @return {UplCookie}
    */
   setLocation(location = { origin: null, destination: null, language: null }) {
+    const formattedLanguage = LanguageType[location.language.replace('-', '_').toUpperCase()];
+
     this.origin = location.origin;
     this.destination = location.destination;
-    this.language = location.language;
+    this.language = formattedLanguage;
 
     return this;
   }
