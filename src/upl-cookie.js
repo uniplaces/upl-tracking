@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import Cookies from 'js-cookie';
-import LanguageType from './enums/language-type';
+import { i18nToUplLocale } from './utils';
 
 const UNIX_DATE_FORMAT = 'x';
 const UPL_COOKIE_NAME = 'upl_cookie';
@@ -44,7 +44,8 @@ export default class UplCookie {
     return {
       origin: this.origin,
       destination: this.destination,
-      language: this.language
+      language: this.language,
+      city: this.city
     };
   }
 
@@ -69,12 +70,11 @@ export default class UplCookie {
    * @param {Object} location
    * @return {UplCookie}
    */
-  setLocation(location = { origin: null, destination: null, language: null }) {
-    const formattedLanguage = LanguageType[location.language.replace('-', '_').toUpperCase()];
-
+  setLocation(location = { origin: null, destination: null, language: null, city: null }) {
     this.origin = location.origin;
     this.destination = location.destination;
-    this.language = formattedLanguage;
+    this.language = i18nToUplLocale(location.language);
+    this.city = location.city;
 
     return this;
   }

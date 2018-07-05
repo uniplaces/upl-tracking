@@ -39,7 +39,8 @@ test('it returns the location', () => {
   const expected = {
     destination: undefined,
     origin: undefined,
-    language: undefined
+    language: undefined,
+    city: undefined
   };
   const result = cookie.getLocation();
 
@@ -80,12 +81,14 @@ test('it sets the new location', () => {
     timestamp: 1000000,
     origin: 'portugal',
     destination: 'barcelona',
-    language: 'portuguese'
+    language: 'portuguese',
+    city: 'lisbon'
   };
   const result = cookie.setLocation({
     origin: 'portugal',
     destination: 'barcelona',
-    language: 'pt-pt'
+    language: 'pt-pt',
+    city: 'lisbon'
   });
 
   expect(result).toEqual(expected);
