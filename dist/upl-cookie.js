@@ -20,9 +20,7 @@ var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
-var _languageType = require('./enums/language-type');
-
-var _languageType2 = _interopRequireDefault(_languageType);
+var _utils = require('./utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77,7 +75,8 @@ var UplCookie = function () {
       return {
         origin: this.origin,
         destination: this.destination,
-        language: this.language
+        language: this.language,
+        city: this.city
       };
     }
 
@@ -117,13 +116,12 @@ var UplCookie = function () {
   }, {
     key: 'setLocation',
     value: function setLocation() {
-      var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null };
-
-      var formattedLanguage = _languageType2.default[location.language.replace('-', '_').toUpperCase()];
+      var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null, city: null };
 
       this.origin = location.origin;
       this.destination = location.destination;
-      this.language = formattedLanguage;
+      this.language = (0, _utils.i18nToUplLocale)(location.language);
+      this.city = location.city;
 
       return this;
     }

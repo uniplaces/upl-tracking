@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
+exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedCampaign = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -19,9 +19,7 @@ var _eventsType2 = _interopRequireDefault(_eventsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: function inferedValue() {
-    return null;
-  }, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
+var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: getInferedCampaign, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'content', inferedValue: function inferedValue() {
     return null;
@@ -40,7 +38,7 @@ var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultV
 function setTouch(cookieDomain, location) {
   // Get URL parameters
   var url = window.location.href;
-  var params = getUrlParameters(url);
+  var params = getUrlParameters(url, location);
 
   // Check if user has cookie already
   var uplCookie = getCookie(url, location);
@@ -76,7 +74,7 @@ function getCookie() {
  * Get the URL parameters
  * @return {Object}
  */
-function getUrlParameters(url) {
+function getUrlParameters(url, location) {
   var parsedUrl = new URL(url);
   var params = {};
 
@@ -85,20 +83,16 @@ function getUrlParameters(url) {
 
     // If the upl_param does not exist, check for the corresponding utm_param
     if (param === null) {
-      console.log('Does not exist UPL for ' + urlParameter.name);
       param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
     }
 
     // Use Google Analytics to try to find something
     if (param === null) {
-      console.log('Does not exist UTM for ' + urlParameter.name);
-      param = urlParameter.inferedValue();
+      param = urlParameter.inferedValue(url, location);
     }
 
     // Set the touch as direct -- use default values
     if (param === null) {
-      console.log('Does not exist infered value for ' + urlParameter.name);
-
       param = urlParameter.defaultValue;
     }
 
@@ -113,25 +107,59 @@ function getUrlParameters(url) {
  * @return {string} the source infered from the referrer
  */
 function getInferedSource() {
-  if (isUniplacesReferrer()) {
+  if (!hasReferrer() || isUniplacesReferrer()) {
     return null;
   }
 
-  var referrer = getReferrer();
-
-  return referrer ? referrer.host.split('.')[1] : null;
+  return getReferrer().host.split('.')[1];
 }
 
 /**
  * Get the medium, inferring it from the document.referrer
+ * @param {string} url
+ * @param {Object} location
  * @return {string} the medium infered from the referrer
  */
-function getInferedMedium() {
-  if (isUniplacesReferrer() || !getReferrer()) {
+function getInferedMedium(_, location) {
+  var origin = location.origin,
+      destination = location.destination,
+      language = location.language;
+
+  var placeholder = 'xxx';
+
+  if (!hasReferrer() || isUniplacesReferrer()) {
     return null;
   }
 
+  if (origin || destination || language) {
+    return (origin || placeholder) + '_' + (destination || placeholder) + '_' + (language || placeholder);
+  }
+
   return 'organic';
+}
+
+/**
+ * Get the campaign, inferring it from the location's city
+ * @param {string} url
+ * @param {Object} location
+ * @return {string} the medium infered from the location's city
+ */
+function getInferedCampaign(_, location) {
+  var city = location.city;
+
+  if (!hasReferrer() || isUniplacesReferrer() || !city) {
+    return null;
+  }
+
+  return city + '_generic';
+}
+
+/**
+ * Check if it exists a document.referrer
+ * @return {boolean} If there is a referrer
+ */
+function hasReferrer() {
+  return document.referrer && document.referrer !== '';
 }
 
 /**
@@ -139,7 +167,7 @@ function getInferedMedium() {
  * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
  */
 function getReferrer() {
-  return document.referrer && document.referrer !== '' ? new URL(document.referrer) : null;
+  return hasReferrer() ? new URL(document.referrer) : null;
 }
 
 /**
@@ -153,7 +181,7 @@ function isUniplacesReferrer() {
  *
  */
 function isCustomReferrer(substring) {
-  return document.referrer && document.referrer.includes(substring);
+  return hasReferrer() && document.referrer.includes(substring);
 }
 
 exports.setTouch = setTouch;
@@ -162,6 +190,7 @@ exports.getCookie = getCookie;
 exports.getUrlParameters = getUrlParameters;
 exports.getInferedSource = getInferedSource;
 exports.getInferedMedium = getInferedMedium;
+exports.getInferedCampaign = getInferedCampaign;
 exports.getReferrer = getReferrer;
 exports.isUniplacesReferrer = isUniplacesReferrer;
 exports.isCustomReferrer = isCustomReferrer;

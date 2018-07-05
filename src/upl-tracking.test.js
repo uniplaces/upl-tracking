@@ -123,6 +123,20 @@ test('it infers the medium when some fields are missing', () => {
   expect(result).toBe(expected);
 });
 
+test('it infers the medium when all fields are missing', () => {
+  _setReferrer('https://www.google.com/');
+
+  const location = {
+    origin: null,
+    destination: null,
+    language: null
+  };
+  const expected = 'organic';
+  const result = getInferedMedium('this-is-an-url', location);
+
+  expect(result).toBe(expected);
+});
+
 test('it does not infer the medium when there is no referrer', () => {
   const location = {
     origin: null,
