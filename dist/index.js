@@ -12,6 +12,12 @@ Object.defineProperty(exports, 'setTouch', {
     return _uplTracking.setTouch;
   }
 });
+Object.defineProperty(exports, 'getCookie', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.getCookie;
+  }
+});
 Object.defineProperty(exports, 'EventsType', {
   enumerable: true,
   get: function get() {

@@ -41,7 +41,7 @@ function setTouch(cookieDomain, location) {
   var params = getUrlParameters(url, location);
 
   // Check if user has cookie already
-  var uplCookie = getCookie(url, location);
+  var uplCookie = getCookie();
 
   // If not, create and set new uplCookie
   if (!uplCookie) {
@@ -67,7 +67,7 @@ function getCookie() {
   var cookieName = _uplCookie2.default.getCookieName();
   var cookie = _jsCookie2.default.getJSON(cookieName);
 
-  return _uplCookie2.default.fromJSON(cookie);
+  return cookie ? _uplCookie2.default.fromJSON(cookie) : null;
 }
 
 /**

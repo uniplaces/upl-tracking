@@ -1,1 +1,5 @@
-export { setTouch, EventsType } from './upl-tracking';
+export {
+  setTouch,
+  getCookie,
+  EventsType
+} from './upl-tracking';
