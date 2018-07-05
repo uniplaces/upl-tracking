@@ -1,6 +1,10 @@
 {
   "presets": [
-    ["env", { "targets": { "node": "8.9.0" } }]
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7"]
+      }
+    }]
   ],
   "ignore": [
     "dist/**/*.js"

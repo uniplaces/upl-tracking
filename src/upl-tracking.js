@@ -14,13 +14,13 @@ const URL_PARAMETERS = [
 
 /**
  * Creates a new UplCookie
- * @param {string} url - the complete url
- * @param {Object} location - the location's object
  * @param {string} cookieDomain - the cookie domain to be used
+ * @param {Object} location - the location's object
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-function setTouch(url, location, cookieDomain) {
+function setTouch(cookieDomain, location) {
   // Get URL parameters
+  const url = window.location.href;
   const params = getUrlParameters(url);
 
   // Check if user has cookie already
@@ -69,11 +69,13 @@ function getUrlParameters(url) {
 
     // If the upl_param does not exist, check for the corresponding utm_param
     if (param === null) {
+      console.log(`Does not exist UPL for ${urlParameter.name}`);
       param = parsedUrl.searchParams.get(`utm_${urlParameter.name}`);
     }
 
     // Use Google Analytics to try to find something
     if (param === null) {
+      console.log(`Does not exist UTM for ${urlParameter.name}`);
       param = urlParameter.inferedValue();
     }
 
@@ -95,6 +97,8 @@ function getUrlParameters(url) {
 function getInferedSource() {
   let referrer = getReferrer();
 
+  console.log('Getting infered source...', referrer.host);
+
   return referrer ? referrer.host.split('.')[1] : null;
 }
 
@@ -111,13 +115,19 @@ function getInferedMedium() {
  * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
  */
 function getReferrer() {
-  return document.referrer ? new URL(document.referrer) : null;
+  return document.referrer && document.referrer !== '' ? new URL(document.referrer) : null;
 }
 
+/**
+ *
+ */
 function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
+/**
+ *
+ */
 function isCustomReferrer(substring) {
   return document.referrer && document.referrer.includes(substring);
 }
@@ -125,8 +135,11 @@ function isCustomReferrer(substring) {
 export {
   setTouch,
   EventsType,
+  getCookie,
   getUrlParameters,
-  getReferrer,
   getInferedSource,
-  getInferedMedium
+  getInferedMedium,
+  getReferrer,
+  isUniplacesReferrer,
+  isCustomReferrer
 };

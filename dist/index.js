@@ -8,13 +8,13 @@ var _uplTracking = require('./upl-tracking');
 
 Object.defineProperty(exports, 'setTouch', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _uplTracking.setTouch;
   }
 });
 Object.defineProperty(exports, 'EventsType', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _uplTracking.EventsType;
   }
 });

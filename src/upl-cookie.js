@@ -3,7 +3,7 @@ import moment from 'moment';
 import Cookies from 'js-cookie';
 
 const UNIX_DATE_FORMAT = 'x';
-const UPL_COOKIE_NAME = 'upl-cookie';
+const UPL_COOKIE_NAME = 'upl_cookie';
 const DEFAULT_EXPIRE_IN_DAYS = 180;
 const DEFAULT_DOMAIN = '.uniplaces.com';
 

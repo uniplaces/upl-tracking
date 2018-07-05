@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getInferedMedium = exports.getInferedSource = exports.getReferrer = exports.getUrlParameters = exports.EventsType = exports.setTouch = undefined;
+exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -19,21 +19,31 @@ var _eventsType2 = _interopRequireDefault(_eventsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: () => null, defaultValue: null }, { name: 'term', inferedValue: () => null, defaultValue: null }, { name: 'content', inferedValue: () => null, defaultValue: null }, { name: 'gclid', inferedValue: () => null, defaultValue: null }, { name: 'msclkid', inferedValue: () => null, defaultValue: null }];
+var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'content', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'gclid', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'msclkid', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }];
 
 /**
  * Creates a new UplCookie
- * @param {string} url - the complete url
- * @param {Object} location - the location's object
  * @param {string} cookieDomain - the cookie domain to be used
+ * @param {Object} location - the location's object
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
-function setTouch(url, location, cookieDomain) {
+function setTouch(cookieDomain, location) {
   // Get URL parameters
-  const params = getUrlParameters(url);
+  var url = window.location.href;
+  var params = getUrlParameters(url);
 
   // Check if user has cookie already
-  let uplCookie = getCookie(url, location);
+  var uplCookie = getCookie(url, location);
 
   // If not, create and set new uplCookie
   if (!uplCookie) {
@@ -56,8 +66,8 @@ function setTouch(url, location, cookieDomain) {
  * @return {UplCookie} the Upl Cookie JSON
  */
 function getCookie() {
-  const cookieName = _uplCookie2.default.getCookieName();
-  const cookie = _jsCookie2.default.getJSON(cookieName);
+  var cookieName = _uplCookie2.default.getCookieName();
+  var cookie = _jsCookie2.default.getJSON(cookieName);
 
   return _uplCookie2.default.fromJSON(cookie);
 }
@@ -67,19 +77,21 @@ function getCookie() {
  * @return {Object}
  */
 function getUrlParameters(url) {
-  const parsedUrl = new URL(url);
-  const params = {};
+  var parsedUrl = new URL(url);
+  var params = {};
 
-  URL_PARAMETERS.forEach(urlParameter => {
-    let param = parsedUrl.searchParams.get(`upl_${urlParameter.name}`);
+  URL_PARAMETERS.forEach(function (urlParameter) {
+    var param = parsedUrl.searchParams.get('upl_' + urlParameter.name);
 
     // If the upl_param does not exist, check for the corresponding utm_param
     if (param === null) {
-      param = parsedUrl.searchParams.get(`utm_${urlParameter.name}`);
+      console.log('Does not exist UPL for ' + urlParameter.name);
+      param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
     }
 
     // Use Google Analytics to try to find something
     if (param === null) {
+      console.log('Does not exist UTM for ' + urlParameter.name);
       param = urlParameter.inferedValue();
     }
 
@@ -99,7 +111,9 @@ function getUrlParameters(url) {
  * @return {string} the source infered from the referrer
  */
 function getInferedSource() {
-  let referrer = getReferrer();
+  var referrer = getReferrer();
+
+  console.log('Getting infered source...', referrer.host);
 
   return referrer ? referrer.host.split('.')[1] : null;
 }
@@ -117,20 +131,29 @@ function getInferedMedium() {
  * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
  */
 function getReferrer() {
-  return document.referrer ? new URL(document.referrer) : null;
+  return document.referrer && document.referrer !== '' ? new URL(document.referrer) : null;
 }
 
+/**
+ *
+ */
 function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
+/**
+ *
+ */
 function isCustomReferrer(substring) {
   return document.referrer && document.referrer.includes(substring);
 }
 
 exports.setTouch = setTouch;
 exports.EventsType = _eventsType2.default;
+exports.getCookie = getCookie;
 exports.getUrlParameters = getUrlParameters;
-exports.getReferrer = getReferrer;
 exports.getInferedSource = getInferedSource;
 exports.getInferedMedium = getInferedMedium;
+exports.getReferrer = getReferrer;
+exports.isUniplacesReferrer = isUniplacesReferrer;
+exports.isCustomReferrer = isCustomReferrer;
