@@ -21,12 +21,22 @@ afterEach(() => {
 test('it parses upl parameters correctly', () => {
   const url = 'https://www.uniplaces.com/accommodation/lisbon?upl_source=google&upl_campaign=campaign_1&upl_medium=this-is-a-medium';
   const expected = {
-    source: 'google',
+    adgroup: null,
+    adposition: null,
     campaign: 'campaign_1',
-    medium: 'this-is-a-medium',
     content: null,
+    creative: null,
+    device: null,
+    devicemodel: null,
     gclid: null,
+    keyword: null,
+    location: null,
+    matchtype: null,
+    medium: 'this-is-a-medium',
     msclkid: null,
+    network: null,
+    sitelink: null,
+    source: 'google',
     term: null
   };
   const result = getUrlParameters(url);
@@ -37,12 +47,22 @@ test('it parses upl parameters correctly', () => {
 test('it parses utm parameters correctly when there are no upl params', () => {
   const url = 'https://www.uniplaces.com/accommodation/lisbon?utm_source=google&utm_campaign=campaign_1&utm_medium=this-is-a-medium';
   const expected = {
-    source: 'google',
+    adgroup: null,
+    adposition: null,
     campaign: 'campaign_1',
-    medium: 'this-is-a-medium',
     content: null,
+    creative: null,
+    device: null,
+    devicemodel: null,
     gclid: null,
+    keyword: null,
+    location: null,
+    matchtype: null,
+    medium: 'this-is-a-medium',
     msclkid: null,
+    network: null,
+    sitelink: null,
+    source: 'google',
     term: null
   };
   const result = getUrlParameters(url);

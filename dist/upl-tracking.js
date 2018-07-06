@@ -19,15 +19,35 @@ var _actionsType2 = _interopRequireDefault(_actionsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: function inferedValue() {
+var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
     return null;
-  }, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
+  }, defaultValue: 'city_type' }, { name: 'term', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'content', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'gclid', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'msclkid', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'network', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'keyword', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'matchtype', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'device', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'devicemodel', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'adposition', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'adgroup', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'location', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'creative', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'sitelink', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }];
 

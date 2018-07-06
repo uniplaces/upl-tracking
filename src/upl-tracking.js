@@ -4,12 +4,22 @@ import ActionsType from './enums/actions-type';
 
 const URL_PARAMETERS = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
-  { name: 'medium', inferedValue: getInferedMedium, defaultValue: null },
-  { name: 'campaign', inferedValue: () => null, defaultValue: null },
+  { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' },
+  { name: 'campaign', inferedValue: () => null, defaultValue: 'city_type' },
   { name: 'term', inferedValue: () => null, defaultValue: null },
   { name: 'content', inferedValue: () => null, defaultValue: null },
   { name: 'gclid', inferedValue: () => null, defaultValue: null },
-  { name: 'msclkid', inferedValue: () => null, defaultValue: null }
+  { name: 'msclkid', inferedValue: () => null, defaultValue: null },
+  { name: 'network', inferedValue: () => null, defaultValue: null },
+  { name: 'keyword', inferedValue: () => null, defaultValue: null },
+  { name: 'matchtype', inferedValue: () => null, defaultValue: null },
+  { name: 'device', inferedValue: () => null, defaultValue: null },
+  { name: 'devicemodel', inferedValue: () => null, defaultValue: null },
+  { name: 'adposition', inferedValue: () => null, defaultValue: null },
+  { name: 'adgroup', inferedValue: () => null, defaultValue: null },
+  { name: 'location', inferedValue: () => null, defaultValue: null },
+  { name: 'creative', inferedValue: () => null, defaultValue: null },
+  { name: 'sitelink', inferedValue: () => null, defaultValue: null }
 ];
 
 /**
