@@ -5,7 +5,7 @@ import EventsType from './enums/events-type';
 const URL_PARAMETERS = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
   { name: 'medium', inferedValue: getInferedMedium, defaultValue: null },
-  { name: 'campaign', inferedValue: getInferedCampaign, defaultValue: null },
+  { name: 'campaign', inferedValue: () => null, defaultValue: null },
   { name: 'term', inferedValue: () => null, defaultValue: null },
   { name: 'content', inferedValue: () => null, defaultValue: null },
   { name: 'gclid', inferedValue: () => null, defaultValue: null },
@@ -102,38 +102,14 @@ function getInferedSource() {
 
 /**
  * Get the medium, inferring it from the document.referrer
- * @param {string} url
- * @param {Object} location
  * @return {string} the medium infered from the referrer
  */
-function getInferedMedium(_, location) {
-  const { origin, destination, language } = location;
-  const placeholder = 'xxx';
-
+function getInferedMedium() {
   if (!hasReferrer() || isUniplacesReferrer()) {
     return null;
   }
 
-  if (origin || destination || language) {
-    return `${origin || placeholder}_${destination || placeholder}_${language || placeholder}`;
-  }
-
   return 'organic';
-}
-
-/**
- * Get the campaign, inferring it from the location's city
- * @param {string} url
- * @param {Object} location
- * @return {string} the medium infered from the location's city
- */
-function getInferedCampaign(_, location) {
-  const { city } = location;
-  if (!hasReferrer() || isUniplacesReferrer() || !city) {
-    return null;
-  }
-
-  return `${city}_generic`;
 }
 
 /**
@@ -173,7 +149,6 @@ export {
   getUrlParameters,
   getInferedSource,
   getInferedMedium,
-  getInferedCampaign,
   getReferrer,
   isUniplacesReferrer,
   isCustomReferrer

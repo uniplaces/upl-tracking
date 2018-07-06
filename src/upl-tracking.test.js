@@ -95,57 +95,15 @@ test('it does not infer the source when the referrer is uniplaces', () => {
 
 test('it infers the medium', () => {
   _setReferrer('https://www.google.com/');
-
-  const location = {
-    origin: 'portugal',
-    destination: 'honduras',
-    city: 'tegucigalpa',
-    language: 'portuguese'
-  };
-  const expected = 'portugal_honduras_portuguese';
-  const result = getInferedMedium('this-is-an-url', location);
-
-  expect(result).toBe(expected);
-});
-
-test('it infers the medium when some fields are missing', () => {
-  _setReferrer('https://www.google.com/');
-
-  const location = {
-    origin: null,
-    destination: 'honduras',
-    city: 'tegucigalpa',
-    language: 'portuguese'
-  };
-  const expected = 'xxx_honduras_portuguese';
-  const result = getInferedMedium('this-is-an-url', location);
-
-  expect(result).toBe(expected);
-});
-
-test('it infers the medium when all fields are missing', () => {
-  _setReferrer('https://www.google.com/');
-
-  const location = {
-    origin: null,
-    destination: null,
-    language: null
-  };
   const expected = 'organic';
-  const result = getInferedMedium('this-is-an-url', location);
+  const result = getInferedMedium();
 
   expect(result).toBe(expected);
 });
 
 test('it does not infer the medium when there is no referrer', () => {
-  const location = {
-    origin: null,
-    destination: 'honduras',
-    city: 'tegucigalpa',
-    language: 'portuguese'
-  };
   const expected = null;
-  const result = getInferedMedium('this-is-an-url', location);
+  const result = getInferedMedium();
 
   expect(result).toBe(expected);
 });
@@ -153,14 +111,8 @@ test('it does not infer the medium when there is no referrer', () => {
 test('it does not infer the medium when the referrer is uniplaces', () => {
   _setReferrer('https://staging-uniplaces.com/');
 
-  const location = {
-    origin: null,
-    destination: 'honduras',
-    city: 'tegucigalpa',
-    language: 'portuguese'
-  };
   const expected = null;
-  const result = getInferedMedium('this-is-an-url', location);
+  const result = getInferedMedium();
 
   expect(result).toBe(expected);
 });

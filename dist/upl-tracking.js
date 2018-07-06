@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedCampaign = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
+exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -19,7 +19,9 @@ var _eventsType2 = _interopRequireDefault(_eventsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: getInferedCampaign, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
+var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: null }, { name: 'campaign', inferedValue: function inferedValue() {
+    return null;
+  }, defaultValue: null }, { name: 'term', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'content', inferedValue: function inferedValue() {
     return null;
@@ -116,42 +118,14 @@ function getInferedSource() {
 
 /**
  * Get the medium, inferring it from the document.referrer
- * @param {string} url
- * @param {Object} location
  * @return {string} the medium infered from the referrer
  */
-function getInferedMedium(_, location) {
-  var origin = location.origin,
-      destination = location.destination,
-      language = location.language;
-
-  var placeholder = 'xxx';
-
+function getInferedMedium() {
   if (!hasReferrer() || isUniplacesReferrer()) {
     return null;
   }
 
-  if (origin || destination || language) {
-    return (origin || placeholder) + '_' + (destination || placeholder) + '_' + (language || placeholder);
-  }
-
   return 'organic';
-}
-
-/**
- * Get the campaign, inferring it from the location's city
- * @param {string} url
- * @param {Object} location
- * @return {string} the medium infered from the location's city
- */
-function getInferedCampaign(_, location) {
-  var city = location.city;
-
-  if (!hasReferrer() || isUniplacesReferrer() || !city) {
-    return null;
-  }
-
-  return city + '_generic';
 }
 
 /**
@@ -190,7 +164,6 @@ exports.getCookie = getCookie;
 exports.getUrlParameters = getUrlParameters;
 exports.getInferedSource = getInferedSource;
 exports.getInferedMedium = getInferedMedium;
-exports.getInferedCampaign = getInferedCampaign;
 exports.getReferrer = getReferrer;
 exports.isUniplacesReferrer = isUniplacesReferrer;
 exports.isCustomReferrer = isCustomReferrer;
