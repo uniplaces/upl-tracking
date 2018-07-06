@@ -33,7 +33,7 @@ function setTouch(cookieDomain, location) {
 
   // If yes, check document's referrer
   // It's Uniplaces?
-  if (!isUniplacesReferrer()) {
+  if (isUniplacesReferrer()) {
     // Return same uplCookie
     return null;
   }
