@@ -1,22 +1,22 @@
-import EventsType from './events-type';
+import ActionsType from './actions-type';
 
 test('it has the correct number of properties', () => {
   const expected = 2;
-  const result = Object.keys(EventsType).length;
+  const result = Object.keys(ActionsType).length;
 
   expect(result).toBe(expected);
 });
 
 test('it returns the sign up event', () => {
   const expected = 'sign-up';
-  const result = EventsType.SIGN_UP;
+  const result = ActionsType.SIGN_UP;
 
   expect(result).toBe(expected);
 });
 
 test('it returns the booking request event', () => {
   const expected = 'booking-request';
-  const result = EventsType.BOOKING_REQUEST;
+  const result = ActionsType.BOOKING_REQUEST;
 
   expect(result).toBe(expected);
 });

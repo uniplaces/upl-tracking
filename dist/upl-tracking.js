@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.EventsType = exports.setTouch = undefined;
+exports.isCustomReferrer = exports.isUniplacesReferrer = exports.getReferrer = exports.getInferedMedium = exports.getInferedSource = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.setTouch = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -13,9 +13,9 @@ var _uplCookie = require('./upl-cookie');
 
 var _uplCookie2 = _interopRequireDefault(_uplCookie);
 
-var _eventsType = require('./enums/events-type');
+var _actionsType = require('./enums/actions-type');
 
-var _eventsType2 = _interopRequireDefault(_eventsType);
+var _actionsType2 = _interopRequireDefault(_actionsType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -159,7 +159,7 @@ function isCustomReferrer(substring) {
 }
 
 exports.setTouch = setTouch;
-exports.EventsType = _eventsType2.default;
+exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = getUrlParameters;
 exports.getInferedSource = getInferedSource;

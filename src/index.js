@@ -1,5 +1,5 @@
 export {
   setTouch,
   getCookie,
-  EventsType
+  ActionsType
 } from './upl-tracking';

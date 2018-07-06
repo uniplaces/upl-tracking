@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
-import EventsType from './enums/events-type';
+import ActionsType from './enums/actions-type';
 
 const URL_PARAMETERS = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -144,7 +144,7 @@ function isCustomReferrer(substring) {
 
 export {
   setTouch,
-  EventsType,
+  ActionsType,
   getCookie,
   getUrlParameters,
   getInferedSource,

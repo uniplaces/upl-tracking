@@ -18,9 +18,9 @@ Object.defineProperty(exports, 'getCookie', {
     return _uplTracking.getCookie;
   }
 });
-Object.defineProperty(exports, 'EventsType', {
+Object.defineProperty(exports, 'ActionsType', {
   enumerable: true,
   get: function get() {
-    return _uplTracking.EventsType;
+    return _uplTracking.ActionsType;
   }
 });

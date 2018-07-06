@@ -3,7 +3,7 @@ import {
   getReferrer,
   getInferedSource,
   getInferedMedium,
-  EventsType
+  ActionsType
 } from './upl-tracking';
 
 function _setReferrer(referrer) {
@@ -70,7 +70,7 @@ test('it returns null when there is no referrer', () => {
 
 test('it exports the events type enumerable', () => {
   const expected = 'sign-up';
-  const result = EventsType.SIGN_UP;
+  const result = ActionsType.SIGN_UP;
 
   expect(result).toBe(expected);
 });
