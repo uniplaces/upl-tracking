@@ -52,38 +52,30 @@ var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultV
   }, defaultValue: null }];
 
 /**
- * Creates a new UplCookie
+ * Set a new touch or update the existing one
  * @param {string} cookieDomain - the cookie domain to be used
  * @param {Object} location - the location's object
  * @returns {(UplCookie|null)} the saved UPL cookie or null
  */
 function setTouch(cookieDomain, location) {
-  // Get URL parameters
   var url = window.location.href;
   var params = getUrlParameters(url, location);
 
-  // Check if user has cookie already
   var uplCookie = getCookie();
-
-  // If not, create and set new uplCookie
   if (!uplCookie) {
     uplCookie = new _uplCookie2.default();
   }
 
-  // If yes, check document's referrer
-  // It's Uniplaces?
   if (isUniplacesReferrer()) {
-    // Return same uplCookie
     return null;
   }
 
-  // Id it's other, set new parameters and save
   return uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
 }
 
 /**
- * Get the Upl Cookie
- * @return {UplCookie} the Upl Cookie JSON
+ * Get the current touch (a.k.a. Upl cookie)
+ * @return {UplCookie}
  */
 function getCookie() {
   var cookieName = _uplCookie2.default.getCookieName();
@@ -93,10 +85,14 @@ function getCookie() {
 }
 
 /**
- * Get the URL parameters
+ * Get URL parameters
+ * @param {string} url
+ * @param {Object} location
  * @return {Object}
  */
-function getUrlParameters(url, location) {
+function getUrlParameters(url) {
+  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   var parsedUrl = new URL(url);
   var params = {};
 
@@ -165,14 +161,17 @@ function getReferrer() {
 }
 
 /**
- *
+ * Check if the referrer is Uniplaces
+ * @return {boolean}
  */
 function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
 
 /**
- *
+ * Check if the referrer exists and contains a substring
+ * @param {string} substring
+ * @return {boolean}
  */
 function isCustomReferrer(substring) {
   return hasReferrer() && document.referrer.includes(substring);

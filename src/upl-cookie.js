@@ -37,7 +37,7 @@ export default class UplCookie {
   }
 
   /**
-   * Get the UplCookie location
+   * Get the location associated with the cookie
    * @return {Object}
    */
   getLocation() {
@@ -51,6 +51,7 @@ export default class UplCookie {
 
   /**
    * Set the parameters of the cookie
+   * @param {Object} parameters
    * @return {UplCookie}
    */
   setParameters({ source, medium, campaign, term, content, gclid, msclkid }) {
@@ -66,7 +67,7 @@ export default class UplCookie {
   }
 
   /**
-   * Set the parameters of the cookie
+   * Set the location of the cookie
    * @param {Object} location
    * @return {UplCookie}
    */
@@ -80,7 +81,7 @@ export default class UplCookie {
   }
 
   /**
-   * Save this cookie as a browser cookie
+   * Save this cookie in the browser for a given domain
    * @param {string} domain - the domain of the cookie
    * @return {UplCookie}
    */
@@ -99,7 +100,7 @@ export default class UplCookie {
   }
 
   /**
-   * Get a new UplCookie from a JSON
+   * Create a new UplCookie from a JSON
    * @param {Object} json - the json containing the information about the cookie
    * @return {UplCookie}
    */

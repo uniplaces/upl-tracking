@@ -65,7 +65,7 @@ var UplCookie = function () {
     }
 
     /**
-     * Get the UplCookie location
+     * Get the location associated with the cookie
      * @return {Object}
      */
 
@@ -82,6 +82,7 @@ var UplCookie = function () {
 
     /**
      * Set the parameters of the cookie
+     * @param {Object} parameters
      * @return {UplCookie}
      */
 
@@ -108,7 +109,7 @@ var UplCookie = function () {
     }
 
     /**
-     * Set the parameters of the cookie
+     * Set the location of the cookie
      * @param {Object} location
      * @return {UplCookie}
      */
@@ -127,7 +128,7 @@ var UplCookie = function () {
     }
 
     /**
-     * Save this cookie as a browser cookie
+     * Save this cookie in the browser for a given domain
      * @param {string} domain - the domain of the cookie
      * @return {UplCookie}
      */
@@ -154,7 +155,7 @@ var UplCookie = function () {
     }
 
     /**
-     * Get a new UplCookie from a JSON
+     * Create a new UplCookie from a JSON
      * @param {Object} json - the json containing the information about the cookie
      * @return {UplCookie}
      */
