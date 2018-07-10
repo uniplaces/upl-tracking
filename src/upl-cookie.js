@@ -54,14 +54,24 @@ export default class UplCookie {
    * @param {Object} parameters
    * @return {UplCookie}
    */
-  setParameters({ source, medium, campaign, term, content, gclid, msclkid }) {
-    this.source = source;
-    this.medium = medium;
-    this.campaign = campaign;
-    this.term = term;
-    this.content = content;
-    this.gclid = gclid;
-    this.msclkid = msclkid;
+  setParameters(parameters) {
+    this.source = parameters.source;
+    this.medium = parameters.medium;
+    this.campaign = parameters.campaign;
+    this.term = parameters.term;
+    this.content = parameters.content;
+    this.gclid = parameters.gclid;
+    this.msclkid = parameters.msclkid;
+    this.network = parameters.network;
+    this.keyword = parameters.keyword;
+    this.matchType = parameters.matchtype;
+    this.device = parameters.device;
+    this.deviceModel = parameters.devicemodel;
+    this.adPosition = parameters.adposition;
+    this.adGroup = parameters.adgroup;
+    this.location = parameters.location;
+    this.creative = parameters.creative;
+    this.siteLink = parameters.sitelink;
 
     return this;
   }

@@ -49,7 +49,7 @@ function setTouch(cookieDomain, location) {
 
 /**
  * Get the current touch (a.k.a. Upl cookie)
- * @return {UplCookie}
+ * @returns {(UplCookie|null)}
  */
 function getCookie() {
   const cookieName = UplCookie.getCookieName();

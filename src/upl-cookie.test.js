@@ -58,7 +58,8 @@ test('it sets the parameters', () => {
     term: 'term',
     content: 'content',
     gclid: 'gclid',
-    msclkid: 'msclkid'
+    msclkid: 'msclkid',
+    matchType: 'matchtype'
   };
   const result = cookie.setParameters({
     source: 'source',
@@ -68,6 +69,7 @@ test('it sets the parameters', () => {
     content: 'content',
     gclid: 'gclid',
     msclkid: 'msclkid',
+    matchtype: 'matchtype',
     nonSpecifiedParameter: 'this-will-not-be-saved'
   });
 

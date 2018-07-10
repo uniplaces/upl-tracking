@@ -1,5 +1,7 @@
 # upl-tracking
 
+upl-tracking is a library that enables touch-cookie
+
 ## Installation
 
 ## Usage
@@ -22,6 +24,12 @@ if (cookie) {
     timestamp: moment().format('x')
   });
 }
+```
+
+## Building the project
+
+```bash
+$ npm run build
 ```
 
 ## Running tests
