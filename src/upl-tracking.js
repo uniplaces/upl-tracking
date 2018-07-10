@@ -4,7 +4,7 @@ import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
 import DataDeliveryStreamType from './enums/data-delivery-stream-type';
 import { putRecord } from './services/data-infrastructure';
-import { isUniplacesReferrer, getReferrer } from './referrer';
+import { isUniplacesReferrer } from './referrer';
 import { UrlParameters } from './url-parameters';
 /**
  * Track a new touch or update the existing one
@@ -108,7 +108,5 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters,
-  getReferrer,
-  isUniplacesReferrer
+  getUrlParameters
 };

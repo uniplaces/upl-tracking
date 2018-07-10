@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isUniplacesReferrer = exports.getReferrer = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = undefined;
+exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -132,5 +132,3 @@ exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = getUrlParameters;
-exports.getReferrer = _referrer.getReferrer;
-exports.isUniplacesReferrer = _referrer.isUniplacesReferrer;
