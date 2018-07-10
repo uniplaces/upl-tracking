@@ -17,6 +17,12 @@ var _actionsType = require('./enums/actions-type');
 
 var _actionsType2 = _interopRequireDefault(_actionsType);
 
+var _dataDeliveryStreamType = require('./enums/data-delivery-stream-type');
+
+var _dataDeliveryStreamType2 = _interopRequireDefault(_dataDeliveryStreamType);
+
+var _dataInfrastructure = require('./services/data-infrastructure');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var URL_PARAMETERS = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
@@ -70,12 +76,14 @@ function setTouch(cookieDomain, location) {
     return null;
   }
 
-  return uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
+  uplCookie = uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
+
+  return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }
 
 /**
  * Get the current touch (a.k.a. Upl cookie)
- * @return {UplCookie}
+ * @returns {(UplCookie|null)}
  */
 function getCookie() {
   var cookieName = _uplCookie2.default.getCookieName();

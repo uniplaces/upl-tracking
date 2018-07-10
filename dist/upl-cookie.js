@@ -88,22 +88,24 @@ var UplCookie = function () {
 
   }, {
     key: 'setParameters',
-    value: function setParameters(_ref) {
-      var source = _ref.source,
-          medium = _ref.medium,
-          campaign = _ref.campaign,
-          term = _ref.term,
-          content = _ref.content,
-          gclid = _ref.gclid,
-          msclkid = _ref.msclkid;
-
-      this.source = source;
-      this.medium = medium;
-      this.campaign = campaign;
-      this.term = term;
-      this.content = content;
-      this.gclid = gclid;
-      this.msclkid = msclkid;
+    value: function setParameters(parameters) {
+      this.source = parameters.source;
+      this.medium = parameters.medium;
+      this.campaign = parameters.campaign;
+      this.term = parameters.term;
+      this.content = parameters.content;
+      this.gclid = parameters.gclid;
+      this.msclkid = parameters.msclkid;
+      this.network = parameters.network;
+      this.keyword = parameters.keyword;
+      this.matchType = parameters.matchtype;
+      this.device = parameters.device;
+      this.deviceModel = parameters.devicemodel;
+      this.adPosition = parameters.adposition;
+      this.adGroup = parameters.adgroup;
+      this.location = parameters.location;
+      this.creative = parameters.creative;
+      this.siteLink = parameters.sitelink;
 
       return this;
     }

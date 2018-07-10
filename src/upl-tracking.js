@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
 import ActionsType from './enums/actions-type';
+import DataDeliveryStreamType from './enums/data-delivery-stream-type';
+import { putRecord } from './services/data-infrastructure';
 
 const URL_PARAMETERS = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -41,10 +43,12 @@ function setTouch(cookieDomain, location) {
     return null;
   }
 
-  return uplCookie
+  uplCookie = uplCookie
     .setParameters(params)
     .setLocation(location)
     .save(cookieDomain);
+
+  return putRecord(DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
 }
 
 /**
