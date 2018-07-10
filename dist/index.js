@@ -6,10 +6,22 @@ Object.defineProperty(exports, "__esModule", {
 
 var _uplTracking = require('./upl-tracking');
 
-Object.defineProperty(exports, 'setTouch', {
+Object.defineProperty(exports, 'trackTouch', {
   enumerable: true,
   get: function get() {
-    return _uplTracking.setTouch;
+    return _uplTracking.trackTouch;
+  }
+});
+Object.defineProperty(exports, 'trackAction', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.trackAction;
+  }
+});
+Object.defineProperty(exports, 'assignUserToTrackingId', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.assignUserToTrackingId;
   }
 });
 Object.defineProperty(exports, 'getCookie', {

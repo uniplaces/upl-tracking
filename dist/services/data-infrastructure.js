@@ -13,7 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var dataInfrastructureService = _axios2.default.create({
   baseURL: 'https://data-events.staging-uniplaces.com/streams',
-  timeout: 1500,
   headers: {
     'Content-Type': 'application/json; charset=utf-8'
   }
@@ -22,5 +21,5 @@ var dataInfrastructureService = _axios2.default.create({
 function putRecord(streamName, record) {
   var endpoint = '/' + streamName + '/record';
 
-  return dataInfrastructureService.put(endpoint, { data: record });
+  return dataInfrastructureService.put(endpoint, record);
 }
