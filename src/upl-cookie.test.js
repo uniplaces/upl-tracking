@@ -6,15 +6,15 @@ jest.mock('js-cookie');
 test('it constructs a upl cookie with default tracking id and timestamp', () => {
   const result = new UplCookie();
 
-  expect(result.trackingId).toBeDefined();
+  expect(result.tracking_id).toBeDefined();
   expect(result.timestamp).toBeDefined();
 });
 
 test('it constructs a upl cookie with custom tracking id and timestamp', () => {
   const result = new UplCookie('123-456-789', 150000000);
 
-  expect(result.trackingId).toBeDefined();
-  expect(result.trackingId).toBe('123-456-789');
+  expect(result.tracking_id).toBeDefined();
+  expect(result.tracking_id).toBe('123-456-789');
   expect(result.timestamp).toBeDefined();
   expect(result.timestamp).toBe(150000000);
 });
@@ -28,7 +28,7 @@ test('it returns the cookie name', () => {
 
 test('it returns the cookie touch ID', () => {
   const cookie = new UplCookie();
-  const expected = `${cookie.trackingId}_${cookie.timestamp}`;
+  const expected = `${cookie.tracking_id}_${cookie.timestamp}`;
   const result = cookie.getTouchId();
 
   expect(result).toBe(expected);
@@ -50,7 +50,7 @@ test('it returns the location', () => {
 test('it sets the parameters', () => {
   const cookie = new UplCookie('1', 2);
   const expected = {
-    trackingId: '1',
+    tracking_id: '1',
     timestamp: 2,
     source: 'source',
     medium: 'medium',
@@ -59,7 +59,7 @@ test('it sets the parameters', () => {
     content: 'content',
     gclid: 'gclid',
     msclkid: 'msclkid',
-    matchType: 'matchtype'
+    match_type: 'matchtype'
   };
   const result = cookie.setParameters({
     source: 'source',
@@ -79,7 +79,7 @@ test('it sets the parameters', () => {
 test('it sets the new location', () => {
   const cookie = new UplCookie('123-456', 1000000);
   const expected = {
-    trackingId: '123-456',
+    tracking_id: '123-456',
     timestamp: 1000000,
     origin: 'portugal',
     destination: 'barcelona',
@@ -101,7 +101,7 @@ test('it saves the cookie in Cookies', () => {
   const result = cookie.save();
 
   const expectedCookieName = 'upl_cookie';
-  const expectedCookieJson = { trackingId: '123-456', timestamp: 150000 };
+  const expectedCookieJson = { tracking_id: '123-456', timestamp: 150000 };
   const expectedOptions = { expires: 180, domain: '.uniplaces.com' };
 
   expect(result).toBeDefined();
@@ -113,7 +113,7 @@ test('it returns as JSON', () => {
   const cookie = new UplCookie();
   const result = cookie.toJSON();
   const expected = {
-    trackingId: cookie.trackingId,
+    tracking_id: cookie.tracking_id,
     timestamp: cookie.timestamp
   };
 
@@ -122,13 +122,13 @@ test('it returns as JSON', () => {
 
 test('it returns a new instance from a JSON', () => {
   const expected = {
-    trackingId: 1,
+    tracking_id: 1,
     timestamp: 15498090,
     source: 'cenas',
     medium: 'cenas-2'
   };
   const result = UplCookie.fromJSON({
-    trackingId: 1,
+    tracking_id: 1,
     timestamp: 15498090,
     source: 'cenas',
     medium: 'cenas-2'

@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = undefined;
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
@@ -20,6 +24,10 @@ var _actionsType2 = _interopRequireDefault(_actionsType);
 var _userType = require('./enums/user-type');
 
 var _userType2 = _interopRequireDefault(_userType);
+
+var _dateFormatType = require('./enums/date-format-type');
+
+var _dateFormatType2 = _interopRequireDefault(_dateFormatType);
 
 var _dataDeliveryStreamType = require('./enums/data-delivery-stream-type');
 
@@ -62,7 +70,11 @@ function trackTouch(cookieDomain, location) {
  */
 function trackAction(actionType) {
   var uplCookie = getCookie();
-  var record = { touchId: uplCookie.getTouchId(), action: actionType };
+  var record = {
+    touch_id: uplCookie.getTouchId(),
+    action: actionType,
+    created_at: (0, _moment2.default)().format(_dateFormatType2.default.UNIX)
+  };
 
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
 }
@@ -74,7 +86,12 @@ function assignUserToTrackingId(userId) {
   var userType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _userType2.default.GUEST;
 
   var uplCookie = getCookie();
-  var record = { trackingId: uplCookie.trackingId, userType: userType, userId: userId };
+  var record = {
+    tracking_id: uplCookie.tracking_id,
+    user_type: userType,
+    user_id: userId,
+    created_at: (0, _moment2.default)().format(_dateFormatType2.default.UNIX)
+  };
 
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
 }

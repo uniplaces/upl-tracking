@@ -1,7 +1,9 @@
+import moment from 'moment';
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
 import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
+import DateFormatType from './enums/date-format-type';
 import DataDeliveryStreamType from './enums/data-delivery-stream-type';
 import { putRecord } from './services/data-infrastructure';
 import { isUniplacesReferrer } from './referrer';
@@ -38,7 +40,11 @@ function trackTouch(cookieDomain, location) {
  */
 function trackAction(actionType) {
   const uplCookie = getCookie();
-  const record = { touchId: uplCookie.getTouchId(), action: actionType };
+  const record = {
+    touch_id: uplCookie.getTouchId(),
+    action: actionType,
+    created_at: moment().format(DateFormatType.UNIX)
+  };
 
   return !uplCookie
     ? Promise.reject()
@@ -50,7 +56,12 @@ function trackAction(actionType) {
  */
 function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const uplCookie = getCookie();
-  const record = { trackingId: uplCookie.trackingId, userType, userId };
+  const record = {
+    tracking_id: uplCookie.tracking_id,
+    user_type: userType,
+    user_id: userId,
+    created_at: moment().format(DateFormatType.UNIX)
+  };
 
   return !uplCookie
     ? Promise.reject()

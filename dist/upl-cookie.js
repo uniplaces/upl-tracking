@@ -42,7 +42,7 @@ var UplCookie = function () {
   function UplCookie(trackingId, timestamp) {
     _classCallCheck(this, UplCookie);
 
-    this.trackingId = trackingId || (0, _v2.default)();
+    this.tracking_id = trackingId || (0, _v2.default)();
     this.timestamp = timestamp || (0, _moment2.default)().format(UNIX_DATE_FORMAT);
   }
 
@@ -61,7 +61,7 @@ var UplCookie = function () {
      * @return {string}
      */
     value: function getTouchId() {
-      return this.trackingId + '_' + this.timestamp;
+      return this.tracking_id + '_' + this.timestamp;
     }
 
     /**
@@ -98,14 +98,14 @@ var UplCookie = function () {
       this.msclkid = parameters.msclkid;
       this.network = parameters.network;
       this.keyword = parameters.keyword;
-      this.matchType = parameters.matchtype;
+      this.match_type = parameters.matchtype;
       this.device = parameters.device;
-      this.deviceModel = parameters.devicemodel;
-      this.adPosition = parameters.adposition;
-      this.adGroup = parameters.adgroup;
+      this.device_model = parameters.devicemodel;
+      this.ad_position = parameters.adposition;
+      this.ad_group = parameters.adgroup;
       this.location = parameters.location;
       this.creative = parameters.creative;
-      this.siteLink = parameters.sitelink;
+      this.site_link = parameters.sitelink;
 
       return this;
     }

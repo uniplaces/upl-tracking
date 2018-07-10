@@ -16,7 +16,7 @@ export default class UplCookie {
    * @param {number} timestamp - the timestamp
    */
   constructor(trackingId, timestamp) {
-    this.trackingId = trackingId || uuidv4();
+    this.tracking_id = trackingId || uuidv4();
     this.timestamp = timestamp || moment().format(UNIX_DATE_FORMAT);
   }
 
@@ -33,7 +33,7 @@ export default class UplCookie {
    * @return {string}
    */
   getTouchId() {
-    return `${this.trackingId}_${this.timestamp}`;
+    return `${this.tracking_id}_${this.timestamp}`;
   }
 
   /**
@@ -64,14 +64,14 @@ export default class UplCookie {
     this.msclkid = parameters.msclkid;
     this.network = parameters.network;
     this.keyword = parameters.keyword;
-    this.matchType = parameters.matchtype;
+    this.match_type = parameters.matchtype;
     this.device = parameters.device;
-    this.deviceModel = parameters.devicemodel;
-    this.adPosition = parameters.adposition;
-    this.adGroup = parameters.adgroup;
+    this.device_model = parameters.devicemodel;
+    this.ad_position = parameters.adposition;
+    this.ad_group = parameters.adgroup;
     this.location = parameters.location;
     this.creative = parameters.creative;
-    this.siteLink = parameters.sitelink;
+    this.site_link = parameters.sitelink;
 
     return this;
   }
