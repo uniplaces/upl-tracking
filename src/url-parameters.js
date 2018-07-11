@@ -22,8 +22,8 @@ export const UrlParameters = [
 
 /**
  * Get URL parameters
- * @param {string} url
- * @param {Object} location
+ * @param {string} url - The URL to be parsed
+ * @param {Object} [location={}] - The location
  * @return {Object}
  */
 export function getUrlParameters(url, location = {}) {

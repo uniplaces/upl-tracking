@@ -12,8 +12,8 @@ import PerformanceNavigationType from './enums/performance-navigation-type';
 
 /**
  * Track a new touch or update the existing one
- * @param {string} cookieDomain - the cookie domain to be used
- * @param {Object} location - the location's object
+ * @param {string} cookieDomain - The cookie domain to be used
+ * @param {Object} location - The location's object
  * @return {Promise}
  */
 function trackTouch(cookieDomain, location) {
@@ -39,7 +39,7 @@ function trackTouch(cookieDomain, location) {
 
 /**
  * Track an action
- * @param {string} actionType - the type of the action
+ * @param {string} actionType - The action's type
  * @return {Promise}
  */
 function trackAction(actionType) {
@@ -56,7 +56,10 @@ function trackAction(actionType) {
 }
 
 /**
- *
+ * Assign a user ID to a tracking ID
+ * @param {string} userId - The user's identifier
+ * @param {string} [userType=guest] - The user's type
+ * @return {Promise}
  */
 function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const uplCookie = getCookie();

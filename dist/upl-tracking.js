@@ -45,12 +45,6 @@ var _performanceNavigationType2 = _interopRequireDefault(_performanceNavigationT
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Track a new touch or update the existing one
- * @param {string} cookieDomain - the cookie domain to be used
- * @param {Object} location - the location's object
- * @return {Promise}
- */
 function trackTouch(cookieDomain, location) {
   var url = window.location.href;
   var params = (0, _urlParameters.getUrlParameters)(url, location);
@@ -69,11 +63,6 @@ function trackTouch(cookieDomain, location) {
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }
 
-/**
- * Track an action
- * @param {string} actionType - the type of the action
- * @return {Promise}
- */
 function trackAction(actionType) {
   var uplCookie = getCookie();
   var record = {
@@ -85,9 +74,6 @@ function trackAction(actionType) {
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
 }
 
-/**
- *
- */
 function assignUserToTrackingId(userId) {
   var userType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _userType2.default.GUEST;
 
@@ -102,10 +88,6 @@ function assignUserToTrackingId(userId) {
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
 }
 
-/**
- * Get the current touch (a.k.a. Upl cookie)
- * @return {(UplCookie|null)}
- */
 function getCookie() {
   var cookieName = _uplCookie2.default.getCookieName();
   var cookie = _jsCookie2.default.getJSON(cookieName);
@@ -113,10 +95,6 @@ function getCookie() {
   return cookie ? _uplCookie2.default.fromJSON(cookie) : null;
 }
 
-/**
- * Check if the user accessed the page by reloading it
- * @return {bool}
- */
 function isPageReload() {
   return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
 }

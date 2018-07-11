@@ -42,12 +42,6 @@ var UrlParameters = exports.UrlParameters = [{ name: 'source', inferedValue: get
     return null;
   }, defaultValue: null }];
 
-/**
- * Get URL parameters
- * @param {string} url
- * @param {Object} location
- * @return {Object}
- */
 function getUrlParameters(url) {
   var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -57,17 +51,14 @@ function getUrlParameters(url) {
   UrlParameters.forEach(function (urlParameter) {
     var param = parsedUrl.searchParams.get('upl_' + urlParameter.name);
 
-    // If the upl_param does not exist, check for the corresponding utm_param
     if (param === null) {
       param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
     }
 
-    // Use Google Analytics to try to find something
     if (param === null) {
       param = urlParameter.inferedValue(url, location);
     }
 
-    // Set the touch as direct -- use default values
     if (param === null) {
       param = urlParameter.defaultValue;
     }
@@ -78,10 +69,6 @@ function getUrlParameters(url) {
   return params;
 }
 
-/**
- * Get the source, inferring it from the document.referrer
- * @return {string} the source infered from the referrer
- */
 function getInferedSource() {
   if (!(0, _referrer.hasReferrer)() || (0, _referrer.isUniplacesReferrer)()) {
     return null;
@@ -90,10 +77,6 @@ function getInferedSource() {
   return (0, _referrer.getReferrer)().host.split('.')[1];
 }
 
-/**
- * Get the medium, inferring it from the document.referrer
- * @return {string} the medium infered from the referrer
- */
 function getInferedMedium() {
   if (!(0, _referrer.hasReferrer)() || (0, _referrer.isUniplacesReferrer)()) {
     return null;

@@ -12,8 +12,8 @@ const DEFAULT_DOMAIN = '.uniplaces.com';
 export default class UplCookie {
   /**
    * Create a UPL cookie
-   * @param {string} trackingId - the trackingId
-   * @param {number} createdAt - the createdAt
+   * @param {string} trackingId - The tracking ID
+   * @param {number} createdAt - When was this cookie created
    */
   constructor(trackingId, createdAt) {
     this.tracking_id = trackingId || uuidv4();
@@ -51,7 +51,7 @@ export default class UplCookie {
 
   /**
    * Set the parameters of the cookie
-   * @param {Object} parameters
+   * @param {Object} parameters - The parameters to set
    * @return {UplCookie}
    */
   setParameters(parameters) {
@@ -78,7 +78,7 @@ export default class UplCookie {
 
   /**
    * Set the location of the cookie
-   * @param {Object} location
+   * @param {Object} [location={ origin: null, destination: null, language: null, city: null }]
    * @return {UplCookie}
    */
   setLocation(location = { origin: null, destination: null, language: null, city: null }) {
@@ -92,7 +92,7 @@ export default class UplCookie {
 
   /**
    * Save this cookie in the browser for a given domain
-   * @param {string} domain - the domain of the cookie
+   * @param {string} [domain=.uniplaces.com] - the domain of the cookie
    * @return {UplCookie}
    */
   save(domain = DEFAULT_DOMAIN) {
@@ -113,7 +113,7 @@ export default class UplCookie {
 
   /**
    * Create a new UplCookie from a JSON
-   * @param {Object} json - the json containing the information about the cookie
+   * @param {Object} json - The json containing the information about the cookie
    * @return {UplCookie}
    */
   static fromJSON(json) {

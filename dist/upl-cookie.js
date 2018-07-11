@@ -34,14 +34,7 @@ var UPL_COOKIE_NAME = 'upl_cookie';
 var DEFAULT_EXPIRE_IN_DAYS = 180;
 var DEFAULT_DOMAIN = '.uniplaces.com';
 
-/** Class representing a UPL cookie */
-
 var UplCookie = function () {
-  /**
-   * Create a UPL cookie
-   * @param {string} trackingId - the trackingId
-   * @param {number} createdAt - the createdAt
-   */
   function UplCookie(trackingId, createdAt) {
     _classCallCheck(this, UplCookie);
 
@@ -49,29 +42,11 @@ var UplCookie = function () {
     this.created_at = createdAt || (0, _moment2.default)().format(_dateFormatType2.default.UNIX);
   }
 
-  /**
-   * Get the cookie name
-   * @return {string}
-   */
-
-
   _createClass(UplCookie, [{
     key: 'getTouchId',
-
-
-    /**
-     * Get the touch ID
-     * @return {string}
-     */
     value: function getTouchId() {
       return this.tracking_id + '_' + this.created_at;
     }
-
-    /**
-     * Get the location associated with the cookie
-     * @return {Object}
-     */
-
   }, {
     key: 'getLocation',
     value: function getLocation() {
@@ -82,13 +57,6 @@ var UplCookie = function () {
         city: this.city
       };
     }
-
-    /**
-     * Set the parameters of the cookie
-     * @param {Object} parameters
-     * @return {UplCookie}
-     */
-
   }, {
     key: 'setParameters',
     value: function setParameters(parameters) {
@@ -112,13 +80,6 @@ var UplCookie = function () {
 
       return this;
     }
-
-    /**
-     * Set the location of the cookie
-     * @param {Object} location
-     * @return {UplCookie}
-     */
-
   }, {
     key: 'setLocation',
     value: function setLocation() {
@@ -131,13 +92,6 @@ var UplCookie = function () {
 
       return this;
     }
-
-    /**
-     * Save this cookie in the browser for a given domain
-     * @param {string} domain - the domain of the cookie
-     * @return {UplCookie}
-     */
-
   }, {
     key: 'save',
     value: function save() {
@@ -147,12 +101,6 @@ var UplCookie = function () {
 
       return this;
     }
-
-    /**
-     * Get this class' instance as JSON
-     * @return {Object}
-     */
-
   }, {
     key: 'toJSON',
     value: function toJSON() {
@@ -160,13 +108,6 @@ var UplCookie = function () {
 
       return _extends({ touch_id: touchId }, this);
     }
-
-    /**
-     * Create a new UplCookie from a JSON
-     * @param {Object} json - the json containing the information about the cookie
-     * @return {UplCookie}
-     */
-
   }], [{
     key: 'getCookieName',
     value: function getCookieName() {
