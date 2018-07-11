@@ -9,20 +9,10 @@ upl-tracking is a library that enables touch-cookie
 ```js
 import * as UplTracking from 'upl-tracking';
 // or
-import { setTouch, EventsType } from 'upl-tracking';
+import { trackTouch, ActionsType } from 'upl-tracking';
 
-let cookie = setTouch();
-if (cookie) {
-  this.sendToApiGateway('new-touch', cookie.toJSON());
-}
-
-if (cookie) {
-  // When a user signs up, send the event to API Gateway
-  this.sendToApiGateway('event', {
-    name: EventsType.SIGN_UP, // 'sign-up'
-    touchId: cookie.getTouchId(),
-    timestamp: moment().format('x')
-  });
+init() {
+  UplTracking.trackTouch(cookieDomain, location);
 }
 ```
 

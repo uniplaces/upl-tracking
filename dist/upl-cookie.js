@@ -22,11 +22,14 @@ var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
 var _utils = require('./utils');
 
+var _dateFormatType = require('./enums/date-format-type');
+
+var _dateFormatType2 = _interopRequireDefault(_dateFormatType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var UNIX_DATE_FORMAT = 'x';
 var UPL_COOKIE_NAME = 'upl_cookie';
 var DEFAULT_EXPIRE_IN_DAYS = 180;
 var DEFAULT_DOMAIN = '.uniplaces.com';
@@ -37,13 +40,13 @@ var UplCookie = function () {
   /**
    * Create a UPL cookie
    * @param {string} trackingId - the trackingId
-   * @param {number} timestamp - the timestamp
+   * @param {number} createdAt - the createdAt
    */
-  function UplCookie(trackingId, timestamp) {
+  function UplCookie(trackingId, createdAt) {
     _classCallCheck(this, UplCookie);
 
     this.tracking_id = trackingId || (0, _v2.default)();
-    this.timestamp = timestamp || (0, _moment2.default)().format(UNIX_DATE_FORMAT);
+    this.created_at = createdAt || (0, _moment2.default)().format(_dateFormatType2.default.UNIX);
   }
 
   /**
@@ -61,7 +64,7 @@ var UplCookie = function () {
      * @return {string}
      */
     value: function getTouchId() {
-      return this.tracking_id + '_' + this.timestamp;
+      return this.tracking_id + '_' + this.created_at;
     }
 
     /**

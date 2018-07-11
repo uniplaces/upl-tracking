@@ -2,8 +2,8 @@ import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import Cookies from 'js-cookie';
 import { i18nToUplLocale } from './utils';
+import DateFormatType from './enums/date-format-type';
 
-const UNIX_DATE_FORMAT = 'x';
 const UPL_COOKIE_NAME = 'upl_cookie';
 const DEFAULT_EXPIRE_IN_DAYS = 180;
 const DEFAULT_DOMAIN = '.uniplaces.com';
@@ -13,11 +13,11 @@ export default class UplCookie {
   /**
    * Create a UPL cookie
    * @param {string} trackingId - the trackingId
-   * @param {number} timestamp - the timestamp
+   * @param {number} createdAt - the createdAt
    */
-  constructor(trackingId, timestamp) {
+  constructor(trackingId, createdAt) {
     this.tracking_id = trackingId || uuidv4();
-    this.timestamp = timestamp || moment().format(UNIX_DATE_FORMAT);
+    this.created_at = createdAt || moment().format(DateFormatType.UNIX);
   }
 
   /**
@@ -33,7 +33,7 @@ export default class UplCookie {
    * @return {string}
    */
   getTouchId() {
-    return `${this.tracking_id}_${this.timestamp}`;
+    return `${this.tracking_id}_${this.created_at}`;
   }
 
   /**
