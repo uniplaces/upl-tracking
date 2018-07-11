@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.UrlParameters = undefined;
+exports.getUrlParameters = getUrlParameters;
 exports.getInferedSource = getInferedSource;
 exports.getInferedMedium = getInferedMedium;
 
@@ -40,6 +41,42 @@ var UrlParameters = exports.UrlParameters = [{ name: 'source', inferedValue: get
   }, defaultValue: null }, { name: 'sitelink', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }];
+
+/**
+ * Get URL parameters
+ * @param {string} url
+ * @param {Object} location
+ * @return {Object}
+ */
+function getUrlParameters(url) {
+  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  var parsedUrl = new URL(url);
+  var params = {};
+
+  UrlParameters.forEach(function (urlParameter) {
+    var param = parsedUrl.searchParams.get('upl_' + urlParameter.name);
+
+    // If the upl_param does not exist, check for the corresponding utm_param
+    if (param === null) {
+      param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
+    }
+
+    // Use Google Analytics to try to find something
+    if (param === null) {
+      param = urlParameter.inferedValue(url, location);
+    }
+
+    // Set the touch as direct -- use default values
+    if (param === null) {
+      param = urlParameter.defaultValue;
+    }
+
+    params[urlParameter.name] = param;
+  });
+
+  return params;
+}
 
 /**
  * Get the source, inferring it from the document.referrer

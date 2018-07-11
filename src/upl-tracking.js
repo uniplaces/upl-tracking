@@ -1,18 +1,20 @@
 import moment from 'moment';
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
+import { putRecord } from './services/data-infrastructure';
+import { isUniplacesReferrer } from './referrer';
+import { getUrlParameters } from './url-parameters';
 import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
 import DateFormatType from './enums/date-format-type';
 import DataDeliveryStreamType from './enums/data-delivery-stream-type';
-import { putRecord } from './services/data-infrastructure';
-import { isUniplacesReferrer } from './referrer';
-import { UrlParameters } from './url-parameters';
+import PerformanceNavigationType from './enums/performance-navigation-type';
+
 /**
  * Track a new touch or update the existing one
  * @param {string} cookieDomain - the cookie domain to be used
  * @param {Object} location - the location's object
- * @returns {(UplCookie|null)} the saved UPL cookie or null
+ * @return {(UplCookie|null)} the saved UPL cookie or null
  */
 function trackTouch(cookieDomain, location) {
   const url = window.location.href;
@@ -23,7 +25,7 @@ function trackTouch(cookieDomain, location) {
     uplCookie = new UplCookie();
   }
 
-  if (isUniplacesReferrer()) {
+  if (isUniplacesReferrer() || isPageReload()) {
     return null;
   }
 
@@ -70,7 +72,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
 
 /**
  * Get the current touch (a.k.a. Upl cookie)
- * @returns {(UplCookie|null)}
+ * @return {(UplCookie|null)}
  */
 function getCookie() {
   const cookieName = UplCookie.getCookieName();
@@ -80,37 +82,11 @@ function getCookie() {
 }
 
 /**
- * Get URL parameters
- * @param {string} url
- * @param {Object} location
- * @return {Object}
+ * Check if the user accessed the page by reloading it
+ * @return {bool}
  */
-function getUrlParameters(url, location = {}) {
-  const parsedUrl = new URL(url);
-  const params = {};
-
-  UrlParameters.forEach((urlParameter) => {
-    let param = parsedUrl.searchParams.get(`upl_${urlParameter.name}`);
-
-    // If the upl_param does not exist, check for the corresponding utm_param
-    if (param === null) {
-      param = parsedUrl.searchParams.get(`utm_${urlParameter.name}`);
-    }
-
-    // Use Google Analytics to try to find something
-    if (param === null) {
-      param = urlParameter.inferedValue(url, location);
-    }
-
-    // Set the touch as direct -- use default values
-    if (param === null) {
-      param = urlParameter.defaultValue;
-    }
-
-    params[urlParameter.name] = param;
-  });
-
-  return params;
+function isPageReload() {
+  return window.performance && window.performance.navigation.type === PerformanceNavigationType.RELOAD;
 }
 
 export {

@@ -17,6 +17,12 @@ var _uplCookie = require('./upl-cookie');
 
 var _uplCookie2 = _interopRequireDefault(_uplCookie);
 
+var _dataInfrastructure = require('./services/data-infrastructure');
+
+var _referrer = require('./referrer');
+
+var _urlParameters = require('./url-parameters');
+
 var _actionsType = require('./enums/actions-type');
 
 var _actionsType2 = _interopRequireDefault(_actionsType);
@@ -33,11 +39,9 @@ var _dataDeliveryStreamType = require('./enums/data-delivery-stream-type');
 
 var _dataDeliveryStreamType2 = _interopRequireDefault(_dataDeliveryStreamType);
 
-var _dataInfrastructure = require('./services/data-infrastructure');
+var _performanceNavigationType = require('./enums/performance-navigation-type');
 
-var _referrer = require('./referrer');
-
-var _urlParameters = require('./url-parameters');
+var _performanceNavigationType2 = _interopRequireDefault(_performanceNavigationType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45,18 +49,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Track a new touch or update the existing one
  * @param {string} cookieDomain - the cookie domain to be used
  * @param {Object} location - the location's object
- * @returns {(UplCookie|null)} the saved UPL cookie or null
+ * @return {(UplCookie|null)} the saved UPL cookie or null
  */
 function trackTouch(cookieDomain, location) {
   var url = window.location.href;
-  var params = getUrlParameters(url, location);
+  var params = (0, _urlParameters.getUrlParameters)(url, location);
 
   var uplCookie = getCookie();
   if (!uplCookie) {
     uplCookie = new _uplCookie2.default();
   }
 
-  if ((0, _referrer.isUniplacesReferrer)()) {
+  if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
     return null;
   }
 
@@ -98,7 +102,7 @@ function assignUserToTrackingId(userId) {
 
 /**
  * Get the current touch (a.k.a. Upl cookie)
- * @returns {(UplCookie|null)}
+ * @return {(UplCookie|null)}
  */
 function getCookie() {
   var cookieName = _uplCookie2.default.getCookieName();
@@ -108,39 +112,11 @@ function getCookie() {
 }
 
 /**
- * Get URL parameters
- * @param {string} url
- * @param {Object} location
- * @return {Object}
+ * Check if the user accessed the page by reloading it
+ * @return {bool}
  */
-function getUrlParameters(url) {
-  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  var parsedUrl = new URL(url);
-  var params = {};
-
-  _urlParameters.UrlParameters.forEach(function (urlParameter) {
-    var param = parsedUrl.searchParams.get('upl_' + urlParameter.name);
-
-    // If the upl_param does not exist, check for the corresponding utm_param
-    if (param === null) {
-      param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
-    }
-
-    // Use Google Analytics to try to find something
-    if (param === null) {
-      param = urlParameter.inferedValue(url, location);
-    }
-
-    // Set the touch as direct -- use default values
-    if (param === null) {
-      param = urlParameter.defaultValue;
-    }
-
-    params[urlParameter.name] = param;
-  });
-
-  return params;
+function isPageReload() {
+  return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
 }
 
 exports.trackTouch = trackTouch;
@@ -148,4 +124,4 @@ exports.trackAction = trackAction;
 exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
-exports.getUrlParameters = getUrlParameters;
+exports.getUrlParameters = _urlParameters.getUrlParameters;

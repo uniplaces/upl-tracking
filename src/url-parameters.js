@@ -20,6 +20,41 @@ export const UrlParameters = [
   { name: 'sitelink', inferedValue: () => null, defaultValue: null }
 ];
 
+
+/**
+ * Get URL parameters
+ * @param {string} url
+ * @param {Object} location
+ * @return {Object}
+ */
+export function getUrlParameters(url, location = {}) {
+  const parsedUrl = new URL(url);
+  const params = {};
+
+  UrlParameters.forEach((urlParameter) => {
+    let param = parsedUrl.searchParams.get(`upl_${urlParameter.name}`);
+
+    // If the upl_param does not exist, check for the corresponding utm_param
+    if (param === null) {
+      param = parsedUrl.searchParams.get(`utm_${urlParameter.name}`);
+    }
+
+    // Use Google Analytics to try to find something
+    if (param === null) {
+      param = urlParameter.inferedValue(url, location);
+    }
+
+    // Set the touch as direct -- use default values
+    if (param === null) {
+      param = urlParameter.defaultValue;
+    }
+
+    params[urlParameter.name] = param;
+  });
+
+  return params;
+}
+
 /**
  * Get the source, inferring it from the document.referrer
  * @return {string} the source infered from the referrer
