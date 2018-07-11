@@ -55,7 +55,7 @@ function trackTouch(cookieDomain, location) {
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
-    return Promise.reject();
+    return Promise.resolve();
   }
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
