@@ -7,6 +7,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
+    "generate-docs": "jsdoc -c .jsdocrc.js",
     "build": "babel src -d dist --no-comments --ignore **/*.test.js,**/__mocks__",
     "test": "jest --forceExit --detectOpenHandles",
     "start": "node dist/index.js",
@@ -28,6 +29,7 @@
     "babel-jest": "23.2.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-env": "1.7.0",
+    "docdash": "0.4.0",
     "eslint": "5.0.1",
     "jest": "23.2.0",
     "nodemon": "1.17.5",

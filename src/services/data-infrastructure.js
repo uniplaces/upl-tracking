@@ -1,3 +1,4 @@
+/** @module DataInfrastructureService */
 import axios from 'axios';
 
 const dataInfrastructureService = axios.create({
@@ -7,6 +8,12 @@ const dataInfrastructureService = axios.create({
   }
 });
 
+/**
+ * Put a record on data infrastructure
+ * @param {string} streamName - The name of the data stream
+ * @param {Object} record - The record to be sent to the stream
+ * @return {Promise}
+ */
 export function putRecord(streamName, record) {
   const endpoint = `/${streamName}/record`;
 
