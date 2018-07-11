@@ -49,7 +49,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Track a new touch or update the existing one
  * @param {string} cookieDomain - the cookie domain to be used
  * @param {Object} location - the location's object
- * @return {(UplCookie|null)} the saved UPL cookie or null
+ * @return {Promise}
  */
 function trackTouch(cookieDomain, location) {
   var url = window.location.href;
@@ -61,7 +61,7 @@ function trackTouch(cookieDomain, location) {
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
-    return null;
+    return Promise.reject();
   }
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
@@ -70,7 +70,9 @@ function trackTouch(cookieDomain, location) {
 }
 
 /**
- *
+ * Track an action
+ * @param {string} actionType - the type of the action
+ * @return {Promise}
  */
 function trackAction(actionType) {
   var uplCookie = getCookie();

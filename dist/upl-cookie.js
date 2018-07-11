@@ -156,7 +156,9 @@ var UplCookie = function () {
   }, {
     key: 'toJSON',
     value: function toJSON() {
-      return _extends({}, this);
+      var touchId = this.getTouchId();
+
+      return _extends({ touch_id: touchId }, this);
     }
 
     /**

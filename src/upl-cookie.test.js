@@ -101,8 +101,15 @@ test('it saves the cookie in Cookies', () => {
   const result = cookie.save();
 
   const expectedCookieName = 'upl_cookie';
-  const expectedCookieJson = { tracking_id: '123-456', created_at: 150000 };
-  const expectedOptions = { expires: 180, domain: '.uniplaces.com' };
+  const expectedCookieJson = {
+    tracking_id: '123-456',
+    created_at: 150000,
+    touch_id: '123-456_150000'
+  };
+  const expectedOptions = {
+    expires: 180,
+    domain: '.uniplaces.com'
+  };
 
   expect(result).toBeDefined();
   expect(Cookies.set).toHaveBeenCalledTimes(1);
@@ -114,7 +121,8 @@ test('it returns as JSON', () => {
   const result = cookie.toJSON();
   const expected = {
     tracking_id: cookie.tracking_id,
-    created_at: cookie.created_at
+    created_at: cookie.created_at,
+    touch_id: `${cookie.tracking_id}_${cookie.created_at}`
   };
 
   expect(result).toEqual(expected);

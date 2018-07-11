@@ -20,7 +20,6 @@ export const UrlParameters = [
   { name: 'sitelink', inferedValue: () => null, defaultValue: null }
 ];
 
-
 /**
  * Get URL parameters
  * @param {string} url

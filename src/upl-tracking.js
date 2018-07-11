@@ -14,7 +14,7 @@ import PerformanceNavigationType from './enums/performance-navigation-type';
  * Track a new touch or update the existing one
  * @param {string} cookieDomain - the cookie domain to be used
  * @param {Object} location - the location's object
- * @return {(UplCookie|null)} the saved UPL cookie or null
+ * @return {Promise}
  */
 function trackTouch(cookieDomain, location) {
   const url = window.location.href;
@@ -26,7 +26,7 @@ function trackTouch(cookieDomain, location) {
   }
 
   if (isUniplacesReferrer() || isPageReload()) {
-    return null;
+    return Promise.reject();
   }
 
   uplCookie = uplCookie
@@ -38,7 +38,9 @@ function trackTouch(cookieDomain, location) {
 }
 
 /**
- *
+ * Track an action
+ * @param {string} actionType - the type of the action
+ * @return {Promise}
  */
 function trackAction(actionType) {
   const uplCookie = getCookie();

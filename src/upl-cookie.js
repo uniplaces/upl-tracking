@@ -106,7 +106,9 @@ export default class UplCookie {
    * @return {Object}
    */
   toJSON() {
-    return { ...this };
+    const touchId = this.getTouchId();
+
+    return { touch_id: touchId, ...this };
   }
 
   /**
