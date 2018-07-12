@@ -1,4 +1,5 @@
 export {
+  setEnvironment,
   trackTouch,
   trackAction,
   assignUserToTrackingId,

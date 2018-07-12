@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = undefined;
+exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _moment = require('moment');
 
@@ -35,6 +35,10 @@ var _dateFormatType = require('./enums/date-format-type');
 
 var _dateFormatType2 = _interopRequireDefault(_dateFormatType);
 
+var _environmentType = require('./enums/environment-type');
+
+var _environmentType2 = _interopRequireDefault(_environmentType);
+
 var _dataDeliveryStreamType = require('./enums/data-delivery-stream-type');
 
 var _dataDeliveryStreamType2 = _interopRequireDefault(_dataDeliveryStreamType);
@@ -43,7 +47,17 @@ var _performanceNavigationType = require('./enums/performance-navigation-type');
 
 var _performanceNavigationType2 = _interopRequireDefault(_performanceNavigationType);
 
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setEnvironment() {
+  var environment = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _environmentType2.default.STAGING;
+
+  _config2.default.setEnvironment(environment);
+}
 
 function trackTouch(cookieDomain, location) {
   var url = window.location.href;
@@ -99,6 +113,7 @@ function isPageReload() {
   return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
 }
 
+exports.setEnvironment = setEnvironment;
 exports.trackTouch = trackTouch;
 exports.trackAction = trackAction;
 exports.assignUserToTrackingId = assignUserToTrackingId;

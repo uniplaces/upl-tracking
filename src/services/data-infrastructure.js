@@ -1,13 +1,9 @@
 /** @module DataInfrastructureService */
 import axios from 'axios';
-
-const BASE_URLS = {
-  STAGING: 'https://data-events.staging-uniplaces.com/streams',
-  PRODUCTION: 'https://data-events.uniplaces.com/streams'
-};
+import config from '../config';
 
 const dataInfrastructureService = axios.create({
-  baseURL: BASE_URLS.STAGING,
+  baseURL: config.getDataInfrastructureUrl(),
   headers: {
     'Content-Type': 'application/json; charset=utf-8'
   }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>utils.js - Documentation</title>
+    <title>config.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">utils.js</h1>
+    <h1 class="page-title">config.js</h1>
     
 
     
@@ -37,25 +37,72 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import LanguageType from './enums/language-type';
+            <pre class="prettyprint source linenums"><code>import EnvironmentType from './enums/environment-type';
 
-/**
- * Capitalize a string
- * @param {string} string - The string to be capitalized
- * @return {string} The capitalized string
- */
-export function capitalize(string) {
-  return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
+const COOKIE_DOMAIN = {
+  DEVELOPMENT: '.staging-uniplaces.com',
+  STAGING: '.staging-uniplaces.com',
+  PRODUCTION: '.uniplaces.com'
+};
+
+const DATA_INFRASTRUCTURE_URL = {
+  DEVELOPMENT: 'https://data-events.staging-uniplaces.com/streams',
+  STAGING: 'https://data-events.staging-uniplaces.com/streams',
+  PRODUCTION: 'https://data-events.uniplaces.com/streams'
+};
+
+/** Class that represents the configuration of the library. This is meant to be used as a singleton. */
+class Config {
+  /**
+   * Create a config. The environment defaults to staging.
+   */
+  constructor() {
+    this.environment = EnvironmentType.STAGING;
+  }
+
+  /**
+   * Set the current environment
+   * @param {string} environment
+   */
+  setEnvironment(environment) {
+    if (!this.isValidEnvironment(environment)) {
+      throw new Error(`The environment '${environment}' is not valid.`);
+    }
+
+    this.environment = environment;
+  }
+
+  /**
+   * Check is a given environment is a valid environment
+   * @param {string} environment
+   * @return {bool}
+   */
+  isValidEnvironment(environment) {
+    return environment === EnvironmentType.DEVELOPMENT
+      || environment === EnvironmentType.STAGING
+      || environment === EnvironmentType.PRODUCTION;
+  }
+
+  /**
+   * Get the cookie domain
+   * @return {string}
+   */
+  getCookieDomain() {
+    return COOKIE_DOMAIN[this.environment];
+  }
+
+  /**
+   * Get the data infrastructure URL
+   * @return {string}
+   */
+  getDataInfrastructureUrl() {
+    return DATA_INFRASTRUCTURE_URL[this.environment];
+  }
 }
 
-/**
- * Convert a i18n locale in an UPL locale
- * @param {string} i18nLocale - The locale in i18n format
- * @return {string} The locale in UPL format
- */
-export function i18nToUplLocale(i18nLocale) {
-  return LanguageType[i18nLocale.replace('-', '_').toUpperCase()];
-}
+const config = new Config();
+
+export default config;
 </code></pre>
         </article>
     </section>

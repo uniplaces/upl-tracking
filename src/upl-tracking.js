@@ -7,8 +7,18 @@ import { getUrlParameters } from './url-parameters';
 import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
 import DateFormatType from './enums/date-format-type';
+import EnvironmentType from './enums/environment-type';
 import DataDeliveryStreamType from './enums/data-delivery-stream-type';
 import PerformanceNavigationType from './enums/performance-navigation-type';
+import config from './config';
+
+/**
+ * Set the environment for the library
+ * @param {string} [environment=staging] - The environment
+ */
+function setEnvironment(environment = EnvironmentType.STAGING) {
+  config.setEnvironment(environment);
+}
 
 /**
  * Track a new touch or update the existing one
@@ -95,6 +105,7 @@ function isPageReload() {
 }
 
 export {
+  setEnvironment,
   trackTouch,
   trackAction,
   assignUserToTrackingId,

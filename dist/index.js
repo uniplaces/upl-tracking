@@ -6,6 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _uplTracking = require('./upl-tracking');
 
+Object.defineProperty(exports, 'setEnvironment', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.setEnvironment;
+  }
+});
 Object.defineProperty(exports, 'trackTouch', {
   enumerable: true,
   get: function get() {

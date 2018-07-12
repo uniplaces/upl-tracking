@@ -9,15 +9,14 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _config = require('../config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BASE_URLS = {
-  STAGING: 'https://data-events.staging-uniplaces.com/streams',
-  PRODUCTION: 'https://data-events.uniplaces.com/streams'
-};
-
 var dataInfrastructureService = _axios2.default.create({
-  baseURL: BASE_URLS.STAGING,
+  baseURL: _config2.default.getDataInfrastructureUrl(),
   headers: {
     'Content-Type': 'application/json; charset=utf-8'
   }

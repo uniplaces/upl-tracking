@@ -9,9 +9,13 @@ upl-tracking is a library that enables touch-cookie
 ```js
 import * as UplTracking from 'upl-tracking';
 // or
-import { trackTouch, ActionsType } from 'upl-tracking';
+import { trackTouch, setEnvironment, ActionsType } from 'upl-tracking';
 
-init() {
+initialize() {
+  // Set the desired environment. It defaults to staging
+  UplTracking.setEnvironment('production');
+
+  // Track the touch
   UplTracking.trackTouch(cookieDomain, location);
 }
 ```
