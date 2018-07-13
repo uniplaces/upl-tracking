@@ -14,16 +14,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var COOKIE_DOMAIN = {
-  DEVELOPMENT: '.staging-uniplaces.com',
-  STAGING: '.staging-uniplaces.com',
-  PRODUCTION: '.uniplaces.com'
+var CookieDomain = {
+  development: '.staging-uniplaces.com',
+  staging: '.staging-uniplaces.com',
+  production: '.uniplaces.com'
 };
 
-var DATA_INFRASTRUCTURE_URL = {
-  DEVELOPMENT: 'https://data-events.staging-uniplaces.com/streams',
-  STAGING: 'https://data-events.staging-uniplaces.com/streams',
-  PRODUCTION: 'https://data-events.uniplaces.com/streams'
+var DataInfrastructureUrl = {
+  development: 'https://data-events.staging-uniplaces.com/streams',
+  staging: 'https://data-events.staging-uniplaces.com/streams',
+  production: 'https://data-events.uniplaces.com/streams'
 };
 
 var Config = function () {
@@ -50,12 +50,12 @@ var Config = function () {
   }, {
     key: 'getCookieDomain',
     value: function getCookieDomain() {
-      return COOKIE_DOMAIN[this.environment];
+      return CookieDomain[this.environment];
     }
   }, {
     key: 'getDataInfrastructureUrl',
     value: function getDataInfrastructureUrl() {
-      return DATA_INFRASTRUCTURE_URL[this.environment];
+      return DataInfrastructureUrl[this.environment];
     }
   }]);
 

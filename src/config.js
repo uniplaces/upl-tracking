@@ -1,15 +1,15 @@
 import EnvironmentType from './enums/environment-type';
 
-const COOKIE_DOMAIN = {
-  DEVELOPMENT: '.staging-uniplaces.com',
-  STAGING: '.staging-uniplaces.com',
-  PRODUCTION: '.uniplaces.com'
+const CookieDomain = {
+  development: '.staging-uniplaces.com',
+  staging: '.staging-uniplaces.com',
+  production: '.uniplaces.com'
 };
 
-const DATA_INFRASTRUCTURE_URL = {
-  DEVELOPMENT: 'https://data-events.staging-uniplaces.com/streams',
-  STAGING: 'https://data-events.staging-uniplaces.com/streams',
-  PRODUCTION: 'https://data-events.uniplaces.com/streams'
+const DataInfrastructureUrl = {
+  development: 'https://data-events.staging-uniplaces.com/streams',
+  staging: 'https://data-events.staging-uniplaces.com/streams',
+  production: 'https://data-events.uniplaces.com/streams'
 };
 
 /** Class that represents the configuration of the library. This is meant to be used as a singleton. */
@@ -49,7 +49,7 @@ class Config {
    * @return {string}
    */
   getCookieDomain() {
-    return COOKIE_DOMAIN[this.environment];
+    return CookieDomain[this.environment];
   }
 
   /**
@@ -57,7 +57,7 @@ class Config {
    * @return {string}
    */
   getDataInfrastructureUrl() {
-    return DATA_INFRASTRUCTURE_URL[this.environment];
+    return DataInfrastructureUrl[this.environment];
   }
 }
 
