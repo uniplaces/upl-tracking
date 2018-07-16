@@ -116,9 +116,11 @@ var UplCookie = function () {
       var cookie = new UplCookie();
 
       for (var property in json) {
-        if (json.hasOwnProperty(property)) {
-          cookie[property] = json[property];
+        if (!json.hasOwnProperty(property)) {
+          continue;
         }
+
+        cookie[property] = json[property];
       }
 
       return cookie;

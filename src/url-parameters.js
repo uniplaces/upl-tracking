@@ -31,24 +31,15 @@ export function getUrlParameters(url, location = {}) {
   const params = {};
 
   UrlParameters.forEach((urlParameter) => {
-    let param = parsedUrl.searchParams.get(`upl_${urlParameter.name}`);
-
-    // If the upl_param does not exist, check for the corresponding utm_param
-    if (param === null) {
-      param = parsedUrl.searchParams.get(`utm_${urlParameter.name}`);
-    }
-
-    // Use Google Analytics to try to find something
-    if (param === null) {
-      param = urlParameter.inferedValue(url, location);
-    }
-
-    // Set the touch as direct -- use default values
-    if (param === null) {
-      param = urlParameter.defaultValue;
-    }
-
-    params[urlParameter.name] = param;
+    /*
+     * If the upl_param does not exist, check for the corresponding utm_param
+     * If the utm_param does not exist, use an infered value given the url and location
+     * If the infered value is null, set the touch as direct -- use default values
+     */
+    params[urlParameter.name] = parsedUrl.searchParams.get(`upl_${urlParameter.name}`)
+      || parsedUrl.searchParams.get(`utm_${urlParameter.name}`)
+      || urlParameter.inferedValue(url, location)
+      || urlParameter.defaultValue;
   });
 
   return params;

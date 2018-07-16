@@ -129,18 +129,18 @@ test('it returns as JSON', () => {
 });
 
 test('it returns a new instance from a JSON', () => {
-  const expected = {
-    tracking_id: 1,
-    created_at: 15498090,
-    source: 'cenas',
-    medium: 'cenas-2'
-  };
   const result = UplCookie.fromJSON({
     tracking_id: 1,
     created_at: 15498090,
     source: 'cenas',
     medium: 'cenas-2'
   });
+  const expected = {
+    tracking_id: 1,
+    created_at: 15498090,
+    source: 'cenas',
+    medium: 'cenas-2'
+  };
 
   expect(result).toEqual(expected);
 });

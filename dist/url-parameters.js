@@ -49,21 +49,7 @@ function getUrlParameters(url) {
   var params = {};
 
   UrlParameters.forEach(function (urlParameter) {
-    var param = parsedUrl.searchParams.get('upl_' + urlParameter.name);
-
-    if (param === null) {
-      param = parsedUrl.searchParams.get('utm_' + urlParameter.name);
-    }
-
-    if (param === null) {
-      param = urlParameter.inferedValue(url, location);
-    }
-
-    if (param === null) {
-      param = urlParameter.defaultValue;
-    }
-
-    params[urlParameter.name] = param;
+    params[urlParameter.name] = parsedUrl.searchParams.get('upl_' + urlParameter.name) || parsedUrl.searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
   });
 
   return params;
