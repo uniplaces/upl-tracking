@@ -98,7 +98,7 @@ test('it sets the new location', () => {
 
 test('it saves the cookie in Cookies', () => {
   const cookie = new UplCookie('123-456', 150000);
-  const result = cookie.save();
+  const result = cookie.save('.uniplaces.com');
 
   const expectedCookieName = 'upl_cookie';
   const expectedCookieJson = {

@@ -39,7 +39,8 @@ class Config {
    * @return {bool}
    */
   isValidEnvironment(environment) {
-    return environment === EnvironmentType.DEVELOPMENT
+    return environment === EnvironmentType.TEST
+      || environment === EnvironmentType.DEVELOPMENT
       || environment === EnvironmentType.STAGING
       || environment === EnvironmentType.PRODUCTION;
   }
@@ -49,7 +50,7 @@ class Config {
    * @return {string}
    */
   getCookieDomain() {
-    return CookieDomain[this.environment];
+    return CookieDomain[this.environment] || CookieDomain[EnvironmentType.STAGING];
   }
 
   /**
@@ -57,7 +58,7 @@ class Config {
    * @return {string}
    */
   getDataInfrastructureUrl() {
-    return DataInfrastructureUrl[this.environment];
+    return DataInfrastructureUrl[this.environment] || DataInfrastructureUrl[EnvironmentType.STAGING];
   }
 }
 

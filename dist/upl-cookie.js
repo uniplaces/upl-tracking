@@ -32,7 +32,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var UPL_COOKIE_NAME = 'upl_cookie';
 var DEFAULT_EXPIRE_IN_DAYS = 180;
-var DEFAULT_DOMAIN = '.uniplaces.com';
 
 var UplCookie = function () {
   function UplCookie(trackingId, createdAt) {
@@ -94,9 +93,7 @@ var UplCookie = function () {
     }
   }, {
     key: 'save',
-    value: function save() {
-      var domain = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_DOMAIN;
-
+    value: function save(domain) {
       _jsCookie2.default.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
 
       return this;

@@ -34,3 +34,10 @@ test('it returns the correct data infrastructure url', () => {
 
   expect(result).toBe('https://data-events.staging-uniplaces.com/streams');
 });
+
+test('it returns values to staging when environment is test', () => {
+  config.setEnvironment(EnvironmentType.TEST);
+  const result = config.getDataInfrastructureUrl();
+
+  expect(result).toBe('https://data-events.staging-uniplaces.com/streams');
+});

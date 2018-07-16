@@ -22,11 +22,10 @@ function setEnvironment(environment = EnvironmentType.STAGING) {
 
 /**
  * Track a new touch or update the existing one
- * @param {string} cookieDomain - The cookie domain to be used
- * @param {Object} location - The location's object
+ * @param {(Object|null)} [location=null] - The location's object
  * @return {Promise}
  */
-function trackTouch(cookieDomain, location) {
+function trackTouch(location = null) {
   const url = window.location.href;
   const params = getUrlParameters(url, location);
 
@@ -42,7 +41,7 @@ function trackTouch(cookieDomain, location) {
   uplCookie = uplCookie
     .setParameters(params)
     .setLocation(location)
-    .save(cookieDomain);
+    .save(config.getCookieDomain());
 
   return putRecord(DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
 }

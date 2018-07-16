@@ -6,7 +6,6 @@ import DateFormatType from './enums/date-format-type';
 
 const UPL_COOKIE_NAME = 'upl_cookie';
 const DEFAULT_EXPIRE_IN_DAYS = 180;
-const DEFAULT_DOMAIN = '.uniplaces.com';
 
 /** Class representing a UPL cookie */
 class UplCookie {
@@ -92,10 +91,10 @@ class UplCookie {
 
   /**
    * Save this cookie in the browser for a given domain
-   * @param {string} [domain=.uniplaces.com] - the domain of the cookie
+   * @param {string} domain - the domain of the cookie
    * @return {UplCookie}
    */
-  save(domain = DEFAULT_DOMAIN) {
+  save(domain) {
     Cookies.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
 
     return this;

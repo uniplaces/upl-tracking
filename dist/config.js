@@ -45,17 +45,17 @@ var Config = function () {
   }, {
     key: 'isValidEnvironment',
     value: function isValidEnvironment(environment) {
-      return environment === _environmentType2.default.DEVELOPMENT || environment === _environmentType2.default.STAGING || environment === _environmentType2.default.PRODUCTION;
+      return environment === _environmentType2.default.TEST || environment === _environmentType2.default.DEVELOPMENT || environment === _environmentType2.default.STAGING || environment === _environmentType2.default.PRODUCTION;
     }
   }, {
     key: 'getCookieDomain',
     value: function getCookieDomain() {
-      return CookieDomain[this.environment];
+      return CookieDomain[this.environment] || CookieDomain[_environmentType2.default.STAGING];
     }
   }, {
     key: 'getDataInfrastructureUrl',
     value: function getDataInfrastructureUrl() {
-      return DataInfrastructureUrl[this.environment];
+      return DataInfrastructureUrl[this.environment] || DataInfrastructureUrl[_environmentType2.default.STAGING];
     }
   }]);
 

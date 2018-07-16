@@ -59,7 +59,9 @@ function setEnvironment() {
   _config2.default.setEnvironment(environment);
 }
 
-function trackTouch(cookieDomain, location) {
+function trackTouch() {
+  var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
   var url = window.location.href;
   var params = (0, _urlParameters.getUrlParameters)(url, location);
 
@@ -72,7 +74,7 @@ function trackTouch(cookieDomain, location) {
     return Promise.resolve();
   }
 
-  uplCookie = uplCookie.setParameters(params).setLocation(location).save(cookieDomain);
+  uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }

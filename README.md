@@ -16,7 +16,7 @@ initialize() {
   UplTracking.setEnvironment('production');
 
   // Track the touch
-  UplTracking.trackTouch(cookieDomain, location);
+  UplTracking.trackTouch(location);
 }
 ```
 
