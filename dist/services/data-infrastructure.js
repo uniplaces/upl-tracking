@@ -25,5 +25,5 @@ var dataInfrastructureService = _axios2.default.create({
 function putRecord(streamName, record) {
   var endpoint = '/' + streamName + '/record';
 
-  return dataInfrastructureService.put(endpoint, record);
+  return dataInfrastructureService.put(endpoint, { data: record });
 }

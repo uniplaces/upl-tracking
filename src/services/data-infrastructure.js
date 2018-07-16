@@ -18,5 +18,5 @@ const dataInfrastructureService = axios.create({
 export function putRecord(streamName, record) {
   const endpoint = `/${streamName}/record`;
 
-  return dataInfrastructureService.put(endpoint, record);
+  return dataInfrastructureService.put(endpoint, { data: record });
 }
