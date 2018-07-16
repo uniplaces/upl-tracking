@@ -15,7 +15,7 @@ initialize() {
   // Set the desired environment. It defaults to staging
   UplTracking.setEnvironment('production');
 
-  // Track the touch
+  // Track the touch. You can provide the location of the user.
   UplTracking.trackTouch(location);
 }
 ```

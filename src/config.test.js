@@ -36,8 +36,11 @@ test('it returns the correct data infrastructure url', () => {
 });
 
 test('it returns values to staging when environment is test', () => {
-  config.setEnvironment(EnvironmentType.TEST);
+  const env = EnvironmentType.TEST;
+  config.setEnvironment(env);
+
   const result = config.getDataInfrastructureUrl();
 
+  expect(config.environment).toBe(env);
   expect(result).toBe('https://data-events.staging-uniplaces.com/streams');
 });
