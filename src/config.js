@@ -24,6 +24,7 @@ class Config {
   /**
    * Set the current environment
    * @param {string} environment
+   * @throws Will throw an error if the environment is not valid
    */
   setEnvironment(environment) {
     if (!this.isValidEnvironment(environment)) {
