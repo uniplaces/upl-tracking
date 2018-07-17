@@ -1,9 +1,9 @@
 {
   "name": "upl-tracking",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Uniplaces",
   "private": true,
-  "description": "UPL Tracking for Uniplaces platforms",
+  "description": "Library that implements UPL Tracking for Uniplaces platforms",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
