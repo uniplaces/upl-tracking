@@ -2,7 +2,6 @@ import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import Cookies from 'js-cookie';
 import { i18nToUplLocale } from './utils';
-import DateFormatType from './enums/date-format-type';
 
 const UPL_COOKIE_NAME = 'upl_cookie';
 const DEFAULT_EXPIRE_IN_DAYS = 180;
@@ -16,7 +15,7 @@ class UplCookie {
    */
   constructor(trackingId, createdAt) {
     this.tracking_id = trackingId || uuidv4();
-    this.created_at = createdAt || moment().format(DateFormatType.UNIX);
+    this.created_at = createdAt || moment().valueOf();
   }
 
   /**

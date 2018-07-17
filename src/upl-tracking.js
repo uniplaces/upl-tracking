@@ -6,7 +6,6 @@ import { isUniplacesReferrer } from './referrer';
 import { getUrlParameters } from './url-parameters';
 import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
-import DateFormatType from './enums/date-format-type';
 import EnvironmentType from './enums/environment-type';
 import DataDeliveryStreamType from './enums/data-delivery-stream-type';
 import PerformanceNavigationType from './enums/performance-navigation-type';
@@ -56,7 +55,7 @@ function trackAction(actionType) {
   const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    created_at: moment().format(DateFormatType.UNIX)
+    created_at: moment().valueOf()
   };
 
   return !uplCookie
@@ -76,7 +75,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId,
-    created_at: moment().format(DateFormatType.UNIX)
+    created_at: moment().valueOf()
   };
 
   return !uplCookie

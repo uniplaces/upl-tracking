@@ -31,10 +31,6 @@ var _userType = require('./enums/user-type');
 
 var _userType2 = _interopRequireDefault(_userType);
 
-var _dateFormatType = require('./enums/date-format-type');
-
-var _dateFormatType2 = _interopRequireDefault(_dateFormatType);
-
 var _environmentType = require('./enums/environment-type');
 
 var _environmentType2 = _interopRequireDefault(_environmentType);
@@ -84,7 +80,7 @@ function trackAction(actionType) {
   var record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    created_at: (0, _moment2.default)().format(_dateFormatType2.default.UNIX)
+    created_at: (0, _moment2.default)().valueOf()
   };
 
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
@@ -98,7 +94,7 @@ function assignUserToTrackingId(userId) {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId,
-    created_at: (0, _moment2.default)().format(_dateFormatType2.default.UNIX)
+    created_at: (0, _moment2.default)().valueOf()
   };
 
   return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
