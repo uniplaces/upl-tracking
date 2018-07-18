@@ -4,6 +4,7 @@
 *.rsa
 node_modules
 .env
+docs
 
 # compiled files
 # dist
