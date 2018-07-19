@@ -77,19 +77,29 @@ function trackTouch() {
 
 function trackAction(actionType) {
   var uplCookie = getCookie();
+
+  if (!uplCookie) {
+    return Promise.reject('UPL cookie is not set');
+  }
+
   var record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
     created_at: (0, _moment2.default)().valueOf()
   };
 
-  return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
+  return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
 }
 
 function assignUserToTrackingId(userId) {
   var userType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _userType2.default.GUEST;
 
   var uplCookie = getCookie();
+
+  if (!uplCookie) {
+    return Promise.reject('UPL cookie is not set');
+  }
+
   var record = {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
@@ -97,7 +107,7 @@ function assignUserToTrackingId(userId) {
     created_at: (0, _moment2.default)().valueOf()
   };
 
-  return !uplCookie ? Promise.reject() : (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
+  return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
 }
 
 function getCookie() {
