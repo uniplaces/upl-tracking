@@ -23,10 +23,10 @@ export const UrlParameters = [
 /**
  * Get URL parameters
  * @param {string} url - The URL to be parsed
- * @param {Object} [location={}] - The location
+ * @param {Object} [location={ origin: null, destination: null, language: null }] - The location
  * @return {Object}
  */
-export function getUrlParameters(url, location = {}) {
+export function getUrlParameters(url, location = { origin: null, destination: null, language: null }) {
   const parsedUrl = new URL(url);
   const params = {};
 
@@ -59,11 +59,16 @@ export function getInferedSource() {
 
 /**
  * Get the medium, inferring it from the document.referrer
+ * @param {string} url - the url
+ * @param {Object} location - the location
  * @return {string} the medium infered from the referrer
  */
-export function getInferedMedium() {
-  if (!hasReferrer() || isUniplacesReferrer()) {
-    return null;
+export function getInferedMedium(_, location) {
+  const { origin, destination, language } = location;
+  const placeholder = 'xxx';
+
+  if (location.origin || location.destination || location.language) {
+    return `${origin || placeholder}_${destination || placeholder}_${language || placeholder}`;
   }
 
   return 'organic';
