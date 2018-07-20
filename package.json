@@ -4,11 +4,12 @@
   "author": "Uniplaces",
   "private": true,
   "description": "Library that implements UPL Tracking for Uniplaces platforms",
-  "main": "dist/index.js",
+  "main": "dist/upl-tracking.js",
   "scripts": {
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdocrc.js",
     "build": "babel src -d dist --no-comments --ignore **/*.test.js,**/__mocks__",
+    "build:webpack": "webpack --mode production",
     "test": "jest --forceExit --detectOpenHandles",
     "start": "node dist/index.js",
     "start:dev": "nodemon src/index.js --exec babel-node"
@@ -23,21 +24,23 @@
     "uniplaces"
   ],
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-core": "6.26.3",
+    "@babel/cli": "7.0.0-beta.54",
+    "@babel/core": "7.0.0-beta.54",
+    "@babel/preset-env": "7.0.0-beta.54",
     "babel-eslint": "8.2.5",
     "babel-jest": "23.2.0",
-    "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "babel-preset-env": "1.7.0",
     "docdash": "0.4.0",
     "eslint": "5.0.1",
     "jest": "23.2.0",
     "jsdoc": "^3.5.5",
     "nodemon": "1.17.5",
-    "regenerator-runtime": "0.12.0"
+    "regenerator-runtime": "0.12.0",
+    "webpack": "4.16.1",
+    "webpack-cli": "3.1.0"
   },
   "dependencies": {
     "axios": "0.18.0",
+    "babel-loader": "8.0.0-beta.4",
     "js-cookie": "2.2.0",
     "moment": "2.22.2",
     "uuid": "3.3.2"
