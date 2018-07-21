@@ -4,11 +4,10 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'main.js',
+    filename: 'upl-tracking.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'upl-tracking',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    library: 'UplTracking',
+    libraryTarget: 'amd'
   },
   module: {
     rules: [
