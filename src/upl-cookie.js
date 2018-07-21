@@ -1,5 +1,4 @@
 import uuidv4 from 'uuid/v4';
-import moment from 'moment';
 import Cookies from 'js-cookie';
 import { i18nToUplLocale } from './utils';
 
@@ -15,7 +14,7 @@ class UplCookie {
    */
   constructor(trackingId, createdAt) {
     this.tracking_id = trackingId || uuidv4();
-    this.created_at = createdAt || moment().valueOf();
+    this.created_at = createdAt || Date.now();
   }
 
   /**
@@ -76,10 +75,10 @@ class UplCookie {
 
   /**
    * Set the location of the cookie
-   * @param {Object} [location={ origin: null, destination: null, language: null, city: null }]
+   * @param {Object} location
    * @return {UplCookie}
    */
-  setLocation(location = { origin: null, destination: null, language: null, city: null }) {
+  setLocation(location) {
     this.origin = location.origin;
     this.destination = location.destination;
     this.language = i18nToUplLocale(location.language);

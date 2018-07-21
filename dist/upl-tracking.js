@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isPageReload = exports.putRecord = exports.config = exports.Cookies = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
 var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
@@ -56,7 +52,7 @@ function setEnvironment() {
 }
 
 function trackTouch() {
-  var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null, city: null };
 
   var url = window.location.href;
   var params = (0, _urlParameters.getUrlParameters)(url, location);
@@ -89,7 +85,7 @@ function trackAction(actionType) {
   var record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    created_at: (0, _moment2.default)().valueOf()
+    created_at: Date.now()
   };
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
@@ -108,7 +104,7 @@ function assignUserToTrackingId(userId) {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId,
-    created_at: (0, _moment2.default)().valueOf()
+    created_at: Date.now()
   };
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
