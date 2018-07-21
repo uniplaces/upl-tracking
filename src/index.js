@@ -5,8 +5,5 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters,
-  Cookies,
-  config,
-  putRecord
+  getUrlParameters
 } from './upl-tracking';

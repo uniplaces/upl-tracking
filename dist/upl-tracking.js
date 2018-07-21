@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isPageReload = exports.putRecord = exports.config = exports.Cookies = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
+exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -118,6 +118,10 @@ function getCookie() {
 }
 
 function isPageReload() {
+  if (_config2.default.isDevelopment()) {
+    return false;
+  }
+
   return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
 }
 
@@ -128,7 +132,3 @@ exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = _urlParameters.getUrlParameters;
-exports.Cookies = _jsCookie2.default;
-exports.config = _config2.default;
-exports.putRecord = _dataInfrastructure.putRecord;
-exports.isPageReload = isPageReload;

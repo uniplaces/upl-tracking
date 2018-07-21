@@ -22,6 +22,14 @@ class Config {
   }
 
   /**
+   * Get the current environment
+   * @return {string}
+   */
+  getEnvironment() {
+    return this.environment;
+  }
+
+  /**
    * Set the current environment
    * @param {string} environment
    * @throws Will throw an error if the environment is not valid
@@ -44,6 +52,14 @@ class Config {
       || environment === EnvironmentType.DEVELOPMENT
       || environment === EnvironmentType.STAGING
       || environment === EnvironmentType.PRODUCTION;
+  }
+
+  /**
+   * Check if the current environment is development
+   * @return {bool}
+   */
+  isDevelopment() {
+    return this.environment === EnvironmentType.DEVELOPMENT;
   }
 
   /**

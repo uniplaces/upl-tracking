@@ -108,6 +108,11 @@ function getCookie() {
  * @return {bool}
  */
 function isPageReload() {
+  // Page reload check is disabled in development for testing purposes
+  if (config.isDevelopment()) {
+    return false;
+  }
+
   return window.performance && window.performance.navigation.type === PerformanceNavigationType.RELOAD;
 }
 
@@ -118,9 +123,5 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters,
-  Cookies,
-  config,
-  putRecord,
-  isPageReload
+  getUrlParameters
 };

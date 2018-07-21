@@ -48,21 +48,3 @@ Object.defineProperty(exports, 'getUrlParameters', {
     return _uplTracking.getUrlParameters;
   }
 });
-Object.defineProperty(exports, 'Cookies', {
-  enumerable: true,
-  get: function get() {
-    return _uplTracking.Cookies;
-  }
-});
-Object.defineProperty(exports, 'config', {
-  enumerable: true,
-  get: function get() {
-    return _uplTracking.config;
-  }
-});
-Object.defineProperty(exports, 'putRecord', {
-  enumerable: true,
-  get: function get() {
-    return _uplTracking.putRecord;
-  }
-});
