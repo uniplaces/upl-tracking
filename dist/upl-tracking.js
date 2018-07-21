@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
+exports.isPageReload = exports.putRecord = exports.config = exports.Cookies = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _moment = require('moment');
 
@@ -63,14 +63,18 @@ function trackTouch() {
 
   var uplCookie = getCookie();
   if (!uplCookie) {
+    console.log('Creating new cookie...');
     uplCookie = new _uplCookie2.default();
+    console.log('Created cookie!', uplCookie);
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
-    return Promise.resolve();
+    return Promise.resolve({ msg: 'user is coming from uniplaces or is a page reload' });
   }
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
+
+  console.log('Saved cookie in domain', uplCookie, _config2.default.getCookieDomain());
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }
@@ -128,3 +132,7 @@ exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = _urlParameters.getUrlParameters;
+exports.Cookies = _jsCookie2.default;
+exports.config = _config2.default;
+exports.putRecord = _dataInfrastructure.putRecord;
+exports.isPageReload = isPageReload;

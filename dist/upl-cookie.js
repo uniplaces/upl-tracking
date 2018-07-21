@@ -90,7 +90,13 @@ var UplCookie = function () {
   }, {
     key: 'save',
     value: function save(domain) {
-      _jsCookie2.default.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
+      console.log('Saving cookie...');
+      var data = this.toJSON();
+      var options = { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain };
+
+      _jsCookie2.default.set(UPL_COOKIE_NAME, data, options);
+
+      console.log('Cookie saved:', _jsCookie2.default.get(UPL_COOKIE_NAME));
 
       return this;
     }

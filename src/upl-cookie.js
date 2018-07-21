@@ -94,7 +94,13 @@ class UplCookie {
    * @return {UplCookie}
    */
   save(domain) {
-    Cookies.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
+    console.log('Saving cookie...');
+    const data = this.toJSON();
+    const options = { expires: DEFAULT_EXPIRE_IN_DAYS, domain };
+
+    Cookies.set(UPL_COOKIE_NAME, data, options);
+
+    console.log('Cookie saved:', Cookies.get(UPL_COOKIE_NAME));
 
     return this;
   }

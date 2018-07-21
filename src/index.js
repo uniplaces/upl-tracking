@@ -3,6 +3,10 @@ export {
   trackTouch,
   trackAction,
   assignUserToTrackingId,
+  ActionsType,
   getCookie,
-  ActionsType
+  getUrlParameters,
+  Cookies,
+  config,
+  putRecord
 } from './upl-tracking';

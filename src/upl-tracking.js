@@ -30,17 +30,21 @@ function trackTouch(location = null) {
 
   let uplCookie = getCookie();
   if (!uplCookie) {
+    console.log('Creating new cookie...');
     uplCookie = new UplCookie();
+    console.log('Created cookie!', uplCookie);
   }
 
   if (isUniplacesReferrer() || isPageReload()) {
-    return Promise.resolve();
+    return Promise.resolve({ msg: 'user is coming from uniplaces or is a page reload' });
   }
 
   uplCookie = uplCookie
     .setParameters(params)
     .setLocation(location)
     .save(config.getCookieDomain());
+
+  console.log('Saved cookie in domain', uplCookie, config.getCookieDomain());
 
   return putRecord(DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
 }
@@ -115,5 +119,9 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters
+  getUrlParameters,
+  Cookies,
+  config,
+  putRecord,
+  isPageReload
 };

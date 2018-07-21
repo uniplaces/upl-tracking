@@ -30,15 +30,39 @@ Object.defineProperty(exports, 'assignUserToTrackingId', {
     return _uplTracking.assignUserToTrackingId;
   }
 });
+Object.defineProperty(exports, 'ActionsType', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.ActionsType;
+  }
+});
 Object.defineProperty(exports, 'getCookie', {
   enumerable: true,
   get: function get() {
     return _uplTracking.getCookie;
   }
 });
-Object.defineProperty(exports, 'ActionsType', {
+Object.defineProperty(exports, 'getUrlParameters', {
   enumerable: true,
   get: function get() {
-    return _uplTracking.ActionsType;
+    return _uplTracking.getUrlParameters;
+  }
+});
+Object.defineProperty(exports, 'Cookies', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.Cookies;
+  }
+});
+Object.defineProperty(exports, 'config', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.config;
+  }
+});
+Object.defineProperty(exports, 'putRecord', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.putRecord;
   }
 });
