@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.config = exports.EnvironmentType = exports.isPageReload = exports.isUniplacesReferrer = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
+exports.Cookies = exports.config = exports.EnvironmentType = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -59,9 +59,7 @@ function trackTouch() {
 
   var uplCookie = getCookie();
   if (!uplCookie) {
-    console.log('Creating new cookie...');
     uplCookie = new _uplCookie2.default();
-    console.log('Created cookie!', uplCookie);
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
@@ -132,7 +130,6 @@ exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = _urlParameters.getUrlParameters;
-exports.isUniplacesReferrer = _referrer.isUniplacesReferrer;
-exports.isPageReload = isPageReload;
 exports.EnvironmentType = _environmentType2.default;
 exports.config = _config2.default;
+exports.Cookies = _jsCookie2.default;

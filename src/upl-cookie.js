@@ -93,13 +93,25 @@ class UplCookie {
    * @return {UplCookie}
    */
   save(domain) {
-    console.log('Saving cookie...');
     const data = this.toJSON();
-    const options = { expires: DEFAULT_EXPIRE_IN_DAYS, domain };
+    const options = { domain };
 
-    Cookies.set(UPL_COOKIE_NAME, data, options);
+    console.log('Saving cookie...', data, options);
 
-    console.log('Cookie saved:', Cookies.get(UPL_COOKIE_NAME));
+    let months = 6;
+    let expireDate = new Date();
+    expireDate.setMonth(expireDate.getMonth() + months);
+
+    let cookie = Cookies.set(UPL_COOKIE_NAME, data, { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
+    let cookie2 = Cookies.set('cookie2', { cenas: 2 }, { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
+    let cookie3 = Cookies.set('cookie3', { cenas: 3 }, { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
+    let cookie4 = Cookies.set('cookie4', { cenas: 4 });
+
+    console.log(Cookies);
+    console.log('Dummy cookie2:', cookie2, Cookies.get('cookie2'));
+    console.log('Dummy cookie3:', cookie3, Cookies.get('cookie3'));
+    console.log('Dummy cookie4:', cookie4, Cookies.get('cookie4'));
+    console.log('Cookie saved:', cookie, UPL_COOKIE_NAME, Cookies.get(UPL_COOKIE_NAME));
 
     return this;
   }
@@ -109,9 +121,7 @@ class UplCookie {
    * @return {Object}
    */
   toJSON() {
-    const touchId = this.getTouchId();
-
-    return { touch_id: touchId, ...this };
+    return { touch_id: this.getTouchId(), ...this };
   }
 
   /**

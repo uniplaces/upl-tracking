@@ -29,9 +29,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
 
   let uplCookie = getCookie();
   if (!uplCookie) {
-    console.log('Creating new cookie...');
     uplCookie = new UplCookie();
-    console.log('Created cookie!', uplCookie);
   }
 
   if (isUniplacesReferrer() || isPageReload()) {
@@ -124,8 +122,7 @@ export {
   ActionsType,
   getCookie,
   getUrlParameters,
-  isUniplacesReferrer,
-  isPageReload,
   EnvironmentType,
-  config
+  config,
+  Cookies
 };

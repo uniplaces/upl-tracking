@@ -84,22 +84,32 @@ var UplCookie = function () {
   }, {
     key: 'save',
     value: function save(domain) {
-      console.log('Saving cookie...');
       var data = this.toJSON();
-      var options = { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain };
+      var options = { domain: domain };
 
-      _jsCookie2.default.set(UPL_COOKIE_NAME, data, options);
+      console.log('Saving cookie...', data, options);
 
-      console.log('Cookie saved:', _jsCookie2.default.get(UPL_COOKIE_NAME));
+      var months = 6;
+      var expireDate = new Date();
+      expireDate.setMonth(expireDate.getMonth() + months);
+
+      var cookie = _jsCookie2.default.set(UPL_COOKIE_NAME, data, { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
+      var cookie2 = _jsCookie2.default.set('cookie2', { cenas: 2 }, { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
+      var cookie3 = _jsCookie2.default.set('cookie3', { cenas: 3 }, { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
+      var cookie4 = _jsCookie2.default.set('cookie4', { cenas: 4 });
+
+      console.log(_jsCookie2.default);
+      console.log('Dummy cookie2:', cookie2, _jsCookie2.default.get('cookie2'));
+      console.log('Dummy cookie3:', cookie3, _jsCookie2.default.get('cookie3'));
+      console.log('Dummy cookie4:', cookie4, _jsCookie2.default.get('cookie4'));
+      console.log('Cookie saved:', cookie, UPL_COOKIE_NAME, _jsCookie2.default.get(UPL_COOKIE_NAME));
 
       return this;
     }
   }, {
     key: 'toJSON',
     value: function toJSON() {
-      var touchId = this.getTouchId();
-
-      return _extends({ touch_id: touchId }, this);
+      return _extends({ touch_id: this.getTouchId() }, this);
     }
   }], [{
     key: 'getCookieName',

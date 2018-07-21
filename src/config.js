@@ -1,7 +1,7 @@
 import EnvironmentType from './enums/environment-type';
 
 const CookieDomain = {
-  development: '.staging-uniplaces.com',
+  development: '.uniplaces.lh',
   staging: '.staging-uniplaces.com',
   production: '.uniplaces.com'
 };
