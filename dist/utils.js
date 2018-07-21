@@ -17,5 +17,5 @@ function capitalize(string) {
 }
 
 function i18nToUplLocale(i18nLocale) {
-  return _languageType2.default[i18nLocale.replace('-', '_').toUpperCase()];
+  return i18nLocale ? _languageType2.default[i18nLocale.replace('-', '_').toUpperCase()] : null;
 }

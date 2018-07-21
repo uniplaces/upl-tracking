@@ -1,5 +1,6 @@
 /* eslint-env node */
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -8,6 +9,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/global-export'),
     library: 'UplTracking',
     libraryTarget: 'var'
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
+    ]
   },
   module: {
     rules: [

@@ -15,5 +15,5 @@ export function capitalize(string) {
  * @return {string} The locale in UPL format
  */
 export function i18nToUplLocale(i18nLocale) {
-  return LanguageType[i18nLocale.replace('-', '_').toUpperCase()];
+  return i18nLocale ? LanguageType[i18nLocale.replace('-', '_').toUpperCase()] : null;
 }
