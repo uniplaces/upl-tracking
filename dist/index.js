@@ -48,3 +48,21 @@ Object.defineProperty(exports, 'getUrlParameters', {
     return _uplTracking.getUrlParameters;
   }
 });
+Object.defineProperty(exports, 'isUniplacesReferrer', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.isUniplacesReferrer;
+  }
+});
+Object.defineProperty(exports, 'isPageReload', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.isPageReload;
+  }
+});
+Object.defineProperty(exports, 'EnvironmentType', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.EnvironmentType;
+  }
+});

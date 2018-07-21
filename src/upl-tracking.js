@@ -123,5 +123,8 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters
+  getUrlParameters,
+  isUniplacesReferrer,
+  isPageReload,
+  EnvironmentType
 };

@@ -5,5 +5,8 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters
+  getUrlParameters,
+  isUniplacesReferrer,
+  isPageReload,
+  EnvironmentType
 } from './upl-tracking';
