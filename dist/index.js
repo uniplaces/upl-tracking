@@ -66,3 +66,9 @@ Object.defineProperty(exports, 'EnvironmentType', {
     return _uplTracking.EnvironmentType;
   }
 });
+Object.defineProperty(exports, 'config', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.config;
+  }
+});

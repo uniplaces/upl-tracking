@@ -1,9 +1,9 @@
 /**
- * Check if it exists a document.referrer
- * @return {boolean} If there is a referrer
+ * Check if the document.referrer is empty
+ * @return {boolean}
  */
-export function hasReferrer() {
-  return document.referrer;
+export function isEmptyReferrer() {
+  return document.referrer === '';
 }
 
 /**
@@ -11,7 +11,7 @@ export function hasReferrer() {
  * @return {(URL|null)} The URL object with the referrer or null if there is no referrer
  */
 export function getReferrer() {
-  return hasReferrer() ? new URL(document.referrer) : null;
+  return !isEmptyReferrer() ? new URL(document.referrer) : null;
 }
 
 /**
@@ -20,7 +20,7 @@ export function getReferrer() {
  * @return {boolean}
  */
 export function isCustomReferrer(substring) {
-  return hasReferrer() && document.referrer.includes(substring);
+  return !isEmptyReferrer() && document.referrer.includes(substring);
 }
 
 /**

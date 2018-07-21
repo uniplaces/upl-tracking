@@ -126,5 +126,6 @@ export {
   getUrlParameters,
   isUniplacesReferrer,
   isPageReload,
-  EnvironmentType
+  EnvironmentType,
+  config
 };

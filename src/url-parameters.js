@@ -1,4 +1,4 @@
-import { isUniplacesReferrer, hasReferrer, getReferrer } from './referrer';
+import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 
 export const UrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -50,7 +50,7 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
  * @return {string} the source infered from the referrer
  */
 export function getInferedSource() {
-  if (!hasReferrer() || isUniplacesReferrer()) {
+  if (isEmptyReferrer() || isUniplacesReferrer()) {
     return null;
   }
 

@@ -8,5 +8,6 @@ export {
   getUrlParameters,
   isUniplacesReferrer,
   isPageReload,
-  EnvironmentType
+  EnvironmentType,
+  config
 } from './upl-tracking';
