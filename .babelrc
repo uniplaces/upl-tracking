@@ -1,14 +1,19 @@
 {
   "presets": [
-    ["@babel/preset-env", {
+    ["env", {
       "targets": {
         "browsers": ["last 2 versions", "safari >= 7"]
       },
-      "modules": "umd",
-      "shippedProposals": true
+      "modules": "amd"
     }]
   ],
+  "plugins": [
+    "transform-object-rest-spread"
+  ],
   "ignore": [
-    "dist/**/*.js"
-  ]
+    "dist/**/*.js",
+    "**/*.test.js",
+    "**/__mocks__"
+  ],
+  "comments": false
 }

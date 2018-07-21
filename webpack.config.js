@@ -1,4 +1,4 @@
-/** eslint-env node */
+/* eslint-env node */
 const path = require('path');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     filename: 'upl-tracking.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'UplTracking',
-    libraryTarget: 'amd'
+    libraryTarget: 'var'
   },
   module: {
     rules: [

@@ -8,10 +8,10 @@
   "scripts": {
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdocrc.js",
-    "build": "babel src -d dist --no-comments --ignore **/*.test.js,**/__mocks__",
+    "build": "babel src -d dist",
     "build:webpack": "webpack --mode production",
     "test": "jest --forceExit --detectOpenHandles",
-    "start": "node dist/index.js",
+    "start": "node dist/upl-tracking.js",
     "start:dev": "nodemon src/index.js --exec babel-node"
   },
   "engines": {
@@ -24,13 +24,13 @@
     "uniplaces"
   ],
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.54",
-    "@babel/core": "7.0.0-beta.54",
-    "@babel/preset-env": "7.0.0-beta.54",
-    "babel-core": "7.0.0-bridge.0",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.3",
     "babel-eslint": "8.2.5",
     "babel-jest": "23.2.0",
-    "babel-loader": "8.0.0-beta.4",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-loader": "7.1.5",
     "docdash": "0.4.0",
     "eslint": "5.0.1",
     "jest": "23.2.0",
