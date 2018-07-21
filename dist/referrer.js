@@ -5,20 +5,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.hasReferrer = hasReferrer;
 exports.getReferrer = getReferrer;
-exports.isUniplacesReferrer = isUniplacesReferrer;
 exports.isCustomReferrer = isCustomReferrer;
+exports.isUniplacesReferrer = isUniplacesReferrer;
 function hasReferrer() {
-  return document.referrer && document.referrer !== '';
+  return document.referrer;
 }
 
 function getReferrer() {
   return hasReferrer() ? new URL(document.referrer) : null;
 }
 
-function isUniplacesReferrer() {
-  return isCustomReferrer('uniplaces');
-}
-
 function isCustomReferrer(substring) {
   return hasReferrer() && document.referrer.includes(substring);
+}
+
+function isUniplacesReferrer() {
+  return isCustomReferrer('uniplaces');
 }

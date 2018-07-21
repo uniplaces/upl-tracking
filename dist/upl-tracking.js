@@ -69,7 +69,7 @@ function trackTouch() {
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
-    return Promise.resolve({ msg: 'user is coming from uniplaces or is a page reload' });
+    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
@@ -83,7 +83,7 @@ function trackAction(actionType) {
   var uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   var record = {
@@ -101,7 +101,7 @@ function assignUserToTrackingId(userId) {
   var uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   var record = {

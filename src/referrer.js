@@ -3,7 +3,7 @@
  * @return {boolean} If there is a referrer
  */
 export function hasReferrer() {
-  return document.referrer && document.referrer !== '';
+  return document.referrer;
 }
 
 /**
@@ -15,18 +15,18 @@ export function getReferrer() {
 }
 
 /**
- * Check if the referrer is Uniplaces
- * @return {boolean}
- */
-export function isUniplacesReferrer() {
-  return isCustomReferrer('uniplaces');
-}
-
-/**
  * Check if the referrer exists and contains a substring
  * @param {string} substring
  * @return {boolean}
  */
 export function isCustomReferrer(substring) {
   return hasReferrer() && document.referrer.includes(substring);
+}
+
+/**
+ * Check if the referrer is Uniplaces
+ * @return {boolean}
+ */
+export function isUniplacesReferrer() {
+  return isCustomReferrer('uniplaces');
 }
