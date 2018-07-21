@@ -3,17 +3,14 @@
     ["env", {
       "targets": {
         "browsers": ["last 2 versions", "safari >= 7"]
-      },
-      "modules": "amd"
+      }
     }]
   ],
   "plugins": [
     "transform-object-rest-spread"
   ],
   "ignore": [
-    "dist/**/*.js",
-    "**/*.test.js",
-    "**/__mocks__"
+    "dist/**/*.js"
   ],
   "comments": false
 }

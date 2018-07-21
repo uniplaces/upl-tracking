@@ -1,13 +1,11 @@
-define(['exports'], function (exports) {
-  'use strict';
+'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.default = {
-    TEST: 'test',
-    DEVELOPMENT: 'development',
-    STAGING: 'staging',
-    PRODUCTION: 'production'
-  };
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports.default = {
+  TEST: 'test',
+  DEVELOPMENT: 'development',
+  STAGING: 'staging',
+  PRODUCTION: 'production'
+};

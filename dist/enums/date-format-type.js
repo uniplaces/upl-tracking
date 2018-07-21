@@ -1,11 +1,9 @@
-define(['exports'], function (exports) {
-  'use strict';
+'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.default = {
-    UNIX: 'x',
-    CORE: 'YYYY-MM-DD'
-  };
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+exports.default = {
+  UNIX: 'x',
+  CORE: 'YYYY-MM-DD'
+};
