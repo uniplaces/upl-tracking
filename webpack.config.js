@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'upl-tracking.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/global-export'),
     library: 'UplTracking',
     libraryTarget: 'var'
   },
