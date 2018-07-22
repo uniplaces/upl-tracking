@@ -50,3 +50,11 @@ $ npm run build && npm run-script build:webpack
 ```bash
 $ npm test
 ```
+
+## Future improvements
+
+* Create a pre-commit git hook to run the build
+* Create a private npm package to host this library where only the `dist` folder is published
+* Use webpack to bundle the app (apart from the global export)
+* Add pull request template
+* Add tests to the data infrastructure service
