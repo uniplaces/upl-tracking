@@ -68,8 +68,6 @@ function trackTouch() {
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
 
-  console.log('Saved cookie in domain', uplCookie, _config2.default.getCookieDomain());
-
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }
 
