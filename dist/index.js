@@ -54,15 +54,3 @@ Object.defineProperty(exports, 'EnvironmentType', {
     return _uplTracking.EnvironmentType;
   }
 });
-Object.defineProperty(exports, 'config', {
-  enumerable: true,
-  get: function get() {
-    return _uplTracking.config;
-  }
-});
-Object.defineProperty(exports, 'Cookies', {
-  enumerable: true,
-  get: function get() {
-    return _uplTracking.Cookies;
-  }
-});

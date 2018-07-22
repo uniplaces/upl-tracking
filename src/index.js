@@ -6,7 +6,5 @@ export {
   ActionsType,
   getCookie,
   getUrlParameters,
-  EnvironmentType,
-  config,
-  Cookies
+  EnvironmentType
 } from './upl-tracking';
