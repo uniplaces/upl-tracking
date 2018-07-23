@@ -12,10 +12,6 @@ var _v = require('uuid/v4');
 
 var _v2 = _interopRequireDefault(_v);
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
 var _jsCookie = require('js-cookie');
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
@@ -34,7 +30,7 @@ var UplCookie = function () {
     _classCallCheck(this, UplCookie);
 
     this.tracking_id = trackingId || (0, _v2.default)();
-    this.created_at = createdAt || (0, _moment2.default)().valueOf();
+    this.created_at = createdAt || Date.now();
   }
 
   _createClass(UplCookie, [{
@@ -77,9 +73,7 @@ var UplCookie = function () {
     }
   }, {
     key: 'setLocation',
-    value: function setLocation() {
-      var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null, city: null };
-
+    value: function setLocation(location) {
       this.origin = location.origin;
       this.destination = location.destination;
       this.language = (0, _utils.i18nToUplLocale)(location.language);
@@ -90,16 +84,16 @@ var UplCookie = function () {
   }, {
     key: 'save',
     value: function save(domain) {
-      _jsCookie2.default.set(UPL_COOKIE_NAME, this.toJSON(), { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
+      var data = this.toJSON();
+
+      _jsCookie2.default.set(UPL_COOKIE_NAME, data, { expires: DEFAULT_EXPIRE_IN_DAYS, domain: domain });
 
       return this;
     }
   }, {
     key: 'toJSON',
     value: function toJSON() {
-      var touchId = this.getTouchId();
-
-      return _extends({ touch_id: touchId }, this);
+      return _extends({ touch_id: this.getTouchId() }, this);
     }
   }], [{
     key: 'getCookieName',

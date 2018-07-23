@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var CookieDomain = {
-  development: '.staging-uniplaces.com',
+  development: '.uniplaces.lh',
   staging: '.staging-uniplaces.com',
   production: '.uniplaces.com'
 };
@@ -34,6 +34,11 @@ var Config = function () {
   }
 
   _createClass(Config, [{
+    key: 'getEnvironment',
+    value: function getEnvironment() {
+      return this.environment;
+    }
+  }, {
     key: 'setEnvironment',
     value: function setEnvironment(environment) {
       if (!this.isValidEnvironment(environment)) {
@@ -46,6 +51,11 @@ var Config = function () {
     key: 'isValidEnvironment',
     value: function isValidEnvironment(environment) {
       return environment === _environmentType2.default.TEST || environment === _environmentType2.default.DEVELOPMENT || environment === _environmentType2.default.STAGING || environment === _environmentType2.default.PRODUCTION;
+    }
+  }, {
+    key: 'isDevelopment',
+    value: function isDevelopment() {
+      return this.environment === _environmentType2.default.DEVELOPMENT;
     }
   }, {
     key: 'getCookieDomain',

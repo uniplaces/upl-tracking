@@ -1,7 +1,7 @@
 import EnvironmentType from './enums/environment-type';
 
 const CookieDomain = {
-  development: '.staging-uniplaces.com',
+  development: '.uniplaces.lh',
   staging: '.staging-uniplaces.com',
   production: '.uniplaces.com'
 };
@@ -19,6 +19,14 @@ class Config {
    */
   constructor() {
     this.environment = EnvironmentType.STAGING;
+  }
+
+  /**
+   * Get the current environment
+   * @return {string}
+   */
+  getEnvironment() {
+    return this.environment;
   }
 
   /**
@@ -44,6 +52,14 @@ class Config {
       || environment === EnvironmentType.DEVELOPMENT
       || environment === EnvironmentType.STAGING
       || environment === EnvironmentType.PRODUCTION;
+  }
+
+  /**
+   * Check if the current environment is development
+   * @return {bool}
+   */
+  isDevelopment() {
+    return this.environment === EnvironmentType.DEVELOPMENT;
   }
 
   /**

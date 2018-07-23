@@ -5,7 +5,7 @@ function _setReferrer(referrer) {
 }
 
 function _clearReferrer() {
-  Object.defineProperty(document, 'referrer', { writable: true, value: null });
+  Object.defineProperty(document, 'referrer', { writable: true, value: '' });
 }
 
 afterEach(() => {

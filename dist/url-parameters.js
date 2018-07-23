@@ -56,7 +56,7 @@ function getUrlParameters(url) {
 }
 
 function getInferedSource() {
-  if (!(0, _referrer.hasReferrer)() || (0, _referrer.isUniplacesReferrer)()) {
+  if ((0, _referrer.isEmptyReferrer)() || (0, _referrer.isUniplacesReferrer)()) {
     return null;
   }
 

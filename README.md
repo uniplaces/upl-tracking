@@ -1,6 +1,6 @@
 # upl-tracking
 
-upl-tracking is a library that enables touch-cookie
+upl-tracking is a library that provides all the UPL tracking functionalities
 
 ## Installation
 
@@ -15,30 +15,34 @@ As this package is private and it's not available in npm, yet, add the following
 ```js
 import * as UplTracking from 'upl-tracking';
 // or
-import { trackTouch, setEnvironment, ActionsType } from 'upl-tracking';
+import { trackTouch, setEnvironment, ActionsType, EnvironmentType } from 'upl-tracking';
 
 initializeUplTracking() {
   // Set the desired environment. It defaults to staging
-  UplTracking.setEnvironment('production');
+  setEnvironment(EnvironmentType.PRODUCTION);
 
   // Track the touch. You can provide the location of the user.
-  UplTracking.trackTouch(location);
+  trackTouch(location);
 }
 
 trackUplBookingRequest() {
   // Track any action you want. The action must be present in the ActionType enumerable.
-  UplTracking.trackAction(UplTracking.ActionsType.BOOKING_REQUEST),
+  trackAction(ActionsType.BOOKING_REQUEST),
 }
 ```
 
 ## Documentation
 
-You can check the documentation [here]()
+You can check the documentation [here](http://upl-tracking.uniplaces.com)
 
 ## Building the project
 
+Every time a new PR is submitted, the project must be built and the `dist` must be committed.
+This is due to the fact that this library is not published in `npm`.
+Run the following command to build this library.
+
 ```bash
-$ npm run build
+$ npm run build && npm run-script build:webpack
 ```
 
 ## Running tests
@@ -46,3 +50,11 @@ $ npm run build
 ```bash
 $ npm test
 ```
+
+## Future improvements
+
+* Create a pre-commit git hook to run the build
+* Create a private npm package to host this library where only the `dist` folder is published
+* Use webpack to bundle the app (apart from the global export)
+* Add pull request template
+* Add tests to the data infrastructure service

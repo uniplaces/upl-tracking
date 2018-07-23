@@ -1,15 +1,27 @@
-import { getReferrer } from './referrer';
+import { getReferrer, isEmptyReferrer } from './referrer';
 
 function _setReferrer(referrer) {
   Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
 }
 
 function _clearReferrer() {
-  Object.defineProperty(document, 'referrer', { writable: true, value: null });
+  Object.defineProperty(document, 'referrer', { writable: true, value: '' });
 }
 
 afterEach(() => {
   _clearReferrer();
+});
+
+test('it verifies that the referrer is empty', () => {
+  expect(isEmptyReferrer()).toBe(true);
+});
+
+test('it verifies that the referrer is not empty', () => {
+  const referrer = 'http://www.uniplaces.com/';
+
+  _setReferrer(referrer);
+
+  expect(isEmptyReferrer()).toBe(false);
 });
 
 test('it returns the referrer as URL', () => {

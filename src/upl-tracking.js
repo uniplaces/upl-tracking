@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
 import { putRecord } from './services/data-infrastructure';
@@ -21,10 +20,10 @@ function setEnvironment(environment = EnvironmentType.STAGING) {
 
 /**
  * Track a new touch or update the existing one
- * @param {(Object|null)} [location=null] - The location's object
+ * @param {Object} [location={ origin: null, destination: null, language: null, city: null }] - The location's object
  * @return {Promise}
  */
-function trackTouch(location = null) {
+function trackTouch(location = { origin: null, destination: null, language: null, city: null }) {
   const url = window.location.href;
   const params = getUrlParameters(url, location);
 
@@ -34,7 +33,7 @@ function trackTouch(location = null) {
   }
 
   if (isUniplacesReferrer() || isPageReload()) {
-    return Promise.resolve();
+    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
   uplCookie = uplCookie
@@ -54,13 +53,13 @@ function trackAction(actionType) {
   const uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    created_at: moment().valueOf()
+    created_at: Date.now()
   };
 
   return putRecord(DataDeliveryStreamType.UPL_ACTIONS, record);
@@ -76,14 +75,14 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   const record = {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId,
-    created_at: moment().valueOf()
+    created_at: Date.now()
   };
 
   return putRecord(DataDeliveryStreamType.UPL_USERS, record);
@@ -105,6 +104,11 @@ function getCookie() {
  * @return {bool}
  */
 function isPageReload() {
+  // Page reload check is disabled in development for testing purposes
+  if (config.isDevelopment()) {
+    return false;
+  }
+
   return window.performance && window.performance.navigation.type === PerformanceNavigationType.RELOAD;
 }
 
@@ -115,5 +119,6 @@ export {
   assignUserToTrackingId,
   ActionsType,
   getCookie,
-  getUrlParameters
+  getUrlParameters,
+  EnvironmentType
 };

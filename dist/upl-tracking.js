@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
+exports.EnvironmentType = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -56,7 +52,7 @@ function setEnvironment() {
 }
 
 function trackTouch() {
-  var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { origin: null, destination: null, language: null, city: null };
 
   var url = window.location.href;
   var params = (0, _urlParameters.getUrlParameters)(url, location);
@@ -67,7 +63,7 @@ function trackTouch() {
   }
 
   if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
-    return Promise.resolve();
+    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
   uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
@@ -79,13 +75,13 @@ function trackAction(actionType) {
   var uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   var record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    created_at: (0, _moment2.default)().valueOf()
+    created_at: Date.now()
   };
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
@@ -97,14 +93,14 @@ function assignUserToTrackingId(userId) {
   var uplCookie = getCookie();
 
   if (!uplCookie) {
-    return Promise.reject('UPL cookie is not set');
+    return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
   var record = {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId,
-    created_at: (0, _moment2.default)().valueOf()
+    created_at: Date.now()
   };
 
   return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
@@ -118,6 +114,10 @@ function getCookie() {
 }
 
 function isPageReload() {
+  if (_config2.default.isDevelopment()) {
+    return false;
+  }
+
   return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
 }
 
@@ -128,3 +128,4 @@ exports.assignUserToTrackingId = assignUserToTrackingId;
 exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = _urlParameters.getUrlParameters;
+exports.EnvironmentType = _environmentType2.default;

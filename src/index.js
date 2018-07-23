@@ -3,6 +3,8 @@ export {
   trackTouch,
   trackAction,
   assignUserToTrackingId,
+  ActionsType,
   getCookie,
-  ActionsType
+  getUrlParameters,
+  EnvironmentType
 } from './upl-tracking';

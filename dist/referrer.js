@@ -3,22 +3,22 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.hasReferrer = hasReferrer;
+exports.isEmptyReferrer = isEmptyReferrer;
 exports.getReferrer = getReferrer;
-exports.isUniplacesReferrer = isUniplacesReferrer;
 exports.isCustomReferrer = isCustomReferrer;
-function hasReferrer() {
-  return document.referrer && document.referrer !== '';
+exports.isUniplacesReferrer = isUniplacesReferrer;
+function isEmptyReferrer() {
+  return document.referrer === '';
 }
 
 function getReferrer() {
-  return hasReferrer() ? new URL(document.referrer) : null;
+  return !isEmptyReferrer() ? new URL(document.referrer) : null;
+}
+
+function isCustomReferrer(substring) {
+  return !isEmptyReferrer() && document.referrer.includes(substring);
 }
 
 function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
-}
-
-function isCustomReferrer(substring) {
-  return hasReferrer() && document.referrer.includes(substring);
 }
