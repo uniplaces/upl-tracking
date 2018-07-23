@@ -43,7 +43,7 @@ var UrlParameters = exports.UrlParameters = [{ name: 'source', inferedValue: get
   }, defaultValue: null }];
 
 function getUrlParameters(url) {
-  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { origin: null, destination: null, language: null };
 
   var parsedUrl = new URL(url);
   var params = {};
@@ -63,9 +63,15 @@ function getInferedSource() {
   return (0, _referrer.getReferrer)().host.split('.')[1];
 }
 
-function getInferedMedium() {
-  if ((0, _referrer.isEmptyReferrer)() || (0, _referrer.isUniplacesReferrer)()) {
-    return null;
+function getInferedMedium(_, location) {
+  var origin = location.origin,
+      destination = location.destination,
+      language = location.language;
+
+  var placeholder = 'xxx';
+
+  if (location.origin || location.destination || location.language) {
+    return (origin || placeholder) + '_' + (destination || placeholder) + '_' + (language || placeholder);
   }
 
   return 'organic';
