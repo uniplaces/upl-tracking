@@ -45,9 +45,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function setEnvironment() {
-  var environment = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _environmentType2.default.STAGING;
-
+function setEnvironment(environment) {
   _config2.default.setEnvironment(environment);
 }
 

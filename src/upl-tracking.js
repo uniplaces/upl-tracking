@@ -12,9 +12,9 @@ import config from './config';
 
 /**
  * Set the environment for the library
- * @param {string} [environment=staging] - The environment
+ * @param {string} environment - The environment
  */
-function setEnvironment(environment = EnvironmentType.STAGING) {
+function setEnvironment(environment) {
   config.setEnvironment(environment);
 }
 

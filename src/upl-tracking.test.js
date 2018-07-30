@@ -1,9 +1,11 @@
 import Cookies from 'js-cookie';
-import { trackAction, ActionsType } from './upl-tracking';
+import Config from './config';
+import { setEnvironment, trackAction, ActionsType } from './upl-tracking';
 import * as DataInfrastructureService from './services/data-infrastructure';
 
 jest.mock('js-cookie');
 jest.mock('./services/data-infrastructure');
+jest.mock('./config');
 
 beforeEach(() => {
   DataInfrastructureService.putRecord = jest.fn(() => Promise.resolve({}));
@@ -36,4 +38,9 @@ test('it exports the events type enumerable', () => {
   const result = ActionsType.SIGN_UP;
 
   expect(result).toBe(expected);
+});
+
+test('environment change from config through seEnvironment', () => {
+  Config.setEnvironment = jest.fn((val) => expect(val).toBe('production'));
+  setEnvironment('production');
 });
