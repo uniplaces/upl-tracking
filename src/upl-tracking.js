@@ -41,7 +41,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
     .setLocation(location)
     .save(config.getCookieDomain());
 
-  return putRecord(DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
+  return putRecord(config, DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
 }
 
 /**
@@ -62,7 +62,7 @@ function trackAction(actionType) {
     created_at: Date.now()
   };
 
-  return putRecord(DataDeliveryStreamType.UPL_ACTIONS, record);
+  return putRecord(config, DataDeliveryStreamType.UPL_ACTIONS, record);
 }
 
 /**
@@ -85,7 +85,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
     created_at: Date.now()
   };
 
-  return putRecord(DataDeliveryStreamType.UPL_USERS, record);
+  return putRecord(config, DataDeliveryStreamType.UPL_USERS, record);
 }
 
 /**
