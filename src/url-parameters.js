@@ -1,11 +1,14 @@
 import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 
-export const UrlParameters = [
+const PrefixedUrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
   { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' },
   { name: 'campaign', inferedValue: () => null, defaultValue: 'city_type' },
   { name: 'term', inferedValue: () => null, defaultValue: null },
-  { name: 'content', inferedValue: () => null, defaultValue: null },
+  { name: 'content', inferedValue: () => null, defaultValue: null }
+];
+
+const UrlParameters = [
   { name: 'gclid', inferedValue: () => null, defaultValue: null },
   { name: 'msclkid', inferedValue: () => null, defaultValue: null },
   { name: 'network', inferedValue: () => null, defaultValue: null },
@@ -30,7 +33,7 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
   const parsedUrl = new URL(url);
   const params = {};
 
-  UrlParameters.forEach((urlParameter) => {
+  PrefixedUrlParameters.forEach((urlParameter) => {
     /*
      * If the upl_param does not exist, check for the corresponding utm_param
      * If the utm_param does not exist, use an infered value given the url and location
@@ -38,6 +41,12 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
      */
     params[urlParameter.name] = parsedUrl.searchParams.get(`upl_${urlParameter.name}`)
       || parsedUrl.searchParams.get(`utm_${urlParameter.name}`)
+      || urlParameter.inferedValue(url, location)
+      || urlParameter.defaultValue;
+  });
+
+  UrlParameters.forEach((urlParameter) => {
+    params[urlParameter.name] = parsedUrl.searchParams.get(urlParameter.name)
       || urlParameter.inferedValue(url, location)
       || urlParameter.defaultValue;
   });

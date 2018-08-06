@@ -3,20 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UrlParameters = undefined;
 exports.getUrlParameters = getUrlParameters;
 exports.getInferedSource = getInferedSource;
 exports.getInferedMedium = getInferedMedium;
 
 var _referrer = require('./referrer');
 
-var UrlParameters = exports.UrlParameters = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
+var PrefixedUrlParameters = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: 'city_type' }, { name: 'term', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'content', inferedValue: function inferedValue() {
     return null;
-  }, defaultValue: null }, { name: 'gclid', inferedValue: function inferedValue() {
+  }, defaultValue: null }];
+
+var UrlParameters = [{ name: 'gclid', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: null }, { name: 'msclkid', inferedValue: function inferedValue() {
     return null;
@@ -48,8 +49,12 @@ function getUrlParameters(url) {
   var parsedUrl = new URL(url);
   var params = {};
 
-  UrlParameters.forEach(function (urlParameter) {
+  PrefixedUrlParameters.forEach(function (urlParameter) {
     params[urlParameter.name] = parsedUrl.searchParams.get('upl_' + urlParameter.name) || parsedUrl.searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
+  });
+
+  UrlParameters.forEach(function (urlParameter) {
+    params[urlParameter.name] = parsedUrl.searchParams.get(urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
   });
 
   return params;
