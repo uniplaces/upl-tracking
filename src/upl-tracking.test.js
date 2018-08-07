@@ -16,10 +16,11 @@ test('it tracks an action', () => {
 
   Cookies.getJSON = jest.fn(() => ({ tracking_id: '123-456-789', created_at: 1500987895463 }));
 
-  trackAction(ActionsType.SIGN_UP).then((res) => expect(res).toEqual({}));
-
-  expect(Cookies.getJSON).toHaveBeenCalled();
-  expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
+  trackAction(ActionsType.SIGN_UP).then((res) => {
+    expect(res).toEqual({});
+    expect(Cookies.getJSON).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
+  });
 });
 
 test('it does not track an action when the cookie is unexistent', () => {
@@ -27,10 +28,11 @@ test('it does not track an action when the cookie is unexistent', () => {
 
   Cookies.getJSON = jest.fn(() => null);
 
-  trackAction(ActionsType.BOOKING_REQUEST).catch((err) => expect(err).toBe('UPL cookie is not set'));
-
-  expect(Cookies.getJSON).toHaveBeenCalled();
-  expect(DataInfrastructureService.putRecord).toHaveBeenCalledTimes(0);
+  trackAction(ActionsType.BOOKING_REQUEST).catch((err) => {
+    expect(Cookies.getJSON).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalledTimes(0);
+    expect(err).toEqual({ msg: 'UPL cookie is not set' });
+  });
 });
 
 test('it exports the events type enumerable', () => {

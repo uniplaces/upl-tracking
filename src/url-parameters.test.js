@@ -39,7 +39,7 @@ test('it parses upl parameters correctly', () => {
 });
 
 test('it parses utm parameters correctly when there are no upl params', () => {
-  const url = 'https://www.uniplaces.com/accommodation/lisbon?utm_source=google&utm_campaign=campaign_1&utm_medium=this-is-a-medium';
+  const url = 'https://www.uniplaces.com/accommodation/lisbon?utm_source=google&utm_campaign=campaign_1&utm_medium=this-is-a-medium&gclid=12345678909&keyword=cenas';
   const expected = {
     adgroup: null,
     adposition: null,
@@ -48,8 +48,8 @@ test('it parses utm parameters correctly when there are no upl params', () => {
     creative: null,
     device: null,
     devicemodel: null,
-    gclid: null,
-    keyword: null,
+    gclid: '12345678909',
+    keyword: 'cenas',
     location: null,
     matchtype: null,
     medium: 'this-is-a-medium',
