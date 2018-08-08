@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EnvironmentType = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
+exports.UserType = exports.EnvironmentType = exports.getUrlParameters = exports.getCookie = exports.ActionsType = exports.assignUserToTrackingId = exports.trackAction = exports.trackTouch = exports.setEnvironment = undefined;
 
 var _jsCookie = require('js-cookie');
 
@@ -64,7 +64,7 @@ function trackTouch() {
     return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
-  uplCookie = uplCookie.setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
+  uplCookie = uplCookie.setParameters(params).setLocation(location).refreshTimestamp().save(_config2.default.getCookieDomain());
 
   return (0, _dataInfrastructure.putRecord)(_config2.default, _dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }
@@ -89,7 +89,6 @@ function assignUserToTrackingId(userId) {
   var userType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _userType2.default.GUEST;
 
   var uplCookie = getCookie();
-
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }
@@ -127,3 +126,4 @@ exports.ActionsType = _actionsType2.default;
 exports.getCookie = getCookie;
 exports.getUrlParameters = _urlParameters.getUrlParameters;
 exports.EnvironmentType = _environmentType2.default;
+exports.UserType = _userType2.default;

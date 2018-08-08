@@ -10,7 +10,7 @@ class UplCookie {
   /**
    * Create a UPL cookie
    * @param {string} trackingId - The tracking ID
-   * @param {number} createdAt - When was this cookie created
+   * @param {number} createdAt - When this cookie was last updated
    */
   constructor(trackingId, createdAt) {
     this.tracking_id = trackingId || uuidv4();
@@ -23,6 +23,14 @@ class UplCookie {
    */
   static getCookieName() {
     return UPL_COOKIE_NAME;
+  }
+
+  /**
+   * Get created at which represents the last time this cookie was updated
+   * @return {number}
+   */
+  getCreatedAt() {
+    return this.created_at;
   }
 
   /**
@@ -83,6 +91,16 @@ class UplCookie {
     this.destination = location.destination;
     this.language = i18nToUplLocale(location.language);
     this.city = location.city;
+
+    return this;
+  }
+
+  /**
+   * Refresh the timestamp of the cookie
+   * @return {UplCookie}
+   */
+  refreshTimestamp() {
+    this.created_at = Date.now();
 
     return this;
   }

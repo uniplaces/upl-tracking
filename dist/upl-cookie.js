@@ -34,6 +34,11 @@ var UplCookie = function () {
   }
 
   _createClass(UplCookie, [{
+    key: 'getCreatedAt',
+    value: function getCreatedAt() {
+      return this.created_at;
+    }
+  }, {
     key: 'getTouchId',
     value: function getTouchId() {
       return this.tracking_id + '_' + this.created_at;
@@ -78,6 +83,13 @@ var UplCookie = function () {
       this.destination = location.destination;
       this.language = (0, _utils.i18nToUplLocale)(location.language);
       this.city = location.city;
+
+      return this;
+    }
+  }, {
+    key: 'refreshTimestamp',
+    value: function refreshTimestamp() {
+      this.created_at = Date.now();
 
       return this;
     }

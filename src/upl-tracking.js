@@ -39,6 +39,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
   uplCookie = uplCookie
     .setParameters(params)
     .setLocation(location)
+    .refreshTimestamp()
     .save(config.getCookieDomain());
 
   return putRecord(config, DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
@@ -73,7 +74,6 @@ function trackAction(actionType) {
  */
 function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const uplCookie = getCookie();
-
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }
@@ -120,5 +120,6 @@ export {
   ActionsType,
   getCookie,
   getUrlParameters,
-  EnvironmentType
+  EnvironmentType,
+  UserType
 };

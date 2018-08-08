@@ -54,3 +54,9 @@ Object.defineProperty(exports, 'EnvironmentType', {
     return _uplTracking.EnvironmentType;
   }
 });
+Object.defineProperty(exports, 'UserType', {
+  enumerable: true,
+  get: function get() {
+    return _uplTracking.UserType;
+  }
+});
