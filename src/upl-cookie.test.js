@@ -144,3 +144,17 @@ test('it returns a new instance from a JSON', () => {
 
   expect(result).toEqual(expected);
 });
+
+test('it refreshes the timestamp', () => {
+  const createdAt = 15498090;
+  const result = UplCookie
+    .fromJSON({
+      tracking_id: 1,
+      created_at: createdAt,
+      source: 'cenas',
+      medium: 'cenas-2'
+    })
+    .refreshTimestamp();
+
+  expect(result.getCreatedAt()).not.toBe(createdAt);
+});
