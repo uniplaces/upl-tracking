@@ -65,7 +65,10 @@ function getInferedSource() {
     return null;
   }
 
-  return (0, _referrer.getReferrer)().host.split('.')[1];
+  var source = (0, _referrer.getReferrer)().host.split('.')[1];
+  var affix = 'organic';
+
+  return source + '_' + affix;
 }
 
 function getInferedMedium(_, location) {
