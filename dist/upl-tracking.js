@@ -64,7 +64,7 @@ function trackTouch() {
     return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
-  uplCookie = uplCookie.setParameters(params).setLocation(location).refreshTimestamp().save(_config2.default.getCookieDomain());
+  uplCookie = uplCookie.refreshTimestamp().setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
 
   return (0, _dataInfrastructure.putRecord)(_config2.default, _dataDeliveryStreamType2.default.UPL_TOUCHES, uplCookie.toJSON());
 }

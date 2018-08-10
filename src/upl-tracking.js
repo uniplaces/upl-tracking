@@ -37,9 +37,9 @@ function trackTouch(location = { origin: null, destination: null, language: null
   }
 
   uplCookie = uplCookie
+    .refreshTimestamp()
     .setParameters(params)
     .setLocation(location)
-    .refreshTimestamp()
     .save(config.getCookieDomain());
 
   return putRecord(config, DataDeliveryStreamType.UPL_TOUCHES, uplCookie.toJSON());
