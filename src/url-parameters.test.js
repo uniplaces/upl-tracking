@@ -67,7 +67,7 @@ test('it parses utm parameters correctly when there are no upl params', () => {
 test('it infers the source', () => {
   _setReferrer('https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1');
 
-  const expected = 'baidu';
+  const expected = 'baidu_organic';
   const result = getInferedSource();
 
   expect(result).toBe(expected);

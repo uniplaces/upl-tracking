@@ -63,7 +63,10 @@ export function getInferedSource() {
     return null;
   }
 
-  return getReferrer().host.split('.')[1];
+  const source = getReferrer().host.split('.')[1];
+  const affix = 'organic';
+
+  return `${source}_${affix}`;
 }
 
 /**
