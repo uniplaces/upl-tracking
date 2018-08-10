@@ -123,7 +123,7 @@ class UplCookie {
    * @return {Object}
    */
   toJSON() {
-    return { touch_id: this.getTouchId(), ...this };
+    return { ...this, touch_id: this.getTouchId() };
   }
 
   /**

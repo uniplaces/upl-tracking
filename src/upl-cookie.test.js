@@ -157,4 +157,5 @@ test('it refreshes the timestamp', () => {
     .refreshTimestamp();
 
   expect(result.getCreatedAt()).not.toBe(createdAt);
+  expect(result.getTouchId()).toBe(`1_${result.getCreatedAt()}`);
 });
