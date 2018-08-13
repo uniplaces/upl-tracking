@@ -70,6 +70,8 @@ function trackTouch() {
 }
 
 function trackAction(actionType) {
+  var extraInfo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
   var uplCookie = getCookie();
 
   if (!uplCookie) {
@@ -79,6 +81,7 @@ function trackAction(actionType) {
   var record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
+    extra_info: extraInfo,
     created_at: Date.now()
   };
 
