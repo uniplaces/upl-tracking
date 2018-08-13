@@ -48,9 +48,10 @@ function trackTouch(location = { origin: null, destination: null, language: null
 /**
  * Track an action
  * @param {string} actionType - The action's type
+ * @param {string} [extraInfo=null] - Additional information related with the action
  * @return {Promise}
  */
-function trackAction(actionType) {
+function trackAction(actionType, extraInfo = null) {
   const uplCookie = getCookie();
 
   if (!uplCookie) {
@@ -60,6 +61,7 @@ function trackAction(actionType) {
   const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
+    extra_info: extraInfo,
     created_at: Date.now()
   };
 

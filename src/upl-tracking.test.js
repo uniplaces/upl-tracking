@@ -23,6 +23,20 @@ test('it tracks an action', () => {
   });
 });
 
+test('it tracks an action', () => {
+  expect.assertions(3);
+
+  const bookingId = '1';
+
+  Cookies.getJSON = jest.fn(() => ({ tracking_id: '123-456-789', created_at: 1500987895463 }));
+
+  trackAction(ActionsType.BOOKING_REQUEST, bookingId).then((res) => {
+    expect(res).toEqual({});
+    expect(Cookies.getJSON).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
+  });
+});
+
 test('it does not track an action when the cookie is unexistent', () => {
   expect.assertions(3);
 
