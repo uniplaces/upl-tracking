@@ -60,7 +60,7 @@ function trackTouch() {
     uplCookie = new _uplCookie2.default();
   }
 
-  if ((0, _referrer.isUniplacesReferrer)() || isPageReload()) {
+  if ((0, _referrer.isUniplacesReferrer)() || isPageReload() || isBrowserNavigation()) {
     return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
@@ -119,6 +119,10 @@ function isPageReload() {
   }
 
   return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.RELOAD;
+}
+
+function isBrowserNavigation() {
+  return window.performance && window.performance.navigation.type === _performanceNavigationType2.default.BACK_FORWARD;
 }
 
 exports.setEnvironment = setEnvironment;

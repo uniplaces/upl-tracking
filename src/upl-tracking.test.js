@@ -23,7 +23,7 @@ test('it tracks an action', () => {
   });
 });
 
-test('it tracks an action', () => {
+test('it tracks an action with extra info', () => {
   expect.assertions(3);
 
   const bookingId = '1';
