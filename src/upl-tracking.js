@@ -32,7 +32,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
     uplCookie = new UplCookie();
   }
 
-  if (isUniplacesReferrer() || isPageReload()) {
+  if (isUniplacesReferrer() || isPageReload() || isBrowserNavigation()) {
     return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
@@ -112,6 +112,14 @@ function isPageReload() {
   }
 
   return window.performance && window.performance.navigation.type === PerformanceNavigationType.RELOAD;
+}
+
+/**
+ * Check if the user accessed the page by clicking back or forward using the browser navigation buttons
+ * @return {bool}
+ */
+function isBrowserNavigation() {
+  return window.performance && window.performance.navigation.type === PerformanceNavigationType.BACK_FORWARD;
 }
 
 export {

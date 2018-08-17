@@ -12,7 +12,13 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin()
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false
+          }
+        }
+      })
     ]
   },
   module: {
