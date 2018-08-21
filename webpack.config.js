@@ -36,12 +36,22 @@ var optimization = {
 module.exports = [
   Object.assign({}, common, optimization, {
     name: 'global-export',
+    mode: 'production',
     entry: './src/index.js',
     output: {
       filename: 'upl-tracking.js',
       path: path.resolve(__dirname, 'dist/global-export'),
       library: 'UplTracking',
       libraryTarget: 'var'
+    }
+  }),
+  Object.assign({}, common, optimization, {
+    name: 'umd',
+    mode: 'production',
+    entry: './src/index.js',
+    output: {
+      filename: 'upl-tracking.js',
+      path: path.resolve(__dirname, 'dist/umd')
     }
   })
 ];
