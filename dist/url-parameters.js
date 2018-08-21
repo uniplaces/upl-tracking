@@ -9,7 +9,11 @@ exports.getInferedMedium = getInferedMedium;
 
 var _referrer = require('./referrer');
 
-require('url-search-params');
+var _urlSearchParams = require('url-search-params');
+
+var _urlSearchParams2 = _interopRequireDefault(_urlSearchParams);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PrefixedUrlParameters = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
     return null;
@@ -51,10 +55,10 @@ function getUrlParameters(url) {
   var parsedUrl = new URL(url);
   var params = {};
 
-  var searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+  var searchParams = parsedUrl.searchParams || new _urlSearchParams2.default(parsedUrl.search);
 
   PrefixedUrlParameters.forEach(function (urlParameter) {
-    params[urlParameter.name] = searchParams.get('upl_' + urlParameter.name) || parsedUrl.searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
+    params[urlParameter.name] = searchParams.get('upl_' + urlParameter.name) || searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
   });
 
   UrlParameters.forEach(function (urlParameter) {

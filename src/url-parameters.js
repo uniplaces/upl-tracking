@@ -1,5 +1,5 @@
 import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
-import URLSearchParams from 'url-search-params'
+import URLSearchParams from 'url-search-params';
 
 const PrefixedUrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -35,9 +35,9 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
   const params = {};
 
   /*
-  * If searchParams doesn't exist, replace with a polyfill
-  * This is needed for MS Edge < 17
-  */
+   * If searchParams doesn't exist, replace with a polyfill
+   * This is needed for MS Edge < 17
+   */
   const searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
 
   PrefixedUrlParameters.forEach((urlParameter) => {
@@ -47,7 +47,7 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
      * If the infered value is null, set the touch as direct -- use default values
      */
     params[urlParameter.name] = searchParams.get(`upl_${urlParameter.name}`)
-      || parsedUrl.searchParams.get(`utm_${urlParameter.name}`)
+      || searchParams.get(`utm_${urlParameter.name}`)
       || urlParameter.inferedValue(url, location)
       || urlParameter.defaultValue;
   });
