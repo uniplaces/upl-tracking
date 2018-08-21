@@ -9,6 +9,8 @@ exports.getInferedMedium = getInferedMedium;
 
 var _referrer = require('./referrer');
 
+require('url-search-params');
+
 var PrefixedUrlParameters = [{ name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' }, { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' }, { name: 'campaign', inferedValue: function inferedValue() {
     return null;
   }, defaultValue: 'city_type' }, { name: 'term', inferedValue: function inferedValue() {
@@ -49,12 +51,14 @@ function getUrlParameters(url) {
   var parsedUrl = new URL(url);
   var params = {};
 
+  var searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+
   PrefixedUrlParameters.forEach(function (urlParameter) {
-    params[urlParameter.name] = parsedUrl.searchParams.get('upl_' + urlParameter.name) || parsedUrl.searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
+    params[urlParameter.name] = searchParams.get('upl_' + urlParameter.name) || parsedUrl.searchParams.get('utm_' + urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
   });
 
   UrlParameters.forEach(function (urlParameter) {
-    params[urlParameter.name] = parsedUrl.searchParams.get(urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
+    params[urlParameter.name] = searchParams.get(urlParameter.name) || urlParameter.inferedValue(url, location) || urlParameter.defaultValue;
   });
 
   return params;

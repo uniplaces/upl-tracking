@@ -1,4 +1,5 @@
 import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
+import URLSearchParams from 'url-search-params'
 
 const PrefixedUrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -33,20 +34,26 @@ export function getUrlParameters(url, location = { origin: null, destination: nu
   const parsedUrl = new URL(url);
   const params = {};
 
+  /*
+  * If searchParams doesn't exist, replace with a polyfill
+  * This is needed for MS Edge < 17
+  */
+  const searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+
   PrefixedUrlParameters.forEach((urlParameter) => {
     /*
      * If the upl_param does not exist, check for the corresponding utm_param
      * If the utm_param does not exist, use an infered value given the url and location
      * If the infered value is null, set the touch as direct -- use default values
      */
-    params[urlParameter.name] = parsedUrl.searchParams.get(`upl_${urlParameter.name}`)
+    params[urlParameter.name] = searchParams.get(`upl_${urlParameter.name}`)
       || parsedUrl.searchParams.get(`utm_${urlParameter.name}`)
       || urlParameter.inferedValue(url, location)
       || urlParameter.defaultValue;
   });
 
   UrlParameters.forEach((urlParameter) => {
-    params[urlParameter.name] = parsedUrl.searchParams.get(urlParameter.name)
+    params[urlParameter.name] = searchParams.get(urlParameter.name)
       || urlParameter.inferedValue(url, location)
       || urlParameter.defaultValue;
   });
