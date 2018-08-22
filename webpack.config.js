@@ -42,13 +42,5 @@ module.exports = [
       library: 'UplTracking',
       libraryTarget: 'var'
     }
-  }),
-  Object.assign({}, common, optimization, {
-    entry: './src/index.js',
-    output: {
-      filename: 'upl-tracking-umd.js',
-      path: path.resolve(__dirname, 'dist'),
-      libraryTarget: 'umd'
-    }
-  }),
+  })
 ];
