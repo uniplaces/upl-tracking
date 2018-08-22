@@ -60,11 +60,10 @@ function trackAction(actionType, extraInfo = null) {
   const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    extra_info: extraInfo,
-    created_at: Date.now()
+    extra_info: extraInfo
   };
 
-  return putRecord(config, DataDeliveryStreamType.UPL_ACTIONS, record);
+  return putRecord(DataDeliveryStreamType.UPL_ACTIONS, record);
 }
 
 /**
@@ -82,11 +81,10 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const record = {
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
-    user_id: userId,
-    created_at: Date.now()
+    user_id: userId
   };
 
-  return putRecord(config, DataDeliveryStreamType.UPL_USERS, record);
+  return putRecord(DataDeliveryStreamType.UPL_USERS, record);
 }
 
 /**
