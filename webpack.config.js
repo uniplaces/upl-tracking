@@ -35,6 +35,7 @@ var common = {
 
 module.exports = [
   Object.assign({}, common, optimization, {
+    mode: 'production',
     entry: './src/index.js',
     output: {
       filename: 'upl-tracking.js',
