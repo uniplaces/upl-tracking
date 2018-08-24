@@ -73,7 +73,6 @@ function trackAction(actionType) {
   var extraInfo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   var uplCookie = getCookie();
-
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }
