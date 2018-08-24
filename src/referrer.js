@@ -20,7 +20,13 @@ export function getReferrer() {
  * @return {boolean}
  */
 export function isCustomReferrer(substring) {
-  return !isEmptyReferrer() && document.referrer.includes(substring);
+  if (isEmptyReferrer()) {
+    return false;
+  }
+
+  const referrer = new URL(document.referrer);
+
+  return referrer.hostname.includes(substring);
 }
 
 /**
