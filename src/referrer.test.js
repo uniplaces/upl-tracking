@@ -42,8 +42,24 @@ test('it returns null when there is no referrer', () => {
   expect(result).toBe(null);
 });
 
+test('it verifies uniplaces is not the referrer when it is empty', () => {
+  const result = isUniplacesReferrer();
+
+  expect(result).toBe(false);
+});
+
 test('it verifies uniplaces is the referrer on complex urls', () => {
   const referrer = 'https://www.uniplaces.com/pt/accommodation/lisbon/70132?open-registration=yes&utm_source=trovit_display_prospecting_demand&utm_medium=portugal_xx_xx&utm_campaign=xx_generic&utm_content=cpc_native';
+
+  _setReferrer(referrer);
+
+  const result = isUniplacesReferrer();
+
+  expect(result).toBe(true);
+});
+
+test('it verifies uniplaces is the referrer on staging urls', () => {
+  const referrer = 'https://www.staging-uniplaces.com/pt/accommodation/lisbon/70132';
 
   _setReferrer(referrer);
 
