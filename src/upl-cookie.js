@@ -123,34 +123,7 @@ class UplCookie {
    * @return {Object}
    */
   toJSON() {
-    return {
-      // Identifiers
-      touch_id: this.getTouchId(),
-      tracking_id: this.tracking_id,
-      // Location information
-      city: this.city,
-      destination: this.destination,
-      language: this.language,
-      origin: this.origin,
-      // Parameters information
-      ad_group: this.adgroup,
-      ad_position: this.adposition,
-      campaign: this.campaign,
-      content: this.content,
-      creative: this.creative,
-      device: this.device,
-      device_model: this.devicemodel,
-      gclid: this.gclid,
-      keyword: this.keyword,
-      location: this.location,
-      match_type: this.matchtype,
-      medium: this.medium,
-      msclkid: this.msclkid,
-      network: this.network,
-      site_link: this.sitelink,
-      source: this.source,
-      term: this.term
-    };
+    return { ...this, touch_id: this.getTouchId() };
   }
 
   /**
