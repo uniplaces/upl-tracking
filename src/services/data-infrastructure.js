@@ -1,6 +1,5 @@
 /** @module DataInfrastructureService */
 import axios from 'axios';
-import config from '../config';
 
 const dataInfrastructureService = axios.create({
   headers: {
@@ -15,7 +14,7 @@ const dataInfrastructureService = axios.create({
  * @param {Object} record - The record to be sent to the stream
  * @return {Promise}
  */
-export function putRecord(streamName, record) {
+export function putRecord(config, streamName, record) {
   const endpoint = `${config.getDataInfrastructureUrl()}/${streamName}/record`;
 
   return dataInfrastructureService.put(endpoint, { data: record });

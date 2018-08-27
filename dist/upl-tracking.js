@@ -83,7 +83,7 @@ function trackAction(actionType) {
     extra_info: extraInfo
   };
 
-  return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_ACTIONS, record);
+  return (0, _dataInfrastructure.putRecord)(_config2.default, _dataDeliveryStreamType2.default.UPL_ACTIONS, record);
 }
 
 function assignUserToTrackingId(userId) {
@@ -100,7 +100,7 @@ function assignUserToTrackingId(userId) {
     user_id: userId
   };
 
-  return (0, _dataInfrastructure.putRecord)(_dataDeliveryStreamType2.default.UPL_USERS, record);
+  return (0, _dataInfrastructure.putRecord)(_config2.default, _dataDeliveryStreamType2.default.UPL_USERS, record);
 }
 
 function getCookie() {

@@ -9,10 +9,6 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var dataInfrastructureService = _axios2.default.create({
@@ -21,8 +17,8 @@ var dataInfrastructureService = _axios2.default.create({
   }
 });
 
-function putRecord(streamName, record) {
-  var endpoint = _config2.default.getDataInfrastructureUrl() + '/' + streamName + '/record';
+function putRecord(config, streamName, record) {
+  var endpoint = config.getDataInfrastructureUrl() + '/' + streamName + '/record';
 
   return dataInfrastructureService.put(endpoint, { data: record });
 }

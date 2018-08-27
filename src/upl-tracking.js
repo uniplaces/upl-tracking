@@ -63,7 +63,7 @@ function trackAction(actionType, extraInfo = null) {
     extra_info: extraInfo
   };
 
-  return putRecord(DataDeliveryStreamType.UPL_ACTIONS, record);
+  return putRecord(config, DataDeliveryStreamType.UPL_ACTIONS, record);
 }
 
 /**
@@ -84,7 +84,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
     user_id: userId
   };
 
-  return putRecord(DataDeliveryStreamType.UPL_USERS, record);
+  return putRecord(config, DataDeliveryStreamType.UPL_USERS, record);
 }
 
 /**

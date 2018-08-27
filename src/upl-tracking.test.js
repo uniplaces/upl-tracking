@@ -30,7 +30,7 @@ test('it tracks an action', () => {
     expect(res).toEqual({});
     expect(Cookies.getJSON).toHaveBeenCalled();
     expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
-    expect(DataInfrastructureService.putRecord).toHaveBeenCalledWith(expectedStream, expectedPayload);
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalledWith(Config, expectedStream, expectedPayload);
   });
 });
 
