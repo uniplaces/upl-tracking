@@ -16,13 +16,9 @@ function getReferrer() {
 }
 
 function isCustomReferrer(substring) {
-<<<<<<< f15cbbe166802cde627ea4b32e255507765a7aca
   var referrer = getReferrer();
 
   return referrer !== null && referrer.hostname.includes(substring);
-=======
-  return !isEmptyReferrer() && document.referrer.includes(substring);
->>>>>>> Commit previous dist
 }
 
 function isUniplacesReferrer() {
