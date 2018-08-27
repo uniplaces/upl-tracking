@@ -12,14 +12,25 @@ beforeEach(() => {
 });
 
 test('it tracks an action', () => {
-  expect.assertions(3);
+  expect.assertions(4);
 
-  Cookies.getJSON = jest.fn(() => ({ tracking_id: '123-456-789', created_at: 1500987895463 }));
+  Cookies.getJSON = jest.fn(() => ({
+    tracking_id: '123-456-789',
+    created_at: 1500987895463
+  }));
 
   trackAction(ActionsType.SIGN_UP).then((res) => {
+    const expectedStream = 'upl-actions-v1';
+    const expectedPayload = {
+      touch_id: '123-456-789_1500987895463',
+      action: 'sign-up',
+      extra_info: null
+    };
+
     expect(res).toEqual({});
     expect(Cookies.getJSON).toHaveBeenCalled();
     expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalledWith(Config, expectedStream, expectedPayload);
   });
 });
 
@@ -28,7 +39,10 @@ test('it tracks an action with extra info', () => {
 
   const bookingId = '1';
 
-  Cookies.getJSON = jest.fn(() => ({ tracking_id: '123-456-789', created_at: 1500987895463 }));
+  Cookies.getJSON = jest.fn(() => ({
+    tracking_id: '123-456-789',
+    created_at: 1500987895463
+  }));
 
   trackAction(ActionsType.BOOKING_REQUEST, bookingId).then((res) => {
     expect(res).toEqual({});

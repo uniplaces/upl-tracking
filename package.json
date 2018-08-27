@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdocrc.js",
     "build": "babel src -d dist --ignore **/*.test.js,**/__mocks__",
-    "build:webpack": "webpack --mode production",
+    "build:webpack": "webpack",
     "test": "jest --forceExit --detectOpenHandles",
     "start": "node dist/index.js",
     "start:dev": "nodemon src/index.js --exec babel-node"

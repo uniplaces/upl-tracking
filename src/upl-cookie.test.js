@@ -118,11 +118,50 @@ test('it saves the cookie in Cookies', () => {
 
 test('it returns as JSON', () => {
   const cookie = new UplCookie();
+  cookie
+    .setParameters({
+      source: 'source',
+      medium: 'medium',
+      campaign: 'campaign',
+      term: 'term',
+      content: 'content',
+      gclid: 'gclid',
+      msclkid: 'msclkid',
+      matchtype: 'matchtype',
+    })
+    .setLocation({
+      origin: 'portugal',
+      destination: 'barcelona',
+      language: 'pt-pt',
+      city: 'lisbon'
+    });
+
   const result = cookie.toJSON();
   const expected = {
     tracking_id: cookie.tracking_id,
     created_at: cookie.created_at,
-    touch_id: `${cookie.tracking_id}_${cookie.created_at}`
+    touch_id: `${cookie.tracking_id}_${cookie.created_at}`,
+    city: cookie.city,
+    destination: cookie.destination,
+    language: cookie.language,
+    origin: cookie.origin,
+    ad_group: cookie.ad_group,
+    ad_position: cookie.ad_position,
+    campaign: cookie.campaign,
+    content: cookie.content,
+    creative: cookie.creative,
+    device: cookie.device,
+    device_model: cookie.device_model,
+    gclid: cookie.gclid,
+    keyword: cookie.keyword,
+    location: cookie.location,
+    match_type: cookie.match_type,
+    medium: cookie.medium,
+    msclkid: cookie.msclkid,
+    network: cookie.network,
+    site_link: cookie.site_link,
+    source: cookie.source,
+    term: cookie.term
   };
 
   expect(result).toEqual(expected);
