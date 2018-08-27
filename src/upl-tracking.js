@@ -53,7 +53,6 @@ function trackTouch(location = { origin: null, destination: null, language: null
  */
 function trackAction(actionType, extraInfo = null) {
   const uplCookie = getCookie();
-
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }

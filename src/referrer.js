@@ -20,7 +20,9 @@ export function getReferrer() {
  * @return {boolean}
  */
 export function isCustomReferrer(substring) {
-  return !isEmptyReferrer() && document.referrer.includes(substring);
+  const referrer = getReferrer();
+
+  return referrer !== null && referrer.hostname.includes(substring);
 }
 
 /**
