@@ -118,7 +118,7 @@ test('it infers the medium when some fields are missing', () => {
     city: 'tegucigalpa',
     language: 'portuguese'
   };
-  const expected = 'xxx_honduras_portuguese';
+  const expected = 'xx_honduras_portuguese';
   const result = getInferedMedium('this-is-an-url', location);
 
   expect(result).toBe(expected);
@@ -131,7 +131,7 @@ test('it does not infer the medium when there is no referrer', () => {
     city: 'tegucigalpa',
     language: 'portuguese'
   };
-  const expected = 'xxx_honduras_portuguese';
+  const expected = 'xx_honduras_portuguese';
   const result = getInferedMedium('this-is-an-url', location);
 
   expect(result).toBe(expected);

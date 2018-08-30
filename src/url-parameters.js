@@ -84,7 +84,7 @@ export function getInferedSource() {
  */
 export function getInferedMedium(_, location) {
   const { origin, destination, language } = location;
-  const placeholder = 'xxx';
+  const placeholder = 'xx';
 
   if (location.origin || location.destination || location.language) {
     return `${origin || placeholder}_${destination || placeholder}_${language || placeholder}`;
