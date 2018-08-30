@@ -32,8 +32,12 @@ function trackTouch(location = { origin: null, destination: null, language: null
     uplCookie = new UplCookie();
   }
 
-  if (isUniplacesReferrer() || isPayPalReferrer() || isPageReload() || isBrowserNavigation()) {
-    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
+  if (isUniplacesReferrer() || isPayPalReferrer()) {
+    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from PayPal' });
+  }
+
+  if (isPageReload() || isBrowserNavigation()) {
+    return Promise.resolve({ msg: 'This action was triggered by a page reload or browser navigation' });
   }
 
   uplCookie = uplCookie
