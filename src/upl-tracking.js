@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import UplCookie from './upl-cookie';
 import { putRecord } from './services/data-infrastructure';
-import { isUniplacesReferrer } from './referrer';
+import { isUniplacesReferrer, isPayPalReferrer } from './referrer';
 import { getUrlParameters } from './url-parameters';
 import ActionsType from './enums/actions-type';
 import UserType from './enums/user-type';
@@ -32,7 +32,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
     uplCookie = new UplCookie();
   }
 
-  if (isUniplacesReferrer() || isPageReload() || isBrowserNavigation()) {
+  if (isUniplacesReferrer() || isPayPalReferrer() || isPageReload() || isBrowserNavigation()) {
     return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
   }
 
