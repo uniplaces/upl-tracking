@@ -7,6 +7,7 @@ exports.isEmptyReferrer = isEmptyReferrer;
 exports.getReferrer = getReferrer;
 exports.isCustomReferrer = isCustomReferrer;
 exports.isUniplacesReferrer = isUniplacesReferrer;
+exports.isPayPalReferrer = isPayPalReferrer;
 function isEmptyReferrer() {
   return document.referrer === '';
 }
@@ -23,4 +24,8 @@ function isCustomReferrer(substring) {
 
 function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
+}
+
+function isPayPalReferrer() {
+  return isCustomReferrer('paypal');
 }

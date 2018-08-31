@@ -60,8 +60,12 @@ function trackTouch() {
     uplCookie = new _uplCookie2.default();
   }
 
-  if ((0, _referrer.isUniplacesReferrer)() || isPageReload() || isBrowserNavigation()) {
-    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from a page reload' });
+  if ((0, _referrer.isUniplacesReferrer)() || (0, _referrer.isPayPalReferrer)()) {
+    return Promise.resolve({ msg: 'User is coming from another Uniplaces or from PayPal' });
+  }
+
+  if (isPageReload() || isBrowserNavigation()) {
+    return Promise.resolve({ msg: 'This action was triggered by a page reload or browser navigation' });
   }
 
   uplCookie = uplCookie.refreshTimestamp().setParameters(params).setLocation(location).save(_config2.default.getCookieDomain());
@@ -95,6 +99,7 @@ function assignUserToTrackingId(userId) {
   }
 
   var record = {
+    touch_id: uplCookie.getTouchId(),
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId

@@ -84,7 +84,7 @@ function getInferedMedium(_, location) {
       destination = location.destination,
       language = location.language;
 
-  var placeholder = 'xxx';
+  var placeholder = 'xx';
 
   if (location.origin || location.destination || location.language) {
     return (origin || placeholder) + '_' + (destination || placeholder) + '_' + (language || placeholder);
