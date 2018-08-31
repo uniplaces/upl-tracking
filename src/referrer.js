@@ -32,3 +32,11 @@ export function isCustomReferrer(substring) {
 export function isUniplacesReferrer() {
   return isCustomReferrer('uniplaces');
 }
+
+/**
+ * Check if the referrer is PayPal
+ * @return {boolean}
+ */
+export function isPayPalReferrer() {
+  return isCustomReferrer('paypal');
+}

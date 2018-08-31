@@ -1,4 +1,9 @@
-import { getReferrer, isEmptyReferrer, isUniplacesReferrer } from './referrer';
+import {
+  getReferrer,
+  isEmptyReferrer,
+  isUniplacesReferrer,
+  isPayPalReferrer
+} from './referrer';
 
 function _setReferrer(referrer) {
   Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
@@ -13,7 +18,9 @@ afterEach(() => {
 });
 
 test('it verifies that the referrer is empty', () => {
-  expect(isEmptyReferrer()).toBe(true);
+  const result = isEmptyReferrer();
+
+  expect(result).toBeTruthy();
 });
 
 test('it verifies that the referrer is not empty', () => {
@@ -21,7 +28,7 @@ test('it verifies that the referrer is not empty', () => {
 
   _setReferrer(referrer);
 
-  expect(isEmptyReferrer()).toBe(false);
+  expect(isEmptyReferrer()).toBeFalsy();
 });
 
 test('it returns the referrer as URL', () => {
@@ -39,13 +46,13 @@ test('it returns the referrer as URL', () => {
 test('it returns null when there is no referrer', () => {
   const result = getReferrer();
 
-  expect(result).toBe(null);
+  expect(result).toBeNull();
 });
 
 test('it verifies uniplaces is not the referrer when it is empty', () => {
   const result = isUniplacesReferrer();
 
-  expect(result).toBe(false);
+  expect(result).toBeFalsy();
 });
 
 test('it verifies uniplaces is the referrer on complex urls', () => {
@@ -55,7 +62,7 @@ test('it verifies uniplaces is the referrer on complex urls', () => {
 
   const result = isUniplacesReferrer();
 
-  expect(result).toBe(true);
+  expect(result).toBeTruthy();
 });
 
 test('it verifies uniplaces is the referrer on staging urls', () => {
@@ -65,7 +72,7 @@ test('it verifies uniplaces is the referrer on staging urls', () => {
 
   const result = isUniplacesReferrer();
 
-  expect(result).toBe(true);
+  expect(result).toBeTruthy();
 });
 
 test('it verifies uniplaces is the referrer on sub-domains', () => {
@@ -75,7 +82,7 @@ test('it verifies uniplaces is the referrer on sub-domains', () => {
 
   const result = isUniplacesReferrer();
 
-  expect(result).toBe(true);
+  expect(result).toBeTruthy();
 });
 
 test('it verifies uniplaces is not the referrer on encoded urls (e.g. trovit ones)', () => {
@@ -85,5 +92,15 @@ test('it verifies uniplaces is not the referrer on encoded urls (e.g. trovit one
 
   const result = isUniplacesReferrer();
 
-  expect(result).toBe(false);
+  expect(result).toBeFalsy();
+});
+
+test('it verifies paypal is the referrer', () => {
+  const referrer = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=this-is-a-random-token';
+
+  _setReferrer(referrer);
+
+  const result = isPayPalReferrer();
+
+  expect(result).toBeTruthy();
 });
