@@ -1,6 +1,12 @@
 import Cookies from 'js-cookie';
 import Config from './config';
-import { setEnvironment, trackAction, ActionsType } from './upl-tracking';
+import {
+  setEnvironment,
+  trackAction,
+  ActionsType,
+  assignUserToTrackingId
+} from './upl-tracking';
+
 import * as DataInfrastructureService from './services/data-infrastructure';
 
 jest.mock('js-cookie');
@@ -60,6 +66,32 @@ test('it does not track an action when the cookie is unexistent', () => {
     expect(Cookies.getJSON).toHaveBeenCalled();
     expect(DataInfrastructureService.putRecord).toHaveBeenCalledTimes(0);
     expect(err).toEqual({ msg: 'UPL cookie is not set' });
+  });
+});
+
+test('it tracks an assignment of a user to a tracking id', () => {
+  expect.assertions(4);
+
+  const userId = 'this-is-a-unique-user-id';
+
+  Cookies.getJSON = jest.fn(() => ({
+    tracking_id: '123-456-789',
+    created_at: 1500987895463
+  }));
+
+  assignUserToTrackingId(userId).then((res) => {
+    const expectedStream = 'upl-users-v1';
+    const expectedPayload = {
+      touch_id: '123-456-789_1500987895463',
+      tracking_id: '123-456-789',
+      user_type: 'guest',
+      user_id: userId,
+    };
+
+    expect(res).toEqual({});
+    expect(Cookies.getJSON).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalled();
+    expect(DataInfrastructureService.putRecord).toHaveBeenCalledWith(Config, expectedStream, expectedPayload);
   });
 });
 

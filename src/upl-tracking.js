@@ -79,6 +79,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   }
 
   const record = {
+    touch_id: uplCookie.getTouchId(),
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
     user_id: userId
