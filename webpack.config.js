@@ -3,6 +3,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var common = {
+  mode: 'production',
   module: {
     rules: [
       {
