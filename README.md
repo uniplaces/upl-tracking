@@ -7,7 +7,7 @@ upl-tracking is a library that provides all the UPL tracking functionalities
 As this package is private and it's not available in npm, yet, add the following line to your `package.json` to install upl-tracking:
 
 ```
-"upl-tracking": "git+ssh://git@github.com/uniplaces/upl-tracking#v0.1.0"
+"upl-tracking": "git+ssh://git@github.com/uniplaces/upl-tracking#v0.1.13"
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ This is due to the fact that this library is not published in `npm`.
 Run the following command to build this library.
 
 ```bash
-$ npm run build && npm run-script build:webpack
+$ npm run build
 ```
 
 ## Running tests
@@ -55,6 +55,5 @@ $ npm test
 
 * Create a pre-commit git hook to run the build
 * Create a private npm package to host this library where only the `dist` folder is published
-* Use webpack to bundle the app (apart from the global export)
 * Add pull request template
 * Add tests to the data infrastructure service
