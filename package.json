@@ -4,7 +4,8 @@
   "author": "Uniplaces",
   "private": true,
   "description": "Library that implements UPL Tracking for Uniplaces platforms",
-  "main": "dist/umd/upl-tracking.js",
+  "main": "dist/upl-tracking.js",
+  "module": "src/index.js",
   "scripts": {
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdocrc.js",

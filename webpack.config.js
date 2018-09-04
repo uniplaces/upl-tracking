@@ -3,7 +3,6 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var common = {
-  mode: 'production',
   module: {
     rules: [
       {
@@ -51,8 +50,10 @@ module.exports = [
     mode: 'production',
     entry: './src/index.js',
     output: {
+      path: path.resolve(__dirname, 'dist'),
       filename: 'upl-tracking.js',
-      path: path.resolve(__dirname, 'dist/umd')
+      library: 'UplTracking',
+      libraryTarget: 'umd'
     }
   })
 ];
