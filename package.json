@@ -1,6 +1,6 @@
 {
   "name": "upl-tracking",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "author": "Uniplaces",
   "private": true,
   "description": "Library that implements UPL Tracking for Uniplaces platforms",
