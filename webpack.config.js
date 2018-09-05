@@ -2,21 +2,8 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-var optimization = {
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          output: {
-            comments: false
-          }
-        }
-      })
-    ]
-  }
-};
-
-var common = {
+var options = {
+  mode: 'production',
   module: {
     rules: [
       {
@@ -30,18 +17,39 @@ var common = {
         }
       }
     ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false
+          }
+        }
+      })
+    ]
   }
 };
 
 module.exports = [
-  Object.assign({}, common, optimization, {
-    mode: 'production',
+  Object.assign({}, options, {
+    name: 'global-export',
     entry: './src/index.js',
     output: {
       filename: 'upl-tracking.js',
       path: path.resolve(__dirname, 'dist/global-export'),
       library: 'UplTracking',
       libraryTarget: 'var'
+    }
+  }),
+  Object.assign({}, options, {
+    name: 'umd',
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'upl-tracking.js',
+      library: 'UplTracking',
+      libraryTarget: 'umd'
     }
   })
 ];
