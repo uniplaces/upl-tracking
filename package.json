@@ -5,7 +5,6 @@
   "private": true,
   "description": "Library that implements UPL Tracking for Uniplaces platforms",
   "main": "dist/cjs/upl-tracking.js",
-  "module": "dist/umd/upl-tracking.js",
   "browser": "dist/umd/upl-tracking.js",
   "scripts": {
     "lint": "eslint .",
