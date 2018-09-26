@@ -17,7 +17,9 @@
     "@babel/plugin-proposal-object-rest-spread"
   ],
   "ignore": [
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "**/*.test.js",
+    "**/__mocks__"
   ],
   "comments": false
 }

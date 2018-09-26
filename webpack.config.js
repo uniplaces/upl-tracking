@@ -10,10 +10,7 @@ var options = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            ignore: ['dist/**/*.js', '**/*.test.js', '**/__mocks__']
-          }
+          loader: 'babel-loader'
         }
       }
     ]
@@ -46,10 +43,20 @@ module.exports = [
     name: 'umd',
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'dist/umd'),
       filename: 'upl-tracking.js',
       library: 'UplTracking',
       libraryTarget: 'umd'
     }
-  })
+  }),
+  Object.assign({}, options, {
+    name: 'commonjs',
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist/cjs'),
+      filename: 'upl-tracking.js',
+      library: 'UplTracking',
+      libraryTarget: 'commonjs'
+    }
+  }),
 ];
