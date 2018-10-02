@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4';
 import Cookies from 'js-cookie';
-import { i18nToUplLocale } from './utils';
+import { i18nToUplLocale } from '../utils';
 
 const UPL_COOKIE_NAME = 'upl_cookie';
 const DEFAULT_EXPIRE_IN_DAYS = 180;

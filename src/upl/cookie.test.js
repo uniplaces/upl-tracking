@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import UplCookie from './upl-cookie';
+import UplCookie from './cookie';
 
 jest.mock('js-cookie');
 

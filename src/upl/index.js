@@ -1,20 +1,20 @@
 import Cookies from 'js-cookie';
-import UplCookie from './upl-cookie';
-import { putRecord } from './services/data-infrastructure';
-import { isUniplacesReferrer, isPayPalReferrer } from './referrer';
-import { getUrlParameters } from './url-parameters';
-import ActionsType from './enums/actions-type';
-import UserType from './enums/user-type';
-import EnvironmentType from './enums/environment-type';
-import DataDeliveryStreamType from './enums/data-delivery-stream-type';
-import PerformanceNavigationType from './enums/performance-navigation-type';
-import config from './config';
+import UplCookie from './cookie';
+import config from '../config';
+import { putRecord } from '../services/data-infrastructure';
+import { isUniplacesReferrer, isPayPalReferrer } from '../referrer';
+import { getUrlParameters } from '../url-parameters';
+import ActionsType from '../enums/actions-type';
+import UserType from '../enums/user-type';
+import EnvironmentType from '../enums/environment-type';
+import DataDeliveryStreamType from '../enums/data-delivery-stream-type';
+import PerformanceNavigationType from '../enums/performance-navigation-type';
 
 /**
  * Set the environment for the library
  * @param {string} environment - The environment
  */
-function setEnvironment(environment) {
+export function setEnvironment(environment) {
   config.setEnvironment(environment);
 }
 
@@ -23,7 +23,7 @@ function setEnvironment(environment) {
  * @param {Object} [location={ origin: null, destination: null, language: null, city: null }] - The location's object
  * @return {Promise}
  */
-function trackTouch(location = { origin: null, destination: null, language: null, city: null }) {
+export function trackTouch(location = { origin: null, destination: null, language: null, city: null }) {
   const url = window.location.href;
   const params = getUrlParameters(url, location);
 
@@ -55,7 +55,7 @@ function trackTouch(location = { origin: null, destination: null, language: null
  * @param {string} [extraInfo=null] - Additional information related with the action
  * @return {Promise}
  */
-function trackAction(actionType, extraInfo = null) {
+export function trackAction(actionType, extraInfo = null) {
   const uplCookie = getCookie();
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
@@ -76,7 +76,7 @@ function trackAction(actionType, extraInfo = null) {
  * @param {string} [userType=guest] - The user's type
  * @return {Promise}
  */
-function assignUserToTrackingId(userId, userType = UserType.GUEST) {
+export function assignUserToTrackingId(userId, userType = UserType.GUEST) {
   const uplCookie = getCookie();
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
@@ -96,7 +96,7 @@ function assignUserToTrackingId(userId, userType = UserType.GUEST) {
  * Get the current touch (a.k.a. Upl cookie)
  * @return {(UplCookie|null)}
  */
-function getCookie() {
+export function getCookie() {
   const cookieName = UplCookie.getCookieName();
   const cookie = Cookies.getJSON(cookieName);
 
@@ -124,14 +124,4 @@ function isBrowserNavigation() {
   return window.performance && window.performance.navigation.type === PerformanceNavigationType.BACK_FORWARD;
 }
 
-export {
-  setEnvironment,
-  trackTouch,
-  trackAction,
-  assignUserToTrackingId,
-  ActionsType,
-  getCookie,
-  getUrlParameters,
-  EnvironmentType,
-  UserType
-};
+export { ActionsType, getUrlParameters, EnvironmentType, UserType };
