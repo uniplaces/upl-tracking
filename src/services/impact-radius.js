@@ -17,10 +17,8 @@ const impactRadiusService = axios.create({
 export function create(config, clickId, bookingId) {
   const endpoint = `${config.getImpactRadiusUrl()}/impact-radius`;
   const data = {
-    data: {
-      click_id: clickId,
-      booking_id: bookingId
-    }
+    click_id: clickId,
+    booking_id: bookingId
   };
 
   return impactRadiusService.post(endpoint, data);
