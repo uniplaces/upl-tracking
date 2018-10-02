@@ -23,12 +23,19 @@ export function trackClickId() {
   const url = window.location.href;
   const clickId = getUrlParameter(url, IMPACT_RADIUS_CLICK_ID_PARAM);
 
-  let impactRadiusCookie = getCookie();
-  if (!impactRadiusCookie) {
-    impactRadiusCookie = new ImpactRadiusCookie(clickId);
+  /* If there isn't a click ID in the URL, do nothing */
+  if (!clickId) {
+    return;
   }
 
-  return impactRadiusCookie.save(config.getCookieDomain());
+  let impactRadiusCookie = getCookie();
+  if (!impactRadiusCookie) {
+    impactRadiusCookie = new ImpactRadiusCookie();
+  }
+
+  return impactRadiusCookie
+    .setClickId(clickId)
+    .save(config.getCookieDomain());
 }
 
 /**

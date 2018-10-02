@@ -18,6 +18,15 @@ test('it returns the cookie name', () => {
   expect(result).toBe(expected);
 });
 
+test('it sets the click ID', () => {
+  const clickId = '123456789-abc';
+  const cookie = new ImpactRadiusCookie();
+
+  cookie.setClickId(clickId);
+
+  expect(cookie.getClickId()).toBe(clickId);
+});
+
 test('it saves the cookie in Cookies', () => {
   const cookie = new ImpactRadiusCookie('123-456');
   const result = cookie.save('.uniplaces.com');

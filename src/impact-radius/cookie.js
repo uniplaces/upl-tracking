@@ -30,6 +30,17 @@ class ImpactRadiusCookie {
   }
 
   /**
+   * Set the click ID
+   * @param {string} clickId - the click ID
+   * @return {impactRadiusCookie}
+   */
+  setClickId(clickId) {
+    this.click_id = clickId;
+
+    return this;
+  }
+
+  /**
    * Save this cookie in the browser for a given domain
    * @param {string} domain - the domain of the cookie
    * @return {UplCookie}
