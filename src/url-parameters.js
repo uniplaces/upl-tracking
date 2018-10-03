@@ -1,3 +1,4 @@
+/** @module UrlParameters */
 import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 import URLSearchParams from 'url-search-params';
 

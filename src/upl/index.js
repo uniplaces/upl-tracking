@@ -1,3 +1,4 @@
+/** @module Upl */
 import Cookies from 'js-cookie';
 import UplCookie from './cookie';
 import config from '../config';

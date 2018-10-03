@@ -1,3 +1,4 @@
+/** @module Referrer */
 /**
  * Check if the document.referrer is empty
  * @return {boolean}

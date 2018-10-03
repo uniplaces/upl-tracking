@@ -1,3 +1,4 @@
+/** @module ImpactRadius */
 import Cookies from 'js-cookie';
 import config from '../config';
 import ImpactRadiusCookie from './cookie';
