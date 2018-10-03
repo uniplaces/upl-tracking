@@ -8,7 +8,7 @@
   "module": "src/index.js",
   "scripts": {
     "lint": "eslint .",
-    "generate-docs": "jsdoc -c .jsdocrc.js",
+    "generate-docs": "jsdoc -c .jsdocrc.js -R README.md",
     "build": "webpack",
     "test": "jest --forceExit --detectOpenHandles"
   },

@@ -1,4 +1,9 @@
-import { getUrlParameters, getInferedSource, getInferedMedium } from './url-parameters';
+import {
+  getUrlParameter,
+  getUrlParameters,
+  getInferedSource,
+  getInferedMedium
+} from './url-parameters';
 
 function _setReferrer(referrer) {
   Object.defineProperty(document, 'referrer', { writable: true, value: referrer });
@@ -10,6 +15,21 @@ function _clearReferrer() {
 
 afterEach(() => {
   _clearReferrer();
+});
+
+test('it returns a specific parameter', () => {
+  const url = 'https://www.uniplaces.com/accommodation/lisbon?upl_source=google&upl_campaign=campaign_1&upl_medium=this-is-a-medium&ir_click_id=1234567890_IRabc';
+  const expected = '1234567890_IRabc';
+  const result = getUrlParameter(url, 'ir_click_id');
+
+  expect(result).toBe(expected);
+});
+
+test('it returns an inexistent specific parameter', () => {
+  const url = 'https://www.uniplaces.com/accommodation/lisbon?upl_source=google&upl_campaign=campaign_1&upl_medium=this-is-a-medium&ir_click_id=1234567890_IRabc';
+  const result = getUrlParameter(url, 'inexistent_parameter');
+
+  expect(result).toBeNull();
 });
 
 test('it parses upl parameters correctly', () => {

@@ -12,6 +12,12 @@ const DataInfrastructureUrl = {
   production: 'https://data-events.uniplaces.com/streams'
 };
 
+const ImpactRadiusUrl = {
+  development: 'https://impact-radius.staging-uniplaces.com',
+  staging: 'https://impact-radius.staging-uniplaces.com',
+  production: 'https://impact-radius.uniplaces.com'
+};
+
 /** Class that represents the configuration of the library. This is meant to be used as a singleton. */
 class Config {
   /**
@@ -77,8 +83,16 @@ class Config {
   getDataInfrastructureUrl() {
     return DataInfrastructureUrl[this.environment] || DataInfrastructureUrl[EnvironmentType.STAGING];
   }
+
+  /**
+   * Get the impact radius micro-service URL
+   * @return {string}
+   */
+  getImpactRadiusUrl() {
+    return ImpactRadiusUrl[this.environment] || ImpactRadiusUrl[EnvironmentType.STAGING];
+  }
 }
 
-const config = new Config();
+const configInstance = new Config();
 
-export default config;
+export default configInstance;

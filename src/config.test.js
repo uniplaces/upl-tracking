@@ -35,6 +35,12 @@ test('it returns the correct data infrastructure url', () => {
   expect(result).toBe('https://data-events.staging-uniplaces.com/streams');
 });
 
+test('it returns the correct impact radius micro-service url', () => {
+  const result = config.getImpactRadiusUrl();
+
+  expect(result).toBe('https://impact-radius.staging-uniplaces.com');
+});
+
 test('it returns values to staging when environment is test', () => {
   const env = EnvironmentType.TEST;
   config.setEnvironment(env);

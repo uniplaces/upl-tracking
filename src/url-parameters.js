@@ -1,3 +1,4 @@
+/** @module UrlParameters */
 import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 import URLSearchParams from 'url-search-params';
 
@@ -23,6 +24,19 @@ const UrlParameters = [
   { name: 'creative', inferedValue: () => null, defaultValue: null },
   { name: 'sitelink', inferedValue: () => null, defaultValue: null }
 ];
+
+/**
+ * Get a specific URL parameter
+ * @param {string} url - The URL to be parsed
+ * @param {string} parameter - The parameter to get
+ * @return {string|null}
+ */
+export function getUrlParameter(url, parameter) {
+  const parsedUrl = new URL(url);
+  const searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+
+  return searchParams.get(parameter);
+}
 
 /**
  * Get URL parameters

@@ -1,3 +1,4 @@
+/** @module Utils */
 import LanguageType from './enums/language-type';
 
 /**
