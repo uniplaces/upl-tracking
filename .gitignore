@@ -5,6 +5,7 @@
 node_modules
 .env
 docs
+tmp
 
 # compiled files
 # dist
