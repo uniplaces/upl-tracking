@@ -3,7 +3,7 @@
   "version": "0.1.14",
   "author": "Uniplaces",
   "private": true,
-  "description": "Library that implements UPL Tracking for Uniplaces platforms",
+  "description": "Library that implements Marketing (UPL+IR) tracking for Uniplaces platforms",
   "main": "dist/upl-tracking.js",
   "module": "src/index.js",
   "scripts": {
@@ -17,8 +17,9 @@
   },
   "keywords": [
     "tracking",
+    "mkt-tracking",
     "upl",
-    "upl-tracking",
+    "impact-radius",
     "uniplaces"
   ],
   "devDependencies": {
@@ -26,7 +27,8 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-env": "7.1.6",
+    "acorn": "6.0.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "8.2.5",
     "babel-jest": "23.4.0",
@@ -44,7 +46,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "js-cookie": "2.2.0",
-    "url-search-params": "^1.0.2",
+    "url-search-params": "1.1.0",
     "uuid": "^3.3.2"
   }
 }
