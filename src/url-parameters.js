@@ -1,6 +1,8 @@
 /** @module UrlParameters */
-import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 import URLSearchParams from 'url-search-params';
+import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
+import { isMobile, isMobileOrTablet } from '../vendor/detect-mobile';
+import DeviceType from './enums/device-type';
 
 const PrefixedUrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
@@ -13,10 +15,11 @@ const PrefixedUrlParameters = [
 const UrlParameters = [
   { name: 'gclid', inferedValue: () => null, defaultValue: null },
   { name: 'msclkid', inferedValue: () => null, defaultValue: null },
+  { name: 'fbclid', inferedValue: () => null, defaultValue: null },
   { name: 'network', inferedValue: () => null, defaultValue: null },
   { name: 'keyword', inferedValue: () => null, defaultValue: null },
   { name: 'matchtype', inferedValue: () => null, defaultValue: null },
-  { name: 'device', inferedValue: () => null, defaultValue: null },
+  { name: 'device', inferedValue: getInferedDevice, defaultValue: null },
   { name: 'devicemodel', inferedValue: () => null, defaultValue: null },
   { name: 'adposition', inferedValue: () => null, defaultValue: null },
   { name: 'adgroup', inferedValue: () => null, defaultValue: null },
@@ -94,7 +97,7 @@ export function getInferedSource() {
  * Get the medium, inferring it from the document.referrer
  * @param {string} url - the url
  * @param {Object} location - the location
- * @return {string} the medium infered from the referrer
+ * @return {string} the infered medium
  */
 export function getInferedMedium(_, location) {
   const { origin, destination, language } = location;
@@ -105,4 +108,21 @@ export function getInferedMedium(_, location) {
   }
 
   return 'organic';
+}
+
+/**
+ * Get the device type, inferring it from the window's
+ * width and height
+ * @return {string} the infered device
+ */
+export function getInferedDevice() {
+  if (isMobileOrTablet() && isMobile()) {
+    return DeviceType.MOBILE;
+  }
+
+  if (isMobileOrTablet()) {
+    return DeviceType.TABLET;
+  }
+
+  return DeviceType.DESKTOP;
 }

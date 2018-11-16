@@ -40,9 +40,10 @@ test('it parses upl parameters correctly', () => {
     campaign: 'campaign_1',
     content: null,
     creative: null,
-    device: null,
+    device: 'desktop',
     devicemodel: null,
     gclid: null,
+    fbclid: null,
     keyword: null,
     location: null,
     matchtype: null,
@@ -59,15 +60,16 @@ test('it parses upl parameters correctly', () => {
 });
 
 test('it parses utm parameters correctly when there are no upl params', () => {
-  const url = 'https://www.uniplaces.com/accommodation/lisbon?utm_source=google&utm_campaign=campaign_1&utm_medium=this-is-a-medium&gclid=12345678909&keyword=cenas';
+  const url = 'https://www.uniplaces.com/accommodation/lisbon?utm_source=google&utm_campaign=campaign_1&utm_medium=this-is-a-medium&gclid=12345678909&keyword=cenas&fbclid=this-is-a-fb-clid';
   const expected = {
     adgroup: null,
     adposition: null,
     campaign: 'campaign_1',
     content: null,
     creative: null,
-    device: null,
+    device: 'desktop',
     devicemodel: null,
+    fbclid: 'this-is-a-fb-clid',
     gclid: '12345678909',
     keyword: 'cenas',
     location: null,
