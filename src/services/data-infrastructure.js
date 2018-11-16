@@ -1,12 +1,4 @@
 /** @module DataInfrastructureService */
-import axios from 'axios';
-
-const dataInfrastructureService = axios.create({
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8'
-  }
-});
-
 /**
  * Put a record on data infrastructure
  * @param {Object} config - The config used on tracking
@@ -16,6 +8,13 @@ const dataInfrastructureService = axios.create({
  */
 export function putRecord(config, streamName, record) {
   const endpoint = `${config.getDataInfrastructureUrl()}/${streamName}/record`;
+  const headers = {
+    'Content-Type': 'application/json; charset=utf-8'
+  };
 
-  return dataInfrastructureService.put(endpoint, { data: record });
+  return fetch(endpoint, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ data: record })
+  });
 }

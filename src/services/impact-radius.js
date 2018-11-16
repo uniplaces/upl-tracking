@@ -1,12 +1,4 @@
 /** @module ImpactRadiusService */
-import axios from 'axios';
-
-const impactRadiusService = axios.create({
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8'
-  }
-});
-
 /**
  * Create a new booking-impact-radius
  * @param {Object} config - The config used on tracking
@@ -16,10 +8,17 @@ const impactRadiusService = axios.create({
  */
 export function create(config, clickId, bookingId) {
   const endpoint = `${config.getImpactRadiusUrl()}/impact-radius`;
+  const headers = {
+    'Content-Type': 'application/json; charset=utf-8'
+  };
   const data = {
     click_id: clickId,
     booking_id: bookingId
   };
 
-  return impactRadiusService.post(endpoint, data);
+  return fetch(endpoint, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(data)
+  });
 }
