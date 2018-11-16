@@ -15,6 +15,6 @@ export function putRecord(config, streamName, record) {
   return fetch(endpoint, {
     method: 'PUT',
     headers,
-    body: JSON.stringify(record)
+    body: JSON.stringify({ data: record })
   });
 }
