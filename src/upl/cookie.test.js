@@ -58,6 +58,7 @@ test('it sets the parameters', () => {
     term: 'term',
     content: 'content',
     gclid: 'gclid',
+    fbclid: 'fbclid',
     msclkid: 'msclkid',
     match_type: 'matchtype'
   };
@@ -68,6 +69,7 @@ test('it sets the parameters', () => {
     term: 'term',
     content: 'content',
     gclid: 'gclid',
+    fbclid: 'fbclid',
     msclkid: 'msclkid',
     matchtype: 'matchtype',
     nonSpecifiedParameter: 'this-will-not-be-saved'
@@ -126,6 +128,7 @@ test('it returns as JSON', () => {
       term: 'term',
       content: 'content',
       gclid: 'gclid',
+      fbclid: 'fbclid',
       msclkid: 'msclkid',
       matchtype: 'matchtype',
     })
@@ -153,6 +156,7 @@ test('it returns as JSON', () => {
     device: cookie.device,
     device_model: cookie.device_model,
     gclid: cookie.gclid,
+    fbclid: cookie.fbclid,
     keyword: cookie.keyword,
     location: cookie.location,
     match_type: cookie.match_type,

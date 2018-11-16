@@ -66,6 +66,7 @@ class UplCookie {
     this.term = parameters.term;
     this.content = parameters.content;
     this.gclid = parameters.gclid;
+    this.fbclid = parameters.fbclid;
     this.msclkid = parameters.msclkid;
     this.network = parameters.network;
     this.keyword = parameters.keyword;
