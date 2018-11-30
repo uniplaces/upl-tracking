@@ -1,6 +1,6 @@
 /* eslint-env node */
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var path = require('path');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var options = {
   mode: 'production',

@@ -5,7 +5,7 @@ import ImpactRadiusCookie from './cookie';
 import { getUrlParameter } from '../url-parameters';
 import { create } from '../services/impact-radius';
 
-const IMPACT_RADIUS_CLICK_ID_PARAM = 'ir_click_id';
+let IMPACT_RADIUS_CLICK_ID_PARAM = 'ir_click_id';
 
 /**
  * Set the environment for the library
@@ -21,8 +21,8 @@ export function setEnvironment(environment) {
  * @return {ImpactRadiusCookie}
  */
 export function trackClickId() {
-  const url = window.location.href;
-  const clickId = getUrlParameter(url, IMPACT_RADIUS_CLICK_ID_PARAM);
+  let url = window.location.href;
+  let clickId = getUrlParameter(url, IMPACT_RADIUS_CLICK_ID_PARAM);
 
   /* If there isn't a click ID in the URL, do nothing */
   if (!clickId) {
@@ -46,7 +46,7 @@ export function trackClickId() {
  * @return {Promise}
  */
 export function assignClickIdToBookingId(bookingId) {
-  const impactRadiusCookie = getCookie();
+  let impactRadiusCookie = getCookie();
   if (!impactRadiusCookie) {
     return Promise.reject({ msg: 'impact radius cookie is not set' });
   }
@@ -59,8 +59,8 @@ export function assignClickIdToBookingId(bookingId) {
  * @return {(ImpactRadiusCookie|null)}
  */
 function getCookie() {
-  const cookieName = ImpactRadiusCookie.getCookieName();
-  const cookie = Cookies.getJSON(cookieName);
+  let cookieName = ImpactRadiusCookie.getCookieName();
+  let cookie = Cookies.getJSON(cookieName);
 
   return cookie ? ImpactRadiusCookie.fromJSON(cookie) : null;
 }

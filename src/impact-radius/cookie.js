@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
-const IMPACT_RADIUS_COOKIE_NAME = 'impact_radius_cookie';
-const DEFAULT_EXPIRE_IN_DAYS = 5;
+var IMPACT_RADIUS_COOKIE_NAME = 'impact_radius_cookie';
+var DEFAULT_EXPIRE_IN_DAYS = 5;
 
 /** Class representing an Impact Radius cookie */
 class ImpactRadiusCookie {
@@ -46,7 +46,7 @@ class ImpactRadiusCookie {
    * @return {UplCookie}
    */
   save(domain) {
-    const data = { click_id: this.click_id };
+    let data = { click_id: this.click_id };
 
     Cookies.set(IMPACT_RADIUS_COOKIE_NAME, data, { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
 

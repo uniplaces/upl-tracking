@@ -21,7 +21,7 @@ export function getReferrer() {
  * @return {boolean}
  */
 export function isCustomReferrer(substring) {
-  const referrer = getReferrer();
+  let referrer = getReferrer();
 
   return referrer !== null && referrer.hostname.includes(substring);
 }

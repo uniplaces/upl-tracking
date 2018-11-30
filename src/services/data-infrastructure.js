@@ -7,8 +7,8 @@
  * @return {Promise}
  */
 export function putRecord(config, streamName, record) {
-  const endpoint = `${config.getDataInfrastructureUrl()}/${streamName}/record`;
-  const headers = {
+  let endpoint = `${config.getDataInfrastructureUrl()}/${streamName}/record`;
+  let headers = {
     'Content-Type': 'application/json; charset=utf-8'
   };
 

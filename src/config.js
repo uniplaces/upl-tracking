@@ -1,18 +1,18 @@
 import EnvironmentType from './enums/environment-type';
 
-const CookieDomain = {
+let CookieDomain = {
   development: '.uniplaces.lh',
   staging: '.staging-uniplaces.com',
   production: '.uniplaces.com'
 };
 
-const DataInfrastructureUrl = {
+let DataInfrastructureUrl = {
   development: 'https://data-events.staging-uniplaces.com/streams',
   staging: 'https://data-events.staging-uniplaces.com/streams',
   production: 'https://data-events.uniplaces.com/streams'
 };
 
-const ImpactRadiusUrl = {
+let ImpactRadiusUrl = {
   development: 'https://impact-radius.staging-uniplaces.com',
   staging: 'https://impact-radius.staging-uniplaces.com',
   production: 'https://impact-radius.uniplaces.com'
@@ -93,6 +93,6 @@ class Config {
   }
 }
 
-const configInstance = new Config();
+let configInstance = new Config();
 
 export default configInstance;

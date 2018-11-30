@@ -4,7 +4,7 @@ import { isUniplacesReferrer, isEmptyReferrer, getReferrer } from './referrer';
 import { isMobile, isMobileOrTablet } from '../vendor/detect-mobile';
 import DeviceType from './enums/device-type';
 
-const PrefixedUrlParameters = [
+let PrefixedUrlParameters = [
   { name: 'source', inferedValue: getInferedSource, defaultValue: 'direct' },
   { name: 'medium', inferedValue: getInferedMedium, defaultValue: 'destination_origin_language' },
   { name: 'campaign', inferedValue: () => null, defaultValue: 'city_type' },
@@ -12,7 +12,7 @@ const PrefixedUrlParameters = [
   { name: 'content', inferedValue: () => null, defaultValue: null }
 ];
 
-const UrlParameters = [
+let UrlParameters = [
   { name: 'gclid', inferedValue: () => null, defaultValue: null },
   { name: 'msclkid', inferedValue: () => null, defaultValue: null },
   { name: 'fbclid', inferedValue: () => null, defaultValue: null },
@@ -35,8 +35,8 @@ const UrlParameters = [
  * @return {string|null}
  */
 export function getUrlParameter(url, parameter) {
-  const parsedUrl = new URL(url);
-  const searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+  let parsedUrl = new URL(url);
+  let searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
 
   return searchParams.get(parameter);
 }
@@ -48,14 +48,14 @@ export function getUrlParameter(url, parameter) {
  * @return {Object}
  */
 export function getUrlParameters(url, location = { origin: null, destination: null, language: null }) {
-  const parsedUrl = new URL(url);
-  const params = {};
+  let parsedUrl = new URL(url);
+  let params = {};
 
   /*
    * If searchParams doesn't exist, replace with a polyfill
    * This is needed for MS Edge < 17
    */
-  const searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
+  let searchParams = parsedUrl.searchParams || new URLSearchParams(parsedUrl.search);
 
   PrefixedUrlParameters.forEach((urlParameter) => {
     /*
@@ -87,8 +87,8 @@ export function getInferedSource() {
     return null;
   }
 
-  const source = getReferrer().host.split('.')[1];
-  const affix = 'organic';
+  let source = getReferrer().host.split('.')[1];
+  let affix = 'organic';
 
   return `${source}_${affix}`;
 }
@@ -100,8 +100,8 @@ export function getInferedSource() {
  * @return {string} the infered medium
  */
 export function getInferedMedium(_, location) {
-  const { origin, destination, language } = location;
-  const placeholder = 'xx';
+  let { origin, destination, language } = location;
+  let placeholder = 'xx';
 
   if (location.origin || location.destination || location.language) {
     return `${origin || placeholder}_${destination || placeholder}_${language || placeholder}`;
