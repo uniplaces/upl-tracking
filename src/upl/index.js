@@ -25,8 +25,8 @@ export function setEnvironment(environment) {
  * @return {Promise}
  */
 export function trackTouch(location = { origin: null, destination: null, language: null, city: null }) {
-  let url = window.location.href;
-  let params = getUrlParameters(url, location);
+  const url = window.location.href;
+  const params = getUrlParameters(url, location);
 
   let uplCookie = getCookie();
   if (!uplCookie) {
@@ -57,12 +57,12 @@ export function trackTouch(location = { origin: null, destination: null, languag
  * @return {Promise}
  */
 export function trackAction(actionType, extraInfo = null) {
-  let uplCookie = getCookie();
+  const uplCookie = getCookie();
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
-  let record = {
+  const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
     extra_info: extraInfo
@@ -78,12 +78,12 @@ export function trackAction(actionType, extraInfo = null) {
  * @return {Promise}
  */
 export function assignUserToTrackingId(userId, userType = UserType.GUEST) {
-  let uplCookie = getCookie();
+  const uplCookie = getCookie();
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
   }
 
-  let record = {
+  const record = {
     touch_id: uplCookie.getTouchId(),
     tracking_id: uplCookie.tracking_id,
     user_type: userType,
@@ -98,8 +98,8 @@ export function assignUserToTrackingId(userId, userType = UserType.GUEST) {
  * @return {(UplCookie|null)}
  */
 export function getCookie() {
-  let cookieName = UplCookie.getCookieName();
-  let cookie = Cookies.getJSON(cookieName);
+  const cookieName = UplCookie.getCookieName();
+  const cookie = Cookies.getJSON(cookieName);
 
   return cookie ? UplCookie.fromJSON(cookie) : null;
 }

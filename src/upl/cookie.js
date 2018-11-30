@@ -2,8 +2,8 @@ import uuidv4 from 'uuid/v4';
 import Cookies from 'js-cookie';
 import { i18nToUplLocale } from '../utils';
 
-let UPL_COOKIE_NAME = 'upl_cookie';
-let DEFAULT_EXPIRE_IN_DAYS = 180;
+const UPL_COOKIE_NAME = 'upl_cookie';
+const DEFAULT_EXPIRE_IN_DAYS = 180;
 
 /** Class representing a UPL cookie */
 class UplCookie {
@@ -112,7 +112,7 @@ class UplCookie {
    * @return {UplCookie}
    */
   save(domain) {
-    let data = this.toJSON();
+    const data = this.toJSON();
 
     Cookies.set(UPL_COOKIE_NAME, data, { expires: DEFAULT_EXPIRE_IN_DAYS, domain });
 
@@ -133,7 +133,7 @@ class UplCookie {
    * @return {UplCookie}
    */
   static fromJSON(json) {
-    let cookie = new UplCookie();
+    const cookie = new UplCookie();
 
     for (let property in json) {
       if (!json.hasOwnProperty(property)) {

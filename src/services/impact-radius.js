@@ -7,11 +7,11 @@
  * @return {Promise}
  */
 export function create(config, clickId, bookingId) {
-  let endpoint = `${config.getImpactRadiusUrl()}/impact-radius`;
-  let headers = {
+  const endpoint = `${config.getImpactRadiusUrl()}/impact-radius`;
+  const headers = {
     'Content-Type': 'application/json; charset=utf-8'
   };
-  let data = {
+  const data = {
     click_id: clickId,
     booking_id: bookingId
   };

@@ -5,7 +5,7 @@
   "private": true,
   "description": "Library that implements Marketing (UPL+IR) tracking for Uniplaces platforms",
   "main": "dist/upl-tracking.js",
-  "module": "src/index.js",
+  "module": "dist/upl-tracking.js",
   "scripts": {
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdocrc.js -R README.md",
