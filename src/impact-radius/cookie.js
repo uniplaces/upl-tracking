@@ -59,7 +59,7 @@ class ImpactRadiusCookie {
    * @return {Cookie}
    */
   static fromJSON(json) {
-    let cookie = new ImpactRadiusCookie();
+    const cookie = new ImpactRadiusCookie();
 
     for (let property in json) {
       if (json.hasOwnProperty(property)) {

@@ -133,7 +133,7 @@ class UplCookie {
    * @return {UplCookie}
    */
   static fromJSON(json) {
-    let cookie = new UplCookie();
+    const cookie = new UplCookie();
 
     for (let property in json) {
       if (!json.hasOwnProperty(property)) {
