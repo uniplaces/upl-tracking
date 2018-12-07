@@ -25,7 +25,8 @@ const UrlParameters = [
   { name: 'adgroup', inferedValue: () => null, defaultValue: null },
   { name: 'location', inferedValue: () => null, defaultValue: null },
   { name: 'creative', inferedValue: () => null, defaultValue: null },
-  { name: 'sitelink', inferedValue: () => null, defaultValue: null }
+  { name: 'sitelink', inferedValue: () => null, defaultValue: null },
+  { name: 'tduid', inferedValue: () => null, defaultValue: null }
 ];
 
 /**

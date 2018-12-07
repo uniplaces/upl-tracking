@@ -60,7 +60,8 @@ test('it sets the parameters', () => {
     gclid: 'gclid',
     fbclid: 'fbclid',
     msclkid: 'msclkid',
-    match_type: 'matchtype'
+    match_type: 'matchtype',
+    tduid: 'tduid'
   };
   const result = cookie.setParameters({
     source: 'source',
@@ -72,6 +73,7 @@ test('it sets the parameters', () => {
     fbclid: 'fbclid',
     msclkid: 'msclkid',
     matchtype: 'matchtype',
+    tduid: 'tduid',
     nonSpecifiedParameter: 'this-will-not-be-saved'
   });
 
@@ -165,7 +167,8 @@ test('it returns as JSON', () => {
     network: cookie.network,
     site_link: cookie.site_link,
     source: cookie.source,
-    term: cookie.term
+    term: cookie.term,
+    tduid: cookie.tduid
   };
 
   expect(result).toEqual(expected);

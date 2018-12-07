@@ -52,7 +52,8 @@ test('it parses upl parameters correctly', () => {
     network: null,
     sitelink: null,
     source: 'google',
-    term: null
+    term: null,
+    tduid: null
   };
   const result = getUrlParameters(url);
 
@@ -79,7 +80,8 @@ test('it parses utm parameters correctly when there are no upl params', () => {
     network: null,
     sitelink: null,
     source: 'google',
-    term: null
+    term: null,
+    tduid: null
   };
   const result = getUrlParameters(url);
 

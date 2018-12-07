@@ -78,6 +78,7 @@ class UplCookie {
     this.location = parameters.location;
     this.creative = parameters.creative;
     this.site_link = parameters.sitelink;
+    this.tduid = parameters.tduid;
 
     return this;
   }
