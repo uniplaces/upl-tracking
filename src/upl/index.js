@@ -53,10 +53,11 @@ export function trackTouch(location = { origin: null, destination: null, languag
 /**
  * Track an action
  * @param {string} actionType - The action's type
- * @param {string} [extraInfo=null] - Additional information related with the action
+ * @param {string} [extraInfo=null] - Deprecated - use extra instead
+ * @param {string} [extra=null] - Additional information related with the action
  * @return {Promise}
  */
-export function trackAction(actionType, extraInfo = null) {
+export function trackAction(actionType, extraInfo = null, extra = null) {
   const uplCookie = getCookie();
   if (!uplCookie) {
     return Promise.reject({ msg: 'UPL cookie is not set' });
@@ -65,7 +66,8 @@ export function trackAction(actionType, extraInfo = null) {
   const record = {
     touch_id: uplCookie.getTouchId(),
     action: actionType,
-    extra_info: extraInfo
+    extra_info: extraInfo,
+    extra
   };
 
   return putRecord(config, DataDeliveryStreamType.UPL_ACTIONS, record);
