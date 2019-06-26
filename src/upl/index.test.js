@@ -25,7 +25,8 @@ test('it tracks an action', () => {
     const expectedPayload = {
       touch_id: '123-456-789_1500987895463',
       action: 'sign-up',
-      extra_info: null
+      extra_info: null,
+      extra: null
     };
 
     expect(res).toEqual({});
