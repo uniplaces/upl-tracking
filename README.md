@@ -42,13 +42,13 @@ This is due to the fact that this library is not published in `npm`.
 Run the following command to build this library.
 
 ```bash
-$ npm run build
+$ yarn run build
 ```
 
 ## Running tests
 
 ```bash
-$ npm test
+$ yarn test
 ```
 
 ## Future improvements

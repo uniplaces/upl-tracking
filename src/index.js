@@ -1,9 +1,10 @@
 import 'whatwg-fetch';
+
 import {
   setEnvironment as setImpactRadiusEnvironment,
   trackClickId,
   assignClickIdToBookingId
-} from './impact-radius';
+} from './impact-radius/index.js';
 import {
   setEnvironment as setUplEnvironment,
   trackTouch,
@@ -14,7 +15,7 @@ import {
   getUrlParameters,
   EnvironmentType,
   UserType
-} from './upl';
+} from './upl/index.js';
 
 /**
  * Set the environment for the library
