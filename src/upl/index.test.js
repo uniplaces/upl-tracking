@@ -53,7 +53,7 @@ test('it tracks an action with extra info', () => {
   });
 });
 
-test('it does not track an action when the cookie is unexistent', () => {
+test('it does not track an action when the cookie is nonexistent', () => {
   expect.assertions(3);
 
   Cookies.getJSON = jest.fn(() => null);
