@@ -108,7 +108,7 @@ export function getCookie() {
 
 /**
  * Check if the user accessed the page by reloading it
- * @return {bool}
+ * @return {boolean}
  */
 function isPageReload() {
   // Page reload check is disabled in development for testing purposes

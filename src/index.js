@@ -1,11 +1,6 @@
 import 'whatwg-fetch';
 
 import {
-  setEnvironment as setImpactRadiusEnvironment,
-  trackClickId,
-  assignClickIdToBookingId
-} from './impact-radius/index.js';
-import {
   setEnvironment as setUplEnvironment,
   trackTouch,
   trackAction,
@@ -23,7 +18,6 @@ import {
  */
 function setEnvironments(environment) {
   setUplEnvironment(environment);
-  setImpactRadiusEnvironment(environment);
 }
 
 export {
@@ -35,7 +29,5 @@ export {
   getCookie,
   getUrlParameters,
   EnvironmentType,
-  UserType,
-  trackClickId,
-  assignClickIdToBookingId
+  UserType
 };
